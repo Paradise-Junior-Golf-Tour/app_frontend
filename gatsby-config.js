@@ -2,6 +2,8 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
+console.log(process.env.NODE_ENV)
+
 module.exports = {
   /* Your site config here */
   siteMetadata: {
@@ -34,7 +36,8 @@ module.exports = {
     {
       resolve: "gatsby-source-strapi",
       options: {
-        apiURL: process.env.NODE_ENV
+        apiURL: `http://localhost:1337`,
+        apiURL: process.env.NODE_ENV === 'production'
         ? "https://paradise-junior-golf-tour.herokuapp.com/"
         : `http://localhost:1337`,
         accessToken: process.env.STRAPI_TOKEN,

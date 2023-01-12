@@ -74,7 +74,7 @@ exports.createPages = async ({ graphql, actions }) => {
 exports.onCreatePage = async ({ page, actions }) => {
   const { createPage, createRedirect } = actions
   const portalRoot = process.env.REACT_APP_PORTAL_ROOT
-  console.log("*** app root config", portalRoot)
+  // console.log("*** app root config", portalRoot)
 
   // page.matchPath is a special key that's used for matching pages
   // only on the client.

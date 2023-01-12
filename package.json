@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "develop": "clear && gatsby develop",
-    "start": "gatsby develop",
+    "start": "wait-on http://localhost:1337/admin && gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "clear && gatsby clean",
@@ -25,6 +25,7 @@
     "@mui/lab": "^5.0.0-alpha.104",
     "@mui/material": "^5.10.10",
     "@mui/x-date-pickers": "^5.0.5",
+    "@fontsource/roboto": "^4.5.8",
     "axios": "^1.1.3",
     "gatsby": "^4.6.1",
     "gatsby-cli": "^4.24.0",
@@ -52,6 +53,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-react-app": "^7.0.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "prettier": "^2.5.1"
+    "prettier": "^2.5.1",
+    "wait-on": "5.2.1"
   }
 }
