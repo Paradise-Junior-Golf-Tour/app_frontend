@@ -1,0 +1,137 @@
+
+html {
+    background: #323031;
+    font-size: 14px !important;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    font-size: 1rem;
+    /* background: #e5e5e5; */
+}
+
+* {
+    box-sizing: border-box;
+}
+
+header,
+footer,
+nav,
+main {
+    /* outline: 1px dashed rgba(15, 15, 15, 0.386); */
+    /* margin: 0.25rem; */
+}
+
+main {
+    padding-bottom: 3rem;
+}
+
+
+
+section {
+    outline: 1px dashed #3475cb76;
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+
+main>div {
+    padding-top: 5rem !important;
+}
+
+header {
+    /* background: #2c2c2c; */
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 0rem;
+}
+
+header .MuiContainer-root {
+    /* outline-color: white; */
+}
+
+nav a {
+    color: initial;
+    padding: 0 1rem 0 0;
+}
+
+.MuiContainer-root {
+    /* outline: 1px dashed rgba(36, 36, 36, 0.406); */
+    /* padding: 1rem 2rem; */
+    height: 100%;
+    /* background: rgba(137, 136, 136, 0.04); */
+}
+
+@media screen and (min-width: 800px) {
+    .MuiContainer-root {
+        padding: 1rem 4rem;
+    }
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+ul li {
+    list-style: none;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    padding: 0 1rem 0 0;
+    display: inline-block;
+}
+
+p a {
+    padding: unset;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+h1 {
+    /* color: sandybrown; */
+}
+
+h2 {
+    /* color: salmon; */
+}
+
+/* strong {
+    color: #a2ff00;
+} */
+
+p {
+    max-width: 700px;
+}
+
+.app-nav-button:hover>* {
+    /* color: lime; */
+}
+
+.dev {
+    color: #e71d36;
+    outline: 1px solid #e71d36;
+    padding: 0.5rem;
+    background: #e71d351e;
+    border-radius: 0.15rem;
+}
+
+.dev.alt {
+    color: #fdfffc;
+    outline: 1px solid #fdfffc;
+}
+
+* {
+    border-radius: 0.15rem;
+}
+
+.btn {
+    text-transform: unset !important;
+  }
