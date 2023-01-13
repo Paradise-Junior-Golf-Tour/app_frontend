@@ -3,7 +3,7 @@ require("dotenv").config({
 })
 
 console.log(`[gatsby-config.js] Starting ${process.env.NODE_ENV} denvironment.`)
-console.log('[gatsby-config.js] Registering metadata and plugins.')
+console.log("[gatsby-config.js] Registering metadata and plugins.")
 
 module.exports = {
   // flags: {
@@ -33,9 +33,10 @@ module.exports = {
       resolve: "gatsby-source-strapi",
       options: {
         apiURL: `http://localhost:1337`,
-        apiURL: process.env.NODE_ENV === 'production'
-        ? "https://paradise-junior-golf-tour.herokuapp.com"
-        : `http://localhost:1337`,
+        apiURL:
+          process.env.NODE_ENV === "production"
+            ? "https://paradise-junior-golf-tour.herokuapp.com"
+            : `http://localhost:1337`,
         accessToken: process.env.STRAPI_TOKEN,
         collectionTypes: [
           {
@@ -71,6 +72,7 @@ module.exports = {
         ],
       },
     },
+    `gatsby-plugin-gatsby-cloud`,
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
