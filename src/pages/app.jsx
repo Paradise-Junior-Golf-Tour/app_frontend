@@ -14,7 +14,6 @@ import { getUser } from "../services/authentication"
 import FourOhFour from "../components/app/404"
 import SEO from "../components/seo"
 import AdminIndex from "../components/app/admin"
-import { portalRoot } from "../config"
 import AdminEventsNew from "../components/app/admin/events/new"
 import AdminTransactions from "../components/app/admin/transactions/event"
 import AdminEventsUpdate from "../components/app/admin/events/event"
@@ -41,6 +40,10 @@ const App = () => {
   //   // Cleanup function needed?
   // }, [location])
 
+  useEffect(() => {
+    console.log('current user:', user)
+  })
+
   return (
     <Layout heading={`Portal - ${heading ? heading : "Home"}`}>
       <Router basepath="/app">
@@ -58,8 +61,8 @@ const App = () => {
             />
           </>
         ) : (
-            <>
-                          <Authenticated path={`/`} component={UserIndex} />
+          <>
+            <Authenticated path={`/`} component={UserIndex} />
             <Authenticated path={`/profile`} component={UserProfile} />
             <Authenticated path={`/events`} component={UserEvents} />
             <Authenticated

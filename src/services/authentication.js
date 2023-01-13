@@ -63,7 +63,7 @@ export const handleLogin = async ({ username, password }) => {
 }
 
 export const isLoggedIn = () => {
-  let user = {}
+  let user = false
   if (typeof window !== "undefined") {
     let _user = getUser()
     user = !!_user?.jwt
