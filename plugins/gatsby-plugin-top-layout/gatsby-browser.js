@@ -11,7 +11,7 @@ export const wrapRootElement = ({ element }) => {
 
   return (
     <TopLayout>
-      <Banner />
+      {/* <Banner /> */}
       {element}
     </TopLayout>
   )
