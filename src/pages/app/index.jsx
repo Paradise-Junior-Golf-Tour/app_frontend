@@ -43,53 +43,53 @@ const App = () => {
 
   return (
     <Layout heading={`Portal - ${heading ? heading : "Home"}`}>
-      <Router>
+      <Router basepath="/app">
         {user?.data?.admin ? (
           <>
-            <Authenticated path={`/${portalRoot}`} component={AdminIndex} />
+            <Authenticated path={`/`} component={AdminIndex} />
             <Authenticated
-              path={`/${portalRoot}/events`}
+              path={`/events`}
               component={AdminEvents}
             />
             <Authenticated
-              path={`/${portalRoot}/resources`}
+              path={`/resources`}
               component={AdminResources}
             />
             <Authenticated
-              path={`/${portalRoot}/events/new`}
+              path={`/events/new`}
               component={AdminEventsNew}
             />
             <Authenticated
-              path={`/${portalRoot}/events/:id`}
+              path={`/events/:id`}
               component={AdminEventsUpdate}
             />
             <Authenticated
-              path={`/${portalRoot}/users`}
+              path={`/users`}
               component={AdminUsers}
             />
             <Authenticated
-              path={`/${portalRoot}/transactions`}
+              path={`/transactions`}
               component={AdminTransactions}
             />
           </>
         ) : (
           <>
-            <Authenticated path={`/${portalRoot}`} component={UserIndex} />
+            <Authenticated path={`/`} component={UserIndex} />
             <Authenticated
-              path={`/${portalRoot}/profile`}
+              path={`/profile`}
               component={UserProfile}
             />
             <Authenticated
-              path={`/${portalRoot}/events`}
+              path={`/events`}
               component={UserEvents}
             />
             <Authenticated
-              path={`/${portalRoot}/events/register`}
+              path={`/events/register`}
               component={UserRegistration}
             />
           </>
         )}
-        <Login path={`/${portalRoot}/login`} />
+        <Login path={`/login`} />
         <Authenticated default component={FourOhFour} />
       </Router>
     </Layout>
