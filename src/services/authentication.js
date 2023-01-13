@@ -2,13 +2,35 @@ import axios from "axios"
 
 export const isBrowser = () => typeof window !== "undefined"
 
-export const getUser = () =>
-  isBrowser() && window.localStorage.getItem("gatsbyUser")
-    ? JSON.parse(window.localStorage.getItem("gatsbyUser"))
-    : {}
+// export const getUser = () =>
+//   isBrowser() && window.localStorage.getItem("gatsbyUser")
+//     ? JSON.parse(window.localStorage.getItem("gatsbyUser"))
+//     : {}
+
+export const getUser = () => {
+  let user = {}
+  if (typeof window !== "undefined") {
+    user = window.localStorage.getItem("gatsbyUser")
+      ? JSON.parse(window.localStorage.getItem("gatsbyUser"))
+      : {}
+  }
+
+  return user
+}
+// isBrowser() && window.localStorage.getItem("gatsbyUser")
+//   ? JSON.parse(window.localStorage.getItem("gatsbyUser"))
+//   : {}
+
+// if(typeof window !== "undefined"){
+//   //your window calculation
+// }
 
 export const setUser = (user) => {
-  return window.localStorage.setItem("gatsbyUser", JSON.stringify(user))
+  // let user = {}
+  if (typeof window !== "undefined") {
+    return window.localStorage.setItem("gatsbyUser", JSON.stringify(user))
+  }
+  // return user
 }
 
 export const handleLogin = async ({ username, password }) => {
@@ -49,9 +71,9 @@ export const logout = (callback) => {
 }
 
 export const setHeaders = () => {
-  console.log("[Auth Service] Set Headers")
   const user = getUser()
   const token = user?.jwt
+
   if (token) {
     axios.defaults.headers.common["Authorization"] = `Bearer ${user?.jwt}`
   } else {

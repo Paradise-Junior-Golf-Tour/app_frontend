@@ -2,16 +2,16 @@
   "name": "gatsby_strapi",
   "version": "1.0.0",
   "private": true,
-  "description": "Strapi + Gatsby",
+  "description": "Paradise Junior Golf Tour",
   "author": "John Robertson",
   "keywords": [
     "gatsby",
     "strapi"
   ],
   "scripts": {
-    "develop": "clear && gatsby develop",
+    "develop": "clear && wait-on http://localhost:1337/admin && gatsby develop",
     "start": "wait-on http://localhost:1337/admin && gatsby develop",
-    "build": "gatsby build",
+    "build": "wait-on http://localhost:1337/admin && gatsby build",
     "serve": "gatsby serve",
     "clean": "clear && gatsby clean",
     "schema": "clear && curl -X POST http://localhost:8000/__refresh",

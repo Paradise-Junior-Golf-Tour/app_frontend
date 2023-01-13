@@ -26,7 +26,7 @@ export default function Navigation({ children, heading }) {
   )
 
   useEffect(() => {
-    console.log("[Navigation] props (not passed - refactor neededF):", {
+    console.log("[Navigation] props (not passed - refactor needed):", {
       data,
       children,
       heading,

@@ -80,7 +80,7 @@ exports.onCreatePage = async ({ page, actions }) => {
 
   // page.matchPath is a special key that's used for matching pages
   // only on the client.
-  if (page.path.match(/^\/portal/)) {
+  if (page.path.match(/^\/app/)) {
     page.matchPath = `/${portalRoot}/*`
 
     // Update the page.
@@ -103,12 +103,12 @@ exports.onCreatePage = async ({ page, actions }) => {
   // })
 
   // Possibly need to redirect all old URLS - tbd.  Def need 301 server redirects.
-  createRedirect({
-    fromPath: `/-upcoming-tee-times`,
-    toPath: `/events/tee-times`,
-    redirectInBrowser: true,
-    isPermanent: true,
-  })
+  // createRedirect({
+  //   fromPath: `/-upcoming-tee-times`,
+  //   toPath: `/events/tee-times`,
+  //   redirectInBrowser: true,
+  //   isPermanent: true,
+  // })
 }
 
 // Exlcude node modules that utilize window during build.
