@@ -45,7 +45,7 @@ export default function EventCard(event) {
       )}
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {event.event.name || "Event Name"}
+          {event?.event?.name || "Event Name"}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           Dates
@@ -55,14 +55,14 @@ export default function EventCard(event) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button to={"/events/" + event.event.slug} size="small">
+        <Button to={"/events/" + event?.event?.slug} size="small">
           More Info
         </Button>
         <Button
           size="small"
           to={
             user?.data?.admin
-              ? `/${portalRoot}/events/${event.event.slug}`
+              ? `/${portalRoot}/events/${event?.event?.slug}`
               : `/${portalRoot}/events/register`
           }
           onClick={(e) => {
@@ -73,14 +73,14 @@ export default function EventCard(event) {
             e.preventDefault()
             navigate(
               `${authenticated ? `/${portalRoot}` : ""}/events/${
-                user?.data?.admin ? "" + event.event.slug : "register"
+                user?.data?.admin ? "" + event?.event?.slug : "register"
               }`,
               {
                 state: {
                   event: {
-                    id: event.event.strapi_id,
-                    name: event.event.name,
-                    slug: event.event.slug,
+                    id: event?.event?.strapi_id,
+                    name: event?.event?.name,
+                    slug: event?.event?.slug,
                   },
                 },
               }

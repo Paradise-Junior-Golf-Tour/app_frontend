@@ -1,6 +1,8 @@
 import { deepOrange, lime, indigo } from "@mui/material/colors"
 import { createTheme } from "@mui/material/styles"
 
+console.log(`[theme.js] Init custom theme overrides.`)
+
 // A custom theme for this app
 const theme = createTheme({
   palette: {

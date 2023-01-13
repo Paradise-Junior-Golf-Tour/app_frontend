@@ -4,7 +4,9 @@ import Grid from "@mui/material/Grid"
 import EventCard from "../event-card"
 
 export default function BasicGrid(events) {
-  console.log("[Event Grid]", events.events.nodes)
+  console.log("[Event Grid]", events?.events?.nodes)
+
+  if (!events?.events?.nodes) return null
 
   return (
     <Box sx={{ flexGrow: 1 }}>

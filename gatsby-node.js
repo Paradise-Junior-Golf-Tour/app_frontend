@@ -1,3 +1,5 @@
+console.log(`[gatsby-node.js] Starting ${process.env.NODE_ENV} denvironment.`)
+
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
   const result = await graphql(
@@ -46,7 +48,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const events = result.data.events.edges
   const EventTemplate = require.resolve("./src/templates/event.jsx")
   events.forEach((event, index) => {
-    console.log("Creating event page:", event.node.Name)
+    console.log("Creating event page:", event.node.name)
     createPage({
       path: `/events/${event.node.slug}`,
       component: EventTemplate,
@@ -107,4 +109,24 @@ exports.onCreatePage = async ({ page, actions }) => {
     redirectInBrowser: true,
     isPermanent: true,
   })
+}
+
+// Exlcude node modules that utilize window during build.
+exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
+  if (stage === "build-html") {
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: /gatsby-plugin-mui-emotion/,
+            use: loaders.null(),
+          },
+          {
+            test: /gatsby-plugin-material-ui/,
+            use: loaders.null(),
+          },
+        ],
+      },
+    })
+  }
 }

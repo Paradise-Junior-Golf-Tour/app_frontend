@@ -4,6 +4,7 @@ import Layout from "../components/Layout"
 import { Typography } from "@mui/material"
 
 const IndexPage = (data) => {
+  console.log(`[index.js] Index page.`)
   const [dataClient, setDataClient] = useState()
 
   useEffect(() => {

@@ -2,9 +2,13 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
-console.log(process.env.NODE_ENV)
+console.log(`[gatsby-config.js] Starting ${process.env.NODE_ENV} denvironment.`)
+console.log('[gatsby-config.js] Registering metadata and plugins.')
 
 module.exports = {
+  // flags: {
+  //   DEV_SSR: true
+  // },
   /* Your site config here */
   siteMetadata: {
     title: "The Paradise Junior Golf Tour",
@@ -25,17 +29,17 @@ module.exports = {
         path: `${__dirname}/src/pages/`,
       },
     },
-    {
-      resolve: `gatsby-plugin-netlify`,
-      options: {
-        headers: {}, // option to add more headers. `Link` headers are transformed by the below criteria
-        allPageHeaders: [], // option to add headers for all pages. `Link` headers are transformed by the below criteria
-        mergeSecurityHeaders: true, // boolean to turn off the default security headers
-        mergeCachingHeaders: true, // boolean to turn off the default caching headers
-        transformHeaders: (headers, path) => headers, // optional transform for manipulating headers under each path (e.g.sorting), etc.
-        generateMatchPathRewrites: true, // boolean to turn off automatic creation of redirect rules for client only paths
-      },
-    },
+    // {
+    //   resolve: `gatsby-plugin-netlify`,
+    //   options: {
+    //     headers: {}, // option to add more headers. `Link` headers are transformed by the below criteria
+    //     allPageHeaders: [], // option to add headers for all pages. `Link` headers are transformed by the below criteria
+    //     mergeSecurityHeaders: true, // boolean to turn off the default security headers
+    //     mergeCachingHeaders: true, // boolean to turn off the default caching headers
+    //     transformHeaders: (headers, path) => headers, // optional transform for manipulating headers under each path (e.g.sorting), etc.
+    //     generateMatchPathRewrites: true, // boolean to turn off automatic creation of redirect rules for client only paths
+    //   },
+    // },
     // {
     //   resolve: `gatsby-source-filesystem`,
     //   options: {
@@ -49,7 +53,7 @@ module.exports = {
       options: {
         apiURL: `http://localhost:1337`,
         apiURL: process.env.NODE_ENV === 'production'
-        ? "https://paradise-junior-golf-tour.herokuapp.com/"
+        ? "https://paradise-junior-golf-tour.herokuapp.com"
         : `http://localhost:1337`,
         accessToken: process.env.STRAPI_TOKEN,
         collectionTypes: [

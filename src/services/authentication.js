@@ -51,9 +51,9 @@ export const logout = (callback) => {
 export const setHeaders = () => {
   console.log("[Auth Service] Set Headers")
   const user = getUser()
-  const token = user.jwt
+  const token = user?.jwt
   if (token) {
-    axios.defaults.headers.common["Authorization"] = `Bearer ${user.jwt}`
+    axios.defaults.headers.common["Authorization"] = `Bearer ${user?.jwt}`
   } else {
     axios.defaults.headers.common["Authorization"] = null
   }

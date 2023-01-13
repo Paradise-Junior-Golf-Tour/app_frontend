@@ -21,13 +21,13 @@ import AdminEventsUpdate from "../components/app/admin/events/event"
 import { useLocation } from "@reach/router"
 
 const App = () => {
+  console.log(`[app.js] App page.`)
   const user = getUser()
   const [heading, setHeading] = useState("")
   const location = useLocation()
 
   useEffect(() => {
     const path = location.pathname.split("/")
-    console.log("*** app root  app page", portalRoot)
 
     if (location.pathname === "/portal/" || location.pathname === "/portal") {
       setHeading("Home")
