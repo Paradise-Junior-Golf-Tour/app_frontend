@@ -6,9 +6,9 @@ console.log(`[gatsby-config.js] Starting ${process.env.NODE_ENV} denvironment.`)
 console.log('[gatsby-config.js] Registering metadata and plugins.')
 
 module.exports = {
-  flags: {
-    DEV_SSR: true
-  },
+  // flags: {
+  //   DEV_SSR: true
+  // },
   /* Your site config here */
   siteMetadata: {
     title: "The Paradise Junior Golf Tour",

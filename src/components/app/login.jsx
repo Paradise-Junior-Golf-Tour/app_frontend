@@ -83,7 +83,7 @@ class Login extends React.Component {
       return (
         <>
           <Typography component="h1" variant="h3">
-            Howdy {user.data.username}!
+            Howdy {user.data?.username}!
           </Typography>
           <Typography component="h2" variant="h5">
             You're logged in!

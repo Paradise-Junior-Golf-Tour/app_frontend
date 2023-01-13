@@ -115,7 +115,7 @@ exports.onCreatePage = async ({ page, actions }) => {
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
   if (stage === "build-html") {
     actions.setWebpackConfig({
-      module: {
+      module: { 
         rules: [
           {
             test: /gatsby-plugin-mui-emotion/,

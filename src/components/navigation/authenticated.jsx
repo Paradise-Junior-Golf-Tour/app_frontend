@@ -41,7 +41,7 @@ const AppNavigation = ({ location }) => {
     if (!authenticated) {
       return "Login Required"
     } else {
-      return user.data.admin ? "Admin Menu" : "User Menu"
+      return user?.data?.admin ? "Admin Menu" : "User Menu"
     }
   }
 

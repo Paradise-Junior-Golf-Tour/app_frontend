@@ -10,6 +10,7 @@ export const isBrowser = () => typeof window !== "undefined"
 export const getUser = () => {
   let user = {}
   if (typeof window !== "undefined") {
+    console.log('Browser')
     user = window.localStorage.getItem("gatsbyUser")
       ? JSON.parse(window.localStorage.getItem("gatsbyUser"))
       : {}
@@ -28,6 +29,7 @@ export const getUser = () => {
 export const setUser = (user) => {
   // let user = {}
   if (typeof window !== "undefined") {
+    console.log('Browser')
     return window.localStorage.setItem("gatsbyUser", JSON.stringify(user))
   }
   // return user
@@ -61,8 +63,12 @@ export const handleLogin = async ({ username, password }) => {
 }
 
 export const isLoggedIn = () => {
-  const user = getUser()
-  return !!user?.jwt
+  let user = {}
+  if (typeof window !== "undefined") {
+    let _user = getUser()
+    user = !!_user?.jwt
+  }
+  return user
 }
 
 export const logout = (callback) => {
