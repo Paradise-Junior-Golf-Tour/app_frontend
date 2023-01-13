@@ -7,7 +7,7 @@ import { portalRoot } from "../../../config"
 const AdminIndex = () => (
   <>
     <Typography variant="h3" component="h1">
-      Admin Index
+      Admin Index :)
     </Typography>
     <Typography variant="h5" component="h2">
       Admin entry point for mangaging the backend of the app.
