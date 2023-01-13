@@ -46,6 +46,7 @@ const App = () => {
       <Router basepath="/app">
         {user?.data?.admin ? (
           <>
+            <Authenticated path={`/`} component={AdminIndex} />
             <Authenticated path={`/events`} component={AdminEvents} />
             <Authenticated path={`/resources`} component={AdminResources} />
             <Authenticated path={`/events/new`} component={AdminEventsNew} />
@@ -55,17 +56,16 @@ const App = () => {
               path={`/transactions`}
               component={AdminTransactions}
             />
-            <Authenticated path={`/`} component={AdminIndex} />
           </>
         ) : (
-          <>
+            <>
+                          <Authenticated path={`/`} component={UserIndex} />
             <Authenticated path={`/profile`} component={UserProfile} />
             <Authenticated path={`/events`} component={UserEvents} />
             <Authenticated
               path={`/events/register`}
               component={UserRegistration}
             />
-            <Authenticated path={`/`} component={UserIndex} />
           </>
         )}
         <Login path={`/login`} />
