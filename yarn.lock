@@ -6303,15 +6303,15 @@ gatsby-plugin-compile-es6-packages@^2.1.0:
     "@babel/runtime" "^7.0.0"
     regex-escape "^3.4.8"
 
-gatsby-plugin-gatsby-cloud@^4.7.0:
-  version "4.24.1"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-gatsby-cloud/-/gatsby-plugin-gatsby-cloud-4.24.1.tgz#a4148bfc3ba17e192f39f8cf6a87d7446c8fe8b0"
-  integrity sha512-ss6axQQ5fzIrHAdPsiBhGssy9d7XrDeJl6rUpXTyDV8RbQmniNm6BAhJ/cEQ2fo0xAhjwk/0rSQj54b0s2fdgQ==
+gatsby-plugin-gatsby-cloud@^5.4.0:
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-gatsby-cloud/-/gatsby-plugin-gatsby-cloud-5.4.0.tgz#2521f8086eba12a98a9ddc30b088271fe0406ba6"
+  integrity sha512-gJjVg7/tKkLP9kuLSDZ6r/aBMQ/gxMHy7ttCxaQcjyCZPBdaJee2QwMtrMMh3QKxG51j+Eee1cYnZVw4zHTtkw==
   dependencies:
-    "@babel/runtime" "^7.15.4"
+    "@babel/runtime" "^7.20.7"
     fs-extra "^10.1.0"
-    gatsby-core-utils "^3.24.0"
-    gatsby-telemetry "^3.24.0"
+    gatsby-core-utils "^4.4.0"
+    gatsby-telemetry "^4.4.0"
     kebab-hash "^0.1.2"
     lodash "^4.17.21"
     webpack-assets-manifest "^5.1.0"
@@ -6512,24 +6512,6 @@ gatsby-source-strapi@^2.0.0:
     gatsby-source-filesystem "4.5.1"
     lodash "^4.17.21"
     qs "^6.10.3"
-
-gatsby-telemetry@^3.24.0:
-  version "3.24.0"
-  resolved "https://registry.yarnpkg.com/gatsby-telemetry/-/gatsby-telemetry-3.24.0.tgz#5306d8a54372eb877be92f782f32cd25fbe9cfb5"
-  integrity sha512-ioBzkmImRuyEAGtnyJgpln4LKTQ61MAjFaU+SFLVKDATcVh86rfNbD2ks5DzZgCtsP1/zVmHv2a7s4z/TQCZjA==
-  dependencies:
-    "@babel/code-frame" "^7.14.0"
-    "@babel/runtime" "^7.15.4"
-    "@turist/fetch" "^7.2.0"
-    "@turist/time" "^0.0.2"
-    boxen "^4.2.0"
-    configstore "^5.0.1"
-    fs-extra "^10.1.0"
-    gatsby-core-utils "^3.24.0"
-    git-up "^7.0.0"
-    is-docker "^2.2.1"
-    lodash "^4.17.21"
-    node-fetch "^2.6.7"
 
 gatsby-telemetry@^4.4.0:
   version "4.4.0"
