@@ -1,4 +1,4 @@
-import { isAuthenticated } from "../services/authentication"
+import { isLoggedIn } from "../services/authentication"
 
 export const portalRoot = process.env.REACT_APP_PORTAL_ROOT
 console.log("*** app root", portalRoot)
@@ -36,7 +36,7 @@ export const routes = {
       element: "",
     },
     {
-      label: isAuthenticated ? "" : "",
+      label: isLoggedIn ? "" : "",
       url: "",
       element: "",
     },
