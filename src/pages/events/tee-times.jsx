@@ -1,6 +1,6 @@
 // import { useStaticQuery, graphql } from "gatsby";
 import React, { useEffect, useState } from "react"
-import Layout from "../../components/Layout"
+import Layout from "../../components/layout"
 import { Link } from "gatsby"
 import { Typography } from "@mui/material"
 

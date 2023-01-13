@@ -11,7 +11,7 @@ import {
   MenuItem,
 } from "@mui/material"
 import { portalRoot } from "../../config"
-import Layout from "../../components/Layout"
+import Layout from "../../components/layout"
 import axios from "axios"
 
 // TODO - refactor to a functinoal component.

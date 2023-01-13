@@ -4,7 +4,7 @@ import { useEffect } from "react"
 // import Layout from "../../components/layout"
 import SEO from "../components/seo"
 import Layout from "../components/layout"
-import { Typography } from "@mui/material"  
+import { Typography } from "@mui/material"
 
 // TODO - replace static query with page query.
 

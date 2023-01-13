@@ -1,6 +1,6 @@
 import React from "react"
 import { Typography } from "@mui/material"
-import Layout from "../components/Layout"
+import Layout from "../components/layout"
 
 const FourOhFour = () => {
   return (
