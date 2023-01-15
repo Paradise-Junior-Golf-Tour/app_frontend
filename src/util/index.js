@@ -5,3 +5,5 @@ export const reduceObjects = function (array, property) {
 
   return total
 }
+
+export const isBrowser = () => typeof window !== "undefined"

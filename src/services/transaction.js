@@ -4,7 +4,7 @@ export const transactionsByEvent = async ({ eventId }) => {
   let transactions = []
 
   await axios(
-    `http://localhost:1337/api/transactions/event-id?eventId=${eventId}`
+    `${process.env.REACT_APP_STRAPI_API_URL}/api/transactions/event-id?eventId=${eventId}`
   )
     .then((res) => {
       transactions = res.data

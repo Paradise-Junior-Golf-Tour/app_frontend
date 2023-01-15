@@ -14,7 +14,7 @@ export const eventsNew = async ({ eventName, eventDescription }) => {
   )
 
   await axios
-    .post("http://localhost:1337/api/events/new", {
+    .post(`${process.env.REACT_APP_STRAPI_API_URL}/api/events/new`, {
       // headers: {
       //   Authorization: `Bearer ${user.jwt}`,
       // },
@@ -42,7 +42,7 @@ export const eventsNew = async ({ eventName, eventDescription }) => {
 
 export const eventsAll = async () => {
   console.log("[Events Service] Get All")
-  const data = await axios.get("http://localhost:1337/api/events/all")
+  const data = await axios.get(`${process.env.REACT_APP_STRAPI_API_URL}/api/events/all`)
 
   if (data.status === 200) {
     console.log("[Events Service] Get All OK", data.status)
@@ -57,7 +57,7 @@ export const eventsOneById = async ({ identifier }) => {
   let event
 
   await axios
-    .get(`http://localhost:1337/api/events/one?identifier=${identifier}`)
+    .get(`${process.env.REACT_APP_STRAPI_API_URL}/api/events/one?identifier=${identifier}`)
     .then((res) => {
       console.log(`[Events Service] Found One: ${res.status}`)
       if (res.status === 200) {
@@ -81,7 +81,7 @@ export const register = async ({ events, type }) => {
 
   console.log(`[Events Service] args:`, { events, type })
   await axios
-    .post("http://localhost:1337/api/events/register", {
+    .post(`${process.env.REACT_APP_STRAPI_API_URL}/api/events/register`, {
       method: "POST",
       // body: {
       events: events,

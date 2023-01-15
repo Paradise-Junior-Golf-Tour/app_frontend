@@ -1,8 +1,9 @@
 import React from "react"
 import { navigate } from "gatsby"
-import { isLoggedIn, isBrowser } from "../../services/authentication"
+import { isLoggedIn } from "../../services/authentication"
 import { portalRoot } from "../../config"
 import { setHeaders } from "../../services/authentication"
+import { isBrowser } from '../../util'
 
 const AuthenticatedRoute = ({ component: Component, location, ...rest }) => {
   console.log("Log [AuthenticatedRoute] location", { location, rest })
@@ -21,7 +22,7 @@ const AuthenticatedRoute = ({ component: Component, location, ...rest }) => {
   //   url,
   // })
 
-  if (isBrowser() && !isLoggedIn()) {
+  if (isBrowser && !isLoggedIn()) {
     navigate(`/${portalRoot}/login`, { state: { } })
     return null
   }

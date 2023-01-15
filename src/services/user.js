@@ -6,7 +6,7 @@ export const usersByEvent = async ({ id }) => {
   let users
 
   await axios
-    .get(`http://localhost:1337/api/users/event?id=${id}`)
+    .get(`${process.env.REACT_APP_STRAPI_API_URL}/api/users/event?id=${id}`)
     .then((res) => {
       console.log(`[User Service] Found Users: ${res.status}`)
       if (res.status === 200) {
@@ -29,7 +29,7 @@ export const getUserEvents = async () => {
   let events
 
   await axios
-    .get(`http://localhost:1337/api/users/events`)
+    .get(`${process.env.REACT_APP_STRAPI_API_URL}/api/users/events`)
     .then((res) => {
       console.log(`[User Service] Found Events: ${res.status}`, res)
       if (res.status === 200) {

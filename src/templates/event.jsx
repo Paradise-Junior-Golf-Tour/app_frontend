@@ -49,7 +49,7 @@ const Event = ({ pageContext, location }) => {
     borderRadius: "0.5rem",
     border: `${!pageContext.image ? "1px dashed grey" : "none"}`,
     opacity: `${!pageContext.image ? 0.25 : 1}`,
-    backgroundImage: `url(${"http://localhost:1337" + pageContext.image})`,
+    backgroundImage: `url(${process.env.REACT_APP_STRAPI_API_URL + pageContext.image})`,
     overflow: "hidden",
     textAlign: "center",
   }

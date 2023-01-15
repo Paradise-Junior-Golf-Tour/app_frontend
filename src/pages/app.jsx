@@ -18,9 +18,10 @@ import AdminEventsNew from "../components/app/admin/events/new"
 import AdminTransactions from "../components/app/admin/transactions/event"
 import AdminEventsUpdate from "../components/app/admin/events/event"
 import { useLocation } from "@reach/router"
+import services from "../services"
 
 const App = () => {
-  console.log(`[app.js] App page.`)
+  console.log(`[app.js] App page.`, services)
   const user = getUser()
   const [heading, setHeading] = useState("")
   // const location = useLocation()

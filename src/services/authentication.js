@@ -1,16 +1,15 @@
 import axios from "axios"
+import { isBrowser } from "../util/index.js"
 
-export const isBrowser = () => typeof window !== "undefined"
 
 // export const getUser = () =>
-//   isBrowser() && window.localStorage.getItem("gatsbyUser")
+//   isBrowser && window.localStorage.getItem("gatsbyUser")
 //     ? JSON.parse(window.localStorage.getItem("gatsbyUser"))
 //     : {}
 
 export const getUser = () => {
   let user = {}
-  if (typeof window !== "undefined") {
-    console.log('Browser')
+  if (isBrowser) {
     user = window.localStorage.getItem("gatsbyUser")
       ? JSON.parse(window.localStorage.getItem("gatsbyUser"))
       : {}
@@ -18,7 +17,7 @@ export const getUser = () => {
 
   return user
 }
-// isBrowser() && window.localStorage.getItem("gatsbyUser")
+// isBrowser && window.localStorage.getItem("gatsbyUser")
 //   ? JSON.parse(window.localStorage.getItem("gatsbyUser"))
 //   : {}
 
@@ -28,7 +27,7 @@ export const getUser = () => {
 
 export const setUser = (user) => {
   // let user = {}
-  if (typeof window !== "undefined") {
+  if (isBrowser) {
     console.log('Browser')
     return window.localStorage.setItem("gatsbyUser", JSON.stringify(user))
   }
@@ -64,7 +63,7 @@ export const handleLogin = async ({ username, password }) => {
 
 export const isLoggedIn = () => {
   let user = false
-  if (typeof window !== "undefined") {
+  if (isBrowser) {
     let _user = getUser()
     user = !!_user?.jwt
   }
