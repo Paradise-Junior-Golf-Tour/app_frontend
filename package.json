@@ -11,7 +11,7 @@
   "scripts": {
     "develop": "clear && wait-on http://localhost:1337/admin && gatsby develop",
     "start": "wait-on http://localhost:1337/admin && gatsby develop",
-    "build": "wait-on http://localhost:1337/admin && gatsby build",
+    "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "clear && gatsby clean",
     "schema": "clear && curl -X POST http://localhost:8000/__refresh",

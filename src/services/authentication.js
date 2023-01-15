@@ -8,9 +8,10 @@ import { isBrowser } from "../util/index.js"
 //     : {}
 
 export const getUser = () => {
+  console.log(`[Service - Authentication]`, isBrowser)
   let user = {}
-  if (isBrowser) {
-    user = window.localStorage.getItem("gatsbyUser")
+  if (isBrowser()) {
+    user = isBrowser() && window.localStorage.getItem("gatsbyUser")
       ? JSON.parse(window.localStorage.getItem("gatsbyUser"))
       : {}
   }
@@ -27,7 +28,7 @@ export const getUser = () => {
 
 export const setUser = (user) => {
   // let user = {}
-  if (isBrowser) {
+  if (isBrowser()) {
     console.log('Browser')
     return window.localStorage.setItem("gatsbyUser", JSON.stringify(user))
   }
@@ -63,7 +64,7 @@ export const handleLogin = async ({ username, password }) => {
 
 export const isLoggedIn = () => {
   let user = false
-  if (isBrowser) {
+  if (isBrowser()) {
     let _user = getUser()
     user = !!_user?.jwt
   }

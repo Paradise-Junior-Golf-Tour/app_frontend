@@ -22,7 +22,7 @@ const AuthenticatedRoute = ({ component: Component, location, ...rest }) => {
   //   url,
   // })
 
-  if (isBrowser && !isLoggedIn()) {
+  if (isBrowser() && !isLoggedIn()) {
     navigate(`/${portalRoot}/login`, { state: { } })
     return null
   }
