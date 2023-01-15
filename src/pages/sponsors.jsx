@@ -52,7 +52,7 @@ const IndexPage = (data) => {
         Ask about the link above and how it relates to the site.
       </p>
       <div>
-        <img src={`${process.env.REACT_APP_STRAPI_API_URL}/uploads/index_0e2d123e0d.png} alt="" />
+        <img src={`${process.env.REACT_APP_STRAPI_API_URL}/uploads/index_0e2d123e0d.png`} alt="" />
         <img src="" alt="" />
         <img src="" alt="" />
         <img src="" alt="" />
