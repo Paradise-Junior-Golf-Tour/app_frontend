@@ -6,6 +6,7 @@ import { portalRoot } from "../../../config"
 import { getUserEvents } from "../../../services/user"
 
 const UserEvents = () => {
+  console.log('echo')
   const [events, setEvents] = useState(undefined)
   useEffect(() => {
     getUserEvents()

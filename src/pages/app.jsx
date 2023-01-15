@@ -41,7 +41,11 @@ const App = () => {
   // }, [location])
 
   useEffect(() => {
-    console.log('current user:', user)
+    console.log('[App]', {
+      env: process.env,
+      user,
+      appHeading: heading
+    })
   })
 
   return (
