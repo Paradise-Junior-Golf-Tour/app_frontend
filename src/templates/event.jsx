@@ -69,15 +69,17 @@ const Event = ({ pageContext, location }) => {
                 label="Register"
                 onClick={(event) => {
                   event.preventDefault()
-                  navigate("/events/register", {
-                    state: {
-                      event: {
-                        id: pageContext.strapi_id,
-                        name: pageContext.name,
-                        slug: pageContext.slug,
+                  if (typeof window !== "undefined") {
+                    navigate("/events/register", {
+                      state: {
+                        event: {
+                          id: pageContext.strapi_id,
+                          name: pageContext.name,
+                          slug: pageContext.slug,
+                        },
                       },
-                    },
-                  })
+                    })
+                  }
                 }}
               />
             ) : null}
