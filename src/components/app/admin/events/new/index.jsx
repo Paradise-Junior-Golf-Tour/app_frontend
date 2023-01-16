@@ -21,11 +21,18 @@ class AdminEventsNew extends React.Component {
     description: ``,
     loading: false,
     toastOpen: false,
+    eventImage: null,
   }
 
   handleUpdate = (event) => {
+    console.log(event.target.files[0])
+
+    // const formData = new FormData();
+    // formData.append('File', event.target.files[0]);
+    // console.log(formData)
+
     this.setState({
-      [event.target.name]: event.target.value,
+      eventImage: event.target.files[0],
     })
   }
 
@@ -44,6 +51,12 @@ class AdminEventsNew extends React.Component {
     this.setState({
       loading: true,
     })
+
+    // const formData = new FormData();
+
+    // formData.append('File', selectedFile);
+    // console.log(formData)
+
     await eventsNew({
       eventName: this.state.eventName,
       eventDescription: this.state.description,
@@ -152,8 +165,33 @@ class AdminEventsNew extends React.Component {
               onChange={this.handleUpdate}
             >
               Upload Image
-              <input type="file" hidden />
+              <label htmlFor="eventImage">
+                <input type="file" name="eventImage" hidden />
+              </label>
             </Button>
+            { this.state.eventImage ? 
+              <Button
+                variant="outlined"
+                color="secondary"
+                component="label"
+                name="event_image"
+                id="event_image"
+                onChange={this.handleUpdate}
+              >
+                Remove Image
+                <label htmlFor="eventImage">
+                  <input type="file" name="eventImage" hidden />
+                </label>
+              </Button> : null
+            }
+            {this.state.eventImage?.name ? (
+              <p>
+                Image currently selected for upload:{" "}
+                <strong>{this.state.eventImage.name}</strong>.{" "}
+              </p>
+            ) : (
+              ""
+            )}
             <br />
             <br />
             <LoadingButton

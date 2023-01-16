@@ -22,7 +22,7 @@ export default function EventCard(event) {
           component="img"
           height="140"
           image={
-            `${process.env.REACT_APP_STRAPI_API_URL}` + event?.event?.image?.formats?.small?.url
+            event?.event?.image?.formats?.small?.url
           }
           alt=""
         />
