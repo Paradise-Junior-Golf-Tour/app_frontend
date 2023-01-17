@@ -4,7 +4,7 @@ import { isLoggedIn, getUser } from "../../services/authentication"
 import ImageSlider from "./image-slider"
 
 // TODO - make this a temp dev tool and then into a real header with styling and breadcrumbs.
-export default function Header({ heading, location }) {
+export default function Header({ heading, img, location }) {
   const authenticated = isLoggedIn()
   const user = getUser()
 
@@ -12,6 +12,7 @@ export default function Header({ heading, location }) {
     props: {
       heading,
       location,
+      img
     },
     data: {
       authenticated,
@@ -31,13 +32,15 @@ export default function Header({ heading, location }) {
   //   backgroundImage: `url(${null})`
   // }
 
-  const images = [
-    "https://images.unsplash.com/photo-1593111774240-d529f12cf4bb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGdvbGZ8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60",
-  ]
+  // const images = [
+  //   "https://images.unsplash.com/photo-1593111774240-d529f12cf4bb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGdvbGZ8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60",
+  // ]
+
+  const imgUrl = img || "https://images.unsplash.com/photo-1593111774240-d529f12cf4bb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGdvbGZ8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60";
 
   const styleHeader = {
     height: "20rem",
-    backgroundImage: `linear-gradient(to left bottom, rgba(245, 246, 252, 0.52), #fb8500 ), url(${images[0]})`,
+    backgroundImage: `linear-gradient(to left bottom, rgba(245, 246, 252, 0.52), #fb8500 ), url(${imgUrl})`,
     backgroundPosition: "center",
     backgroundSize: "cover",
     padding: "0",
@@ -47,7 +50,7 @@ export default function Header({ heading, location }) {
   const styleContainer = {
     display: "flex",
     flexDirection: "column",
-    justifyContent: "flex-end",
+    justifyContent: "flex-end", 
     alignItems: "start",
   }
 

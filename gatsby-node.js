@@ -75,7 +75,6 @@ exports.createPages = async ({ graphql, actions }) => {
 // called after every page is created.
 exports.onCreatePage = async ({ page, actions }) => {
   const { createPage, createRedirect } = actions
-  const portalRoot = process.env.REACT_APP_PORTAL_ROOT
   // console.log("*** app root config", portalRoot)
 
   // page.matchPath is a special key that's used for matching pages
@@ -115,7 +114,7 @@ exports.onCreatePage = async ({ page, actions }) => {
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
   if (stage === "build-html") {
     actions.setWebpackConfig({
-      module: { 
+      module: {
         rules: [
           {
             test: /gatsby-plugin-mui-emotion/,

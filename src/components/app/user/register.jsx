@@ -8,6 +8,7 @@ import FormLabel from "@mui/material/FormLabel"
 import FormHelperText from "@mui/material/FormHelperText"
 import { reduceObjects } from "../../../util"
 import { register, eventsAll } from "../../../services/event"
+import { navigate } from "gatsby"
 
 export default function UserEventRegistration(props) {
   // const { name, id, slug } = props?.location?.state?.event
@@ -18,6 +19,8 @@ export default function UserEventRegistration(props) {
     register({ events: events.map((event) => event.id), type: "Event Single" })
       .then((res) => {
         console.log(res)
+        alert('Registration success!')
+        navigate('/app/events')
       })
       .catch((err) => {
         console.log(err)
@@ -26,12 +29,10 @@ export default function UserEventRegistration(props) {
 
   const handleChangeNew = (event) => {
     const newState = events.map((obj) => {
-      // 👇️ if id equals 2, update country property
       if (obj.name === event.target.name) {
         return { ...obj, checked: obj.checked === true ? false : true }
       }
 
-      // 👇️ otherwise return object as is
       return obj
     })
 
@@ -73,7 +74,7 @@ export default function UserEventRegistration(props) {
 
   console.log(checked)
 
-  const total = reduceObjects(checked, "Fee")
+  const total = reduceObjects(checked, "fee")
 
   return (
     <>
@@ -84,7 +85,14 @@ export default function UserEventRegistration(props) {
         Register for the {props?.location?.state?.event?.name || "event"}.
       </Typography>
       <hr />
+      <p>
+        This is the Event Registration page. The form can be dynamically set
+        based on the user's slection from the Events page.
+      </p>
       <p>Choose the events you would like to register for.</p>
+
+      <div className="dev">Need to filter out Events the user has previously registered for.</div>
+      <br />
 
       <Box>
         <FormControl sx={{}} component="fieldset" variant="standard">
@@ -97,7 +105,7 @@ export default function UserEventRegistration(props) {
                       <FormControlLabel
                         control={
                           <Checkbox
-                            checked={event.checked}
+                            checked={props?.location?.state?.event?.name === event.name ? true : event.checked}
                             onChange={handleChangeNew}
                             name={event.name}
                           />
@@ -174,15 +182,10 @@ export default function UserEventRegistration(props) {
       <br />
       <br />
       <hr />
-      <p>
-        This is the Event Registration page. The form can be dynamically set
-        based on the user's slection from the Events page.
-      </p>
       <p className="dev">
         Should the option to sign up in foursomes be incorporated? Pick othe
         users? Invite if they are not signed up?
       </p>
-      <p className="dev">Select multiple events and pay in one transaction.</p>
     </>
   )
 }

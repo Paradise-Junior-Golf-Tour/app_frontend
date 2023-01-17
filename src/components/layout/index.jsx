@@ -6,15 +6,15 @@ import Main from "./main"
 import { Box } from "@mui/material"
 import Header from './header'
 
-export default function Layout({ heading, children }) {
+export default function Layout({ heading, children, img }) {
   useEffect(() => {
-    console.log("[F] Props and State", { children, heading })
+    console.log("[Layout] Props and State", { children, heading, img })
   }, [children, heading])
 
   return (
     <div style={layoutStyles}>
       <Navigation />
-      <Header heading={heading} images />
+      <Header heading={heading} img={img} />
       <Main children={children} />
       <Footer />
     </div>

@@ -31,6 +31,7 @@ const Event = ({ pageContext, location }) => {
   // }, [pageContext])
 
   useEffect(() => {
+    console.log(`[Events Template]`, pageContext)
     usersByEvent({ id: pageContext.strapiId }).then((data) => {
       setUsers(data.data)
     })
@@ -55,7 +56,7 @@ const Event = ({ pageContext, location }) => {
   }
 
   return (
-    <Layout heading={pageContext.name}>
+    <Layout heading={pageContext.name} img={pageContext.image}>
       {true ? (
         <article>
           <Typography component="h1" variant="h3">
