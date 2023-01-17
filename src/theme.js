@@ -7,8 +7,8 @@ console.log(`[theme.js] Init custom theme overrides.`)
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#184e77",
-      contrastText: "#ffffff",
+      main: "#023047",
+      contrastText: "#fff",
     },
     secondary: {
       main: "#52b69a",

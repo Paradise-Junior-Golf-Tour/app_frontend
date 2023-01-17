@@ -90,6 +90,9 @@ const EventsPage = (props) => {
 
   return (
     <Layout heading="Events">
+      {/* <Layout.Header heading={"YEET"}>
+        Hello
+      </Layout.Header> */}
       <Typography component="h1" variant="h3">
         Tour Events
       </Typography>

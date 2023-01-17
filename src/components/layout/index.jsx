@@ -4,6 +4,7 @@ import Navigation from "../navigation"
 import { layoutStyles } from "../../styles"
 import Main from "./main"
 import { Box } from "@mui/material"
+import Header from './header'
 
 export default function Layout({ heading, children }) {
   useEffect(() => {
@@ -13,6 +14,7 @@ export default function Layout({ heading, children }) {
   return (
     <div style={layoutStyles}>
       <Navigation />
+      <Header heading={heading} images />
       <Main children={children} />
       <Footer />
     </div>

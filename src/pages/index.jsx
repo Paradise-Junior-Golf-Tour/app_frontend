@@ -21,7 +21,7 @@ const IndexPage = (data) => {
   }, [])
 
   return (
-    <Layout heading="Home">
+    <Layout heading={`Welcome to the ${new Date().getFullYear()} Tour`}>
       <Typography variant="h3" component="h1">
         Home Sweet Home
       </Typography>

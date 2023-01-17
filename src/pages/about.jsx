@@ -27,7 +27,7 @@ const AboutPage = (props) => {
   }, [props])
 
   return (
-    <Layout heading="Events">
+    <Layout heading="Events" images={[]}>
       <Typography component="h1" variant="h3">
         About
       </Typography>

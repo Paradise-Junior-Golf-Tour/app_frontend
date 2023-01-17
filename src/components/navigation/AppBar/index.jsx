@@ -7,7 +7,7 @@ import Drawer from "@mui/material/Drawer"
 import List from "@mui/material/List"
 import ListItem from "@mui/material/ListItem"
 import ListItemButton from "@mui/material/ListItemButton"
-// import ListItemText from "@mui/material/ListItemText"
+import ListItemText from "@mui/material/ListItemText"
 import MenuIcon from "@mui/icons-material/Menu"
 import Toolbar from "@mui/material/Toolbar"
 import Typography from "@mui/material/Typography"
@@ -37,6 +37,8 @@ const navItem2 = [
   { name: "Sandbox", link: "/sandbox" },
 ]
 
+
+
 export default function DrawerAppBar(props) {
   const { window } = props
   const [mobileOpen, setMobileOpen] = React.useState(false)
@@ -49,10 +51,13 @@ export default function DrawerAppBar(props) {
   const hc = (e) => {
     e.preventDefault()
     setMobileOpen(!mobileOpen)
+    alert(e.target.href)
     setTimeout(() => {
       navigate(e.target.href)
-    }, 100)
+    }, 0)
   }
+
+  console.log(ListItemButton)
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
@@ -65,15 +70,8 @@ export default function DrawerAppBar(props) {
       <List>
         {navItem2.map((item) => (
           <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: "center" }}>
-              <Link
-                // primary={item.name}
-                href={item.link}
-                onClick={hc}
-              >
-                {item.name}
-              </Link>
-              {/* <Link to={item.link}>{item.name}</Link> */}
+            <ListItemButton sx={{ textAlign: 'center' }} onClick={() => navigate(item.link)}>
+              <ListItemText primary={item.name} />
             </ListItemButton>
           </ListItem>
         ))}
