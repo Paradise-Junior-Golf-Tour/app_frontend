@@ -67,7 +67,7 @@ class AdminEventsNew extends React.Component {
 
         setTimeout(() => {
           axios
-            .post("http://localhost:8000/__refresh") // Refresh data in Gatsby static queries
+            .post(`${process.env.REACT_APP_STRAPI_API_URL}/__refresh`) // Refresh data in Gatsby static queries
             .then((res) => {
               console.log("[Event New] schema refreshed")
             })
