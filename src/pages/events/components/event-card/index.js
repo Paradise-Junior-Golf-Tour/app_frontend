@@ -62,7 +62,7 @@ export default function EventCard(event) {
           size="small"
           to={
             user?.data?.admin
-              ? `/${portalRoot}/events/${event?.event?.slug}`
+              ? `/${portalRoot}/events/${event?.event?.id}`
               : `/${portalRoot}/events/register`
           }
           onClick={(e) => {

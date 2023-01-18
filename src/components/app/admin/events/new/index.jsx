@@ -65,22 +65,20 @@ class AdminEventsNew extends React.Component {
         console.log("[Event New] created", res)
         const event = res
 
-        // setTimeout((event) => {
-        //   console.log("[Event New] start TO", event)
-        //   axios
-        //     .post(`${process.env.REACT_APP_STRAPI_API_URL}/__refresh`) // Refresh data in Gatsby static queries
-        //     .then((res) => {
-        //       console.log("[Event New] schema refreshed")
-        //     })
-        //     .catch((err) => {
-        //       console.log("[Event New] schema failed to refresh", err)
-        //       this.setState({
-        //         toastOpen: true,
-        //       })
-        //     })
-        //   console.log("[Event New] redirect on success", res)
-        //   // navigate(`/${portalRoot}/events${event.id}`, { state: res })
-        // }, 1000)
+        setTimeout((event) => {
+          console.log("[Event New] start TO", event)
+          axios
+            .post(`${process.env.REACT_APP_STRAPI_API_URL}/__refresh`) // Refresh data in Gatsby static queries
+            .then((res) => {
+              console.log("[Event New] schema refreshed")
+            })
+            .catch((err) => {
+              console.log("[Event New] schema failed to refresh", err)
+              this.setState({
+                toastOpen: true,
+              })
+            })
+        }, 1000)
         navigate(`/${portalRoot}/events/${event.data.id}`, { state: res })
       })
       .catch((err) => {
