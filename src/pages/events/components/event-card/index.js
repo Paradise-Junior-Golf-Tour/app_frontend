@@ -73,7 +73,7 @@ export default function EventCard(event) {
             e.preventDefault()
             navigate(
               `${authenticated ? `/${portalRoot}` : ""}/events/${
-                user?.data?.admin ? "" + event?.event?.slug : "register"
+                user?.data?.admin ? event?.event?.strapi_id : "register"
               }`,
               {
                 state: {
