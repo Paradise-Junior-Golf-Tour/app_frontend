@@ -13,7 +13,6 @@ export default function Header({ heading, img, ...props }) {
   console.log("[Header] props/data:", {
     props: {
       heading,
-      location,
       img,
     },
     data: {
