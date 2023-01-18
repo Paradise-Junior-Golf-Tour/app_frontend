@@ -5,6 +5,7 @@ import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment"
 import { LocalizationProvider } from "@mui/x-date-pickers"
 import { portalRoot } from "../../../../../config"
 import { LoadingButton } from "@mui/lab"
+import Layout from "../../../../layout"
 import {
   Typography,
   TextField,
@@ -25,14 +26,13 @@ class AdminEventsNew extends React.Component {
   }
 
   handleUpdate = (event) => {
-    console.log(event.target.files[0])
 
     // const formData = new FormData();
     // formData.append('File', event.target.files[0]);
     // console.log(formData)
 
     this.setState({
-      eventImage: event.target.files[0],
+      [event.target.name]: event.target.value,
     })
   }
 
@@ -57,7 +57,7 @@ class AdminEventsNew extends React.Component {
     // formData.append('File', selectedFile);
     // console.log(formData)
 
-    await eventsNew({
+    eventsNew({
       eventName: this.state.eventName,
       eventDescription: this.state.description,
     })
@@ -65,21 +65,23 @@ class AdminEventsNew extends React.Component {
         console.log("[Event New] created", res)
         const event = res
 
-        setTimeout(() => {
-          axios
-            .post(`${process.env.REACT_APP_STRAPI_API_URL}/__refresh`) // Refresh data in Gatsby static queries
-            .then((res) => {
-              console.log("[Event New] schema refreshed")
-            })
-            .catch((err) => {
-              console.log("[Event New] schema failed to refresh", err)
-              this.setState({
-                toastOpen: true,
-              })
-            })
-          console.log("[Event New] redirect on success", res)
-          navigate(`/${portalRoot}/events`, { state: res })
-        }, 1000)
+        // setTimeout((event) => {
+        //   console.log("[Event New] start TO", event)
+        //   axios
+        //     .post(`${process.env.REACT_APP_STRAPI_API_URL}/__refresh`) // Refresh data in Gatsby static queries
+        //     .then((res) => {
+        //       console.log("[Event New] schema refreshed")
+        //     })
+        //     .catch((err) => {
+        //       console.log("[Event New] schema failed to refresh", err)
+        //       this.setState({
+        //         toastOpen: true,
+        //       })
+        //     })
+        //   console.log("[Event New] redirect on success", res)
+        //   // navigate(`/${portalRoot}/events${event.id}`, { state: res })
+        // }, 1000)
+        navigate(`/${portalRoot}/events/${event.data.id}`, { state: res })
       })
       .catch((err) => {
         console.log("[Event New] error", err)
@@ -88,11 +90,8 @@ class AdminEventsNew extends React.Component {
 
   render() {
     return (
-      <>
+      <Layout heading="New Event">
         <LocalizationProvider dateAdapter={AdapterMoment}>
-          <Typography component="h1" variant="h3">
-            New Event
-          </Typography>
           <Typography component="h2" variant="h5">
             Administrator's form to create an event.
           </Typography>
@@ -157,6 +156,7 @@ class AdminEventsNew extends React.Component {
             <br />
             <br />
             <Button
+              disabled
               variant="contained"
               color="secondary"
               component="label"
@@ -227,7 +227,7 @@ class AdminEventsNew extends React.Component {
             An error occurred while trying to create this event.
           </Alert>
         </Snackbar>
-      </>
+      </Layout>
     )
   }
 }

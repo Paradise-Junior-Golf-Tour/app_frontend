@@ -3,13 +3,11 @@ import { Link } from "gatsby"
 import { navListItemStyle, linkActive } from "../../../../styles"
 import { Typography } from "@mui/material"
 import { portalRoot } from "../../../../config"
+import Layout from "../../../layout"
 
 const Resources = () => {
   return (
-    <>
-      <Typography variant="h3" component="h1">
-        Admin Resources
-      </Typography>
+    <Layout heading="Admin Resources">
       <Typography variant="h5" component="h2">
         Developer resources to help you along!
       </Typography>
@@ -123,7 +121,7 @@ const Resources = () => {
           </Link>
         </li>
       </ul>
-    </>
+    </Layout>
   )
 }
 

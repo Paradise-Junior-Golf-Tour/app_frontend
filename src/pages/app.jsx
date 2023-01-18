@@ -21,7 +21,6 @@ import { useLocation } from "@reach/router"
 import services from "../services"
 
 const App = () => {
-  console.log(`[app.js] App page.`, services)
   const user = getUser()
   const [heading, setHeading] = useState("")
   // const location = useLocation()
@@ -42,44 +41,39 @@ const App = () => {
   // }, [location])
 
   useEffect(() => {
-    console.log('[App]', {
+    console.log("[App]", {
       env: process.env,
       user,
-      appHeading: heading
+      appHeading: heading,
     })
   })
 
   return (
-    <Layout heading={`Portal - ${heading ? heading : "Home"}`}>
-      <Router basepath="/app">
-        {user?.data?.admin ? (
-          <>
-            <Authenticated path={`/`} component={AdminIndex} />
-            <Authenticated path={`/events`} component={AdminEvents} />
-            <Authenticated path={`/resources`} component={AdminResources} />
-            <Authenticated path={`/events/new`} component={AdminEventsNew} />
-            <Authenticated path={`/events/:id`} component={AdminEventsUpdate} />
-            <Authenticated path={`/users`} component={AdminUsers} />
-            <Authenticated
-              path={`/transactions`}
-              component={AdminTransactions}
-            />
-          </>
-        ) : (
-          <>
-            <Authenticated path={`/`} component={UserIndex} />
-            <Authenticated path={`/profile`} component={UserProfile} />
-            <Authenticated path={`/events`} component={UserEvents} />
-            <Authenticated
-              path={`/events/register`}
-              component={UserRegistration}
-            />
-          </>
-        )}
-        <Login path={`/login`} />
-        <Authenticated default component={FourOhFour} />
-      </Router>
-    </Layout>
+    <Router basepath="/app">
+      {user?.data?.admin ? (
+        <>
+          <Authenticated path={`/users`} component={AdminUsers} />
+          <Authenticated path={`/transactions`} component={AdminTransactions} />
+          <Authenticated path={`/`} component={AdminIndex} />
+          <Authenticated path={`/events`} component={AdminEvents} />
+          <Authenticated path={`/resources`} component={AdminResources} />
+          <Authenticated path={`/events/new`} component={AdminEventsNew} />
+          <Authenticated path={`/events/:id`} component={AdminEventsUpdate} />
+        </>
+      ) : (
+        <>
+          <Authenticated path={`/`} component={UserIndex} />
+          <Authenticated path={`/profile`} component={UserProfile} />
+          <Authenticated path={`/events`} component={UserEvents} />
+          <Authenticated
+            path={`/events/register`}
+            component={UserRegistration}
+          />
+        </>
+      )}
+      <Login path={`/login`} />
+      <Authenticated default component={FourOhFour} />
+    </Router>
   )
 }
 

@@ -10,10 +10,15 @@ export const useSiteMetadata = () => {
           twitterUsername
           image
           siteUrl
+          menuLinks {
+            name
+            link
+          }
         }
       }
     }
   `)
 
+  console.log('Site Metadata', data)
   return data.site.siteMetadata
 }

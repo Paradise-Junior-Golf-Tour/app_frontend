@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { transactionsByEvent } from "../../../../services/transaction"
 import moment from "moment"
 import { Typography } from "@mui/material"
+import Layout from "../../../layout"
 
 const TransactionsByEvent = ({ eventId }) => {
   const [data, setData] = useState([])
@@ -45,10 +46,7 @@ const TransactionsByEvent = ({ eventId }) => {
     )
 
   return (
-    <section>
-      <Typography variant="h4" component="h2">
-        Transaction History
-      </Typography>
+    <Layout heading="Admin Transactions">
       <hr />
       {content}
       <p className="dev">Component is for Admin use only.</p>
@@ -61,7 +59,7 @@ const TransactionsByEvent = ({ eventId }) => {
         A corresponding flow needs to be adapted from the existing registration
         flow.
       </p>
-    </section>
+    </Layout>
   )
 }
 

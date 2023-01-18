@@ -12,11 +12,11 @@ export default function Layout({ heading, children, img }) {
   }, [children, heading])
 
   return (
-    <div style={layoutStyles}>
+    <Box style={layoutStyles}>
       <Navigation />
       <Header heading={heading} img={img} />
       <Main children={children} />
       <Footer />
-    </div>
+    </Box>
   )
 }

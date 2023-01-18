@@ -3,9 +3,10 @@ import { Link } from "gatsby"
 import { Typography } from "@mui/material"
 import { navListItemStyle, linkActive } from "../../../../styles"
 import { portalRoot } from "../../../../config"
+import Layout from "../../../layout"
 
 const AdminTransactions = () => (
-  <>
+  <section>
     <Typography variant="h3" component="h1">
       Admin Transactions
     </Typography>
@@ -34,7 +35,7 @@ const AdminTransactions = () => (
         </Link>
       </li>
     </ul>
-  </>
+  </section>
 )
 
 export default AdminTransactions

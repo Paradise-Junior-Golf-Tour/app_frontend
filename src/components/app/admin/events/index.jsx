@@ -17,6 +17,7 @@ import {
 } from "@mui/material"
 import { eventsAll } from "../../../../services/event"
 import { portalRoot } from "../../../../config"
+import Layout from "../../../layout"
 
 const AdminEvents = ({ location }) => {
   const [data, setData] = useState(null)
@@ -44,20 +45,17 @@ const AdminEvents = ({ location }) => {
 
   useEffect(() => {
     console.log("[Events Page]", { data, location })
-    if (location?.state?.data?.event?.name) {
-      setToastOpen(true)
-    }
+    // if (location?.state?.data?.event?.name) {
+    //   setToastOpen(true)
+    // }
   }, [data, location])
 
-  if (!data) return <div>Loading</div>
+  // if (!data) return <div>Loading</div>
 
   return (
-    <>
-      <Typography variant="h3" component="h1">
-        Admin Events
-      </Typography>
+    <Layout heading="Admin Events">
       <Typography variant="h5" component="h2">
-        Register and manage events.
+        Manage and create events.
       </Typography>
       <hr />
       <p>CRUD operations and the associated services.</p>
@@ -113,7 +111,7 @@ const AdminEvents = ({ location }) => {
           </TableHead>
 
           <TableBody>
-            {data.map((row) => (
+            {data?.map((row) => (
               <TableRow
                 key={row.name}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -121,8 +119,7 @@ const AdminEvents = ({ location }) => {
                 <TableCell align="left">{row.id}</TableCell>
                 <TableCell component="th" scope="row">
                   <Link
-                    to={`/${portalRoot}/events/` + row.slug}
-                    state={{ id: row.id }}
+                    to={`/${portalRoot}/events/` + row.id}
                   >
                     {row.name}
                   </Link>
@@ -167,7 +164,7 @@ const AdminEvents = ({ location }) => {
           Created the new event {location?.state?.data?.event?.name}.
         </Alert>
       </Snackbar> */}
-    </>
+    </Layout>
   )
 }
 

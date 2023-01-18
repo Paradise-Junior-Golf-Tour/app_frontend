@@ -8,6 +8,7 @@ import {
 } from "../../services/authentication"
 import { Button, TextField, Typography } from "@mui/material"
 import { portalRoot } from "../../config"
+import Layout from "../layout"
 
 class Login extends React.Component {
   constructor(props) {
@@ -81,10 +82,7 @@ class Login extends React.Component {
 
       // navigate(`/${portalRoot}`)
       return (
-        <>
-          <Typography component="h1" variant="h3">
-            Howdy {user.data?.username}!
-          </Typography>
+        <Layout heading={`Howdy ${user.data?.username}!`}>
           <Typography component="h2" variant="h5">
             You're logged in!
           </Typography>
@@ -103,23 +101,20 @@ class Login extends React.Component {
           >
             Logout
           </Button>
-        </>
+        </Layout>
       )
     }
 
     console.log("login props", this.props)
 
     return (
-      <>
-        <Typography component="h1" variant="h3">
-          Login
-        </Typography>
+      <Layout heading="Login">
         <Typography component="h2" variant="h5">
           Users and admins log in to the app here.
         </Typography>
         <hr />
         <p>
-          Not a member? An account is required to register up for and manage
+          Not a member? An account is required to register for and manage
           your events. You can sign up <Link to="/signup">right here.</Link>
         </p>
         <br />
@@ -158,7 +153,7 @@ class Login extends React.Component {
             Log In
           </Button>
         </form>
-      </>
+      </Layout>
     )
   }
 }

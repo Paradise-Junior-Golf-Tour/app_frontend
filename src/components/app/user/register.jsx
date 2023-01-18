@@ -9,18 +9,27 @@ import FormHelperText from "@mui/material/FormHelperText"
 import { reduceObjects } from "../../../util"
 import { register, eventsAll } from "../../../services/event"
 import { navigate } from "gatsby"
+import Layout from "../../layout"
 
 export default function UserEventRegistration(props) {
   // const { name, id, slug } = props?.location?.state?.event
   const [events, setEvents] = useState([])
+
+  const registerTypes = []
+
+  useEffect(() => {
+    console.log("Register", {
+      events,
+    })
+  })
 
   const handleSubmit = (e) => {
     e.preventDefault()
     register({ events: events.map((event) => event.id), type: "Event Single" })
       .then((res) => {
         console.log(res)
-        alert('Registration success!')
-        navigate('/app/events')
+        alert("Registration success!")
+        navigate("/app/events")
       })
       .catch((err) => {
         console.log(err)
@@ -72,12 +81,10 @@ export default function UserEventRegistration(props) {
     return obj.checked === true
   })
 
-  console.log(checked)
-
   const total = reduceObjects(checked, "fee")
 
   return (
-    <>
+    <Layout heading="Tour Event Registration">
       <Typography variant="h3" component="h1">
         Tour Event Registration
       </Typography>
@@ -91,7 +98,9 @@ export default function UserEventRegistration(props) {
       </p>
       <p>Choose the events you would like to register for.</p>
 
-      <div className="dev">Need to filter out Events the user has previously registered for.</div>
+      <div className="dev">
+        Need to filter out Events the user has previously registered for.
+      </div>
       <br />
 
       <Box>
@@ -105,7 +114,11 @@ export default function UserEventRegistration(props) {
                       <FormControlLabel
                         control={
                           <Checkbox
-                            checked={props?.location?.state?.event?.name === event.name ? true : event.checked}
+                            checked={
+                              props?.location?.state?.event?.name === event.name
+                                ? true
+                                : event.checked
+                            }
                             onChange={handleChangeNew}
                             name={event.name}
                           />
@@ -186,6 +199,6 @@ export default function UserEventRegistration(props) {
         Should the option to sign up in foursomes be incorporated? Pick othe
         users? Invite if they are not signed up?
       </p>
-    </>
+    </Layout>
   )
 }

@@ -3,12 +3,10 @@ import { Link } from "gatsby"
 import { Typography } from "@mui/material"
 import { navListItemStyle, linkActive } from "../../../../styles"
 import { portalRoot } from "../../../../config"
+import Layout from "../../../layout"
 
 const AdminUsers = () => (
-  <>
-    <Typography variant="h3" component="h1">
-      Admin Users
-    </Typography>
+  <Layout heading="Admin Users">
     <Typography variant="h5" component="h2">
       Admins can manage users, register users for events, etc.
     </Typography>
@@ -31,7 +29,7 @@ const AdminUsers = () => (
         </Link>
       </li>
     </ul>
-  </>
+  </Layout>
 )
 
 export default AdminUsers

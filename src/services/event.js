@@ -25,10 +25,11 @@ export const eventsNew = async ({ eventName, eventDescription }) => {
     })
     .then((res) => {
       console.log(`[Events Service] Create New Success: ${res.status}`)
-      if (res.status === 201) {
-        console.log(res.data)
-        event = res.data
-      }
+      event = res.data
+      // if (res.status === 201) {
+      //   console.log(res.data)
+      //   event = res.data
+      // }
     })
     .catch((err) => {
       console.log(
@@ -57,9 +58,9 @@ export const eventsOneById = async ({ identifier }) => {
   let event
 
   await axios
-    .get(`${process.env.REACT_APP_STRAPI_API_URL}/api/events/one?identifier=${identifier}`)
+    .get(`${process.env.REACT_APP_STRAPI_API_URL}/api/events/${identifier}`)
     .then((res) => {
-      console.log(`[Events Service] Found One: ${res.status}`)
+      console.log(`[Events Service] Found One: ${res}`)
       if (res.status === 200) {
         console.log("[services - event]", res.data)
         event = res.data

@@ -6,21 +6,29 @@ console.log(`[gatsby-config.js] Starting ${process.env.NODE_ENV} denvironment.`)
 console.log("[gatsby-config.js] Registering metadata and plugins.")
 
 module.exports = {
-  // flags: {
-  //   DEV_SSR: true
-  // },
-  /* Your site config here */
+  flags: {
+    DEV_SSR: true,
+  },
+
   siteMetadata: {
     title: "The Paradise Junior Golf Tour",
     description: "This is my awesome golf site I made from scratch!",
     twitterUsername: `@gatsbyjs`,
     image: `/gatsby-icon.png`,
     siteUrl: `https://www.yourdomain.tld`,
+    menuLinks: [
+      {
+        name: "home",
+        link: "/",
+      },
+      {
+        name: "page2",
+        link: "/page-2",
+      },
+    ],
   },
   plugins: [
     "gatsby-plugin-top-layout",
-    // If you want to use styled components you should add the plugin here.
-    // 'gatsby-plugin-styled-components',
     "gatsby-plugin-mui-emotion",
     {
       resolve: `gatsby-source-filesystem`,
@@ -31,7 +39,7 @@ module.exports = {
     },
     {
       resolve: "gatsby-source-strapi",
-      options: {  
+      options: {
         apiURL:
           process.env.NODE_ENV === "production"
             ? "https://paradise-junior-golf-tour.herokuapp.com"
@@ -56,6 +64,9 @@ module.exports = {
           {
             singularName: "sponsor",
           },
+          {
+            singularName: "fundraiser",
+          },
         ],
         singleTypes: [
           {
@@ -72,9 +83,5 @@ module.exports = {
       },
     },
     `gatsby-plugin-gatsby-cloud`,
-    // "gatsby-plugin-image",
-    // "gatsby-plugin-sharp",
-    // "gatsby-transformer-sharp",
-    // "gatsby-transformer-remark",
   ],
 }

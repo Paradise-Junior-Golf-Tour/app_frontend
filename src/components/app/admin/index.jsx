@@ -3,9 +3,10 @@ import { Link } from "gatsby"
 import { Typography } from "@mui/material"
 import { navListItemStyle, linkActive } from "../../../styles"
 import { portalRoot } from "../../../config"
+import Layout from "../../layout"
 
 const AdminIndex = () => (
-  <>
+  <Layout heading="Administrator">
     <Typography variant="h3" component="h1">
       Admin Index 
     </Typography>
@@ -26,7 +27,7 @@ const AdminIndex = () => (
         </Link>
       </li>
     </ul>
-  </>
+  </Layout>
 )
 
 export default AdminIndex

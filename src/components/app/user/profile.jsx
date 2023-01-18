@@ -4,9 +4,10 @@ import { Typography, Box } from "@mui/material"
 import { Avatar } from "@mui/material"
 import { navListItemStyle, linkActive } from "../../../styles"
 import { portalRoot } from "../../../config"
+import Layout from "../../layout"
 
 const UserProfile = () => (
-  <>
+  <Layout heading="Your Profile">
     <Typography
       variant="h3"
       component="h1"
@@ -14,19 +15,12 @@ const UserProfile = () => (
       justifyContent="space-between"
     >
       <Box>
-        <span>Your Profile</span>
-        <Typography variant="body1" component="p">
+        <Typography variant="h4" component="p">
           View and manage your profile.
         </Typography>
       </Box>
-      <Avatar
-        alt="Remy Sharp"
-        sx={{ width: "4rem", height: "4rem" }}
-        src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80"
-      />
     </Typography>
     <hr />
-    <p>Users can view and modify their profiles.</p>
     <Typography variant="subtitle1" component="p">
       Change Picture
     </Typography>
@@ -40,7 +34,7 @@ const UserProfile = () => (
         </Link>
       </li>
     </ul>
-  </>
+  </Layout>
 )
 
 export default UserProfile
