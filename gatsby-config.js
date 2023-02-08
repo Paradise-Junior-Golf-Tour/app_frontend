@@ -43,7 +43,7 @@ module.exports = {
         apiURL:
           process.env.NODE_ENV === "production"
             ? "https://paradise-junior-golf-tour.herokuapp.com"
-            : `http://localhost:1337`,
+            : `http://127.0.0.1:1337`,
         accessToken: process.env.STRAPI_TOKEN,
         collectionTypes: [
           {

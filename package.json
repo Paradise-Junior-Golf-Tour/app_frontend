@@ -9,8 +9,8 @@
     "strapi"
   ],
   "scripts": {
-    "develop": "clear && wait-on http://localhost:1337/admin && gatsby develop",
-    "start": "wait-on http://localhost:1337/admin && gatsby develop",
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "clear && gatsby clean",
