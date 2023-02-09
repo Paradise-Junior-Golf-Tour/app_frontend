@@ -7,13 +7,14 @@ import { useEffect } from "react"
 import axios from "axios"
 
 const SandboxPage = (data) => {
-  console.log("Log [Donate Page] Props", data)
+  console.log("Log [Sandbox Page] Props", data)
   useEffect(() => {
     axios
       .get("http://localhost:1337/api/upload/files")
       .then((files) => console.log("FILES", files))
       .catch((err) => console.log("ERR", err))
   }, [])
+  
   return (
     <Layout heading="Contact">
       <Typography variant="h3" component="h1">

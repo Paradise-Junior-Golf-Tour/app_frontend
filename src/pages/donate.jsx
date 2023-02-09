@@ -5,12 +5,12 @@ import SEO from "../components/seo"
 import { Typography } from "@mui/material"
 
 const DonatePage = (data) => {
-  const [dataClient, setDataClient] = useState()
-  console.log("Log [Donate Page] Props", data)
+  // const [dataClient, setDataClient] = useState()
+  // console.log("Log [Donate Page] Props", data)
 
-  if (dataClient) {
-    console.log("Log [Donate Page] Props", dataClient)
-  }
+  // if (dataClient) {
+  //   console.log("Log [Donate Page] Props", dataClient)
+  // }
 
   useEffect(() => {
     // API calls on mount
