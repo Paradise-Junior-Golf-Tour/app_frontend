@@ -27,6 +27,16 @@ const theme = createTheme({
       main: "#db3a34",
     },
   },
+  components: {
+    MuiGrid2: {
+      defaultProps: {
+        spacing: 3,
+        // all grids under this theme will apply
+        // negative margin on the top and left sides.
+        disableEqualOverflow: false,
+      },
+    },
+  },
 })
 
 export default theme

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Container, Typography, Box, Modal, Button } from "@mui/material"
 
 const Banner = () => {
@@ -6,6 +6,10 @@ const Banner = () => {
 
   const [dismissed, setDismissed] = useState(false)
   const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    console.log("Banner", { open, dismissed })
+  })
 
   const toggleOpen = () => {
     setOpen(!open)
@@ -30,7 +34,7 @@ const Banner = () => {
   if (dismissed) return null
 
   return (
-    <>
+    <div>
       <Box sx={{ backgroundColor: "warning.main", borderRadius: "0" }}>
         <Container color="primary.main">
           <div
@@ -43,14 +47,14 @@ const Banner = () => {
             <strong>
               Announcements! Welcome to The 2022 Paradise Junior Golf Tour.
             </strong>
-            <span>
+            <div>
               <Button color="primary" onClick={toggleOpen}>
                 View More
               </Button>
               <Button color="primary" onClick={dismissBanner}>
                 Dismiss
               </Button>
-            </span>
+            </div>
           </div>
         </Container>
       </Box>
@@ -110,7 +114,7 @@ const Banner = () => {
           </div>
         </Box>
       </Modal>
-    </>
+    </div>
   )
 }
 

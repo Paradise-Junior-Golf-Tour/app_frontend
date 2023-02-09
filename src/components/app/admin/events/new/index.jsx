@@ -1,8 +1,7 @@
 import React, { useEffect } from "react"
 import { navigate } from "gatsby"
 import { eventsNew } from "../../../../../services/event"
-import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment"
-import { LocalizationProvider } from "@mui/x-date-pickers"
+import ContentGrid from "../../../../layout/content-grid"
 import { portalRoot } from "../../../../../config"
 import { LoadingButton } from "@mui/lab"
 import Layout from "../../../../layout"
@@ -13,6 +12,7 @@ import {
   Alert,
   AlertTitle,
 } from "@mui/material"
+import Grid from "@mui/material/Unstable_Grid2"
 import axios from "axios"
 import Button from "@mui/material/Button"
 
@@ -26,7 +26,6 @@ class AdminEventsNew extends React.Component {
   }
 
   handleUpdate = (event) => {
-
     // const formData = new FormData();
     // formData.append('File', event.target.files[0]);
     // console.log(formData)
@@ -89,125 +88,206 @@ class AdminEventsNew extends React.Component {
   render() {
     return (
       <Layout heading="New Event">
-        <LocalizationProvider dateAdapter={AdapterMoment}>
-          <Typography component="h2" variant="h5">
-            Administrator's form to create an event.
+        <Typography component="h2" variant="h4">
+          Administrator's form to create an event.
+        </Typography>
+        <hr />
+        <br />
+        <Typography component="p" variant="body1">
+          Add a new Event entry and generate the corresponding Tee Times and
+          Results records.
+        </Typography>
+
+        <br />
+        <form
+          method="post"
+          name="login"
+          onSubmit={(event) => {
+            this.handleSubmit(event)
+          }}
+        >
+          <Typography component="h3" variant="h5">
+            Event Name, Date, and Description
           </Typography>
-          <hr />
           <br />
-          <Typography component="p" variant="body1">
-            Add a new Event entry and generate the corresponding Tee Times and
-            Results records.
-          </Typography>
+          <ContentGrid>
+            <Grid xs={12} sm={6}>
+              <TextField
+                required
+                sx={{ width: "100%" }}
+                id="event_name"
+                label="Name"
+                type="text"
+                name="event_name"
+                placeholder="Event Name"
+                // sx={{ width: 220 }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            </Grid>
+            <Grid xs={12} sm={6}>
+              <TextField
+                required
+                sx={{ width: "100%" }}
+                id="event_date"
+                label="Event Date"
+                type="date"
+                name="event_date"
+                // defaultValue="2017-05-24"
+                // sx={{ width: 220 }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            </Grid>
+            <Grid xs={12}>
+              <TextField
+                required
+                id="event_description"
+                label="Description"
+                type="textarea"
+                multiline
+                name="event_name"
+                placeholder="Event Name"
+                sx={{ width: "100%" }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            </Grid>
+          </ContentGrid>
 
           <br />
-          <form
-            method="post"
-            name="login"
-            onSubmit={(event) => {
-              this.handleSubmit(event)
-            }}
+          <br />
+          <Typography component="h3" variant="h5">
+            Event Registration
+          </Typography>
+          <br />
+          <ContentGrid>
+            <Grid xs={12} sm={6}>
+              <TextField
+                required
+                autoComplete="off"
+                id="event_registration_fee"
+                name="event_registration_fee"
+                label="Registration Fee"
+                variant="outlined"
+                type="number"
+                placeholder="0.00"
+                onChange={this.handleUpdate}
+                // sx={{ width: 220 }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                sx={{ width: "100%" }}
+              />
+            </Grid>
+            <Grid xs={12} sm={6}>
+              <TextField
+                required
+                autoComplete="off"
+                id="max_users"
+                name="max_users"
+                label="Maximum Participants"
+                variant="outlined"
+                type="number"
+                placeholder="0"
+                onChange={this.handleUpdate}
+                // sx={{ width: 220 }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                sx={{ width: "100%" }}
+              />
+            </Grid>
+            <Grid xs={12} sm={6}>
+              <TextField
+                required
+                id="registration_start_date"
+                label="Registration Start Date"
+                type="date"
+                name="registration_start_date"
+                // defaultValue="2017-05-24"
+                // sx={{ width: 220 }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                sx={{ width: "100%" }}
+              />
+            </Grid>
+            <Grid xs={12} sm={6}>
+              <TextField
+                required
+                id="registration_end_date"
+                label="Registration End Date"
+                type="date"
+                name="registration_end_date"
+                // defaultValue="2017-05-24"
+                // sx={{ width: 220 }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                sx={{ width: "100%" }}
+              />
+            </Grid>
+          </ContentGrid>
+          <br />
+          <br />
+          <Button
+            disabled
+            variant="contained"
+            color="secondary"
+            component="label"
+            name="event_image"
+            id="event_image"
+            onChange={this.handleUpdate}
           >
-            <TextField
-              autoComplete="off"
-              id="eventName"
-              name="eventName"
-              label="Event Name"
-              variant="outlined"
-              onChange={this.handleUpdate}
-            />
-            <br /> <br />
-            <TextField
-              autoComplete="off"
-              id="description"
-              type="description"
-              name="description"
-              label="Description"
-              variant="outlined"
-              onChange={this.handleUpdate}
-            />
-            <br /> <br />
-            <TextField
-              id="date_start"
-              label="Date Start"
-              type="date"
-              name="date_start"
-              // defaultValue="2017-05-24"
-              sx={{ width: 220 }}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-            <br />
-            <br />
-            <TextField
-              id="date_end"
-              label="Date End"
-              type="date"
-              name="date_end"
-              // defaultValue="2017-05-24"
-              sx={{ width: 220 }}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-            <br />
-            <br />
+            Upload Image
+            <label htmlFor="eventImage">
+              <input type="file" name="eventImage" hidden />
+            </label>
+          </Button>
+          {this.state.eventImage ? (
             <Button
-              disabled
-              variant="contained"
+              variant="outlined"
               color="secondary"
               component="label"
               name="event_image"
               id="event_image"
               onChange={this.handleUpdate}
             >
-              Upload Image
+              Remove Image
               <label htmlFor="eventImage">
                 <input type="file" name="eventImage" hidden />
               </label>
             </Button>
-            { this.state.eventImage ? 
-              <Button
-                variant="outlined"
-                color="secondary"
-                component="label"
-                name="event_image"
-                id="event_image"
-                onChange={this.handleUpdate}
-              >
-                Remove Image
-                <label htmlFor="eventImage">
-                  <input type="file" name="eventImage" hidden />
-                </label>
-              </Button> : null
-            }
-            {this.state.eventImage?.name ? (
-              <p>
-                Image currently selected for upload:{" "}
-                <strong>{this.state.eventImage.name}</strong>.{" "}
-              </p>
-            ) : (
-              ""
-            )}
-            <br />
-            <br />
-            <LoadingButton
-              variant="contained"
-              loading={this.state.loading}
-              type="submit"
-            >
-              Create New Event
-            </LoadingButton>
-          </form>
+          ) : null}
+          {this.state.eventImage?.name ? (
+            <p>
+              Image currently selected for upload:{" "}
+              <strong>{this.state.eventImage.name}</strong>.{" "}
+            </p>
+          ) : (
+            ""
+          )}
           <br />
-          <p className="dev">Need to add all fields from CMS.</p>
-          <p className="dev">
-            This may be the only data that requires a new build of the site.
-            Consider triggering it in the pipeline, via a plugin, or calling the
-            refresh (yarn schema) endpoint.
-          </p>
-        </LocalizationProvider>
+          <br />
+          <LoadingButton
+            variant="contained"
+            loading={this.state.loading}
+            type="submit"
+          >
+            Create New Event
+          </LoadingButton>
+        </form>
+        <br />
+        <p className="dev">Need to add all fields from CMS.</p>
+        <p className="dev">
+          This may be the only data that requires a new build of the site.
+          Consider triggering it in the pipeline, via a plugin, or calling the
+          refresh (yarn schema) endpoint.
+        </p>
 
         <Snackbar
           open={this.state.toastOpen}
