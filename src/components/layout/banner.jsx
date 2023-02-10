@@ -38,7 +38,7 @@ const Banner = () => {
   if (!showBanner) return null
 
   return (
-    <>
+    <div>
       <Box sx={{ backgroundColor: "warning.main", borderRadius: "0" }}>
         <Container sx={{ color: "warning.contrastText" }}>
           <div
@@ -124,7 +124,7 @@ const Banner = () => {
           </div>
         </Box>
       </Modal>
-    </>
+    </div>
   )
 }
 

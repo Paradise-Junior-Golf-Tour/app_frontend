@@ -2,7 +2,6 @@
 import * as React from "react"
 import TopLayout from "./TopLayout"
 import "../../src/styles/global.css"
-import Banner from "../../src/components/layout/banner"
 
 // Could also move setHeaders here?
 
@@ -11,7 +10,6 @@ export const wrapRootElement = ({ element }) => {
 
   return (
     <TopLayout>
-      {/* <Banner /> */}
       {element}
     </TopLayout>
   )

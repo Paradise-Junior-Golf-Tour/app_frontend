@@ -6,7 +6,6 @@ import { routes } from "../config"
 import { useEffect } from "react"
 import axios from "axios"
 
-
 const SandboxPage = (data) => {
   console.log("Log [Sandbox Page] Props", data)
   useEffect(() => {
@@ -15,7 +14,7 @@ const SandboxPage = (data) => {
       .then((files) => console.log("FILES", files))
       .catch((err) => console.log("ERR", err))
   }, [])
- 
+  
   return (
     <Layout heading="Contact">
       <Typography variant="h3" component="h1">
