@@ -3,37 +3,40 @@ import { getUser } from "./authentication"
 
 // TODO - fix error messaging...
 // Create a new Event and it's associated Tee Time record.
-export const eventsNew = async ({ eventName, eventDescription }) => {
+export const eventsNew = async ({
+  name,
+  description,
+  fee,
+  date,
+  max_users,
+}) => {
   const user = getUser()
   let event = null
 
   console.log(
     `[Events Service] Create New: ${
-      eventName || "No name provided - validation needed..."
-    }`
+      name || "No name provided - validation needed..."
+    }`,
+    { name, description, fee, date, max_users }
   )
 
   await axios
     .post(`${process.env.REACT_APP_STRAPI_API_URL}/api/events/new`, {
-      // headers: {
-      //   Authorization: `Bearer ${user.jwt}`,
-      // },
       data: {
-        eventName: eventName,
-        eventDescription: eventDescription,
+        name,
+        description,
+        fee,
+        date,
+        max_users,
       },
     })
     .then((res) => {
       console.log(`[Events Service] Create New Success: ${res.status}`)
       event = res.data
-      // if (res.status === 201) {
-      //   console.log(res.data)
-      //   event = res.data
-      // }
     })
     .catch((err) => {
       console.log(
-        `[Events Service] Create New Error: ${eventName}`,
+        `[Events Service] Create New Error: ${name}`,
         (event = err.message)
       )
     })
@@ -43,7 +46,9 @@ export const eventsNew = async ({ eventName, eventDescription }) => {
 
 export const eventsAll = async () => {
   console.log("[Events Service] Get All")
-  const data = await axios.get(`${process.env.REACT_APP_STRAPI_API_URL}/api/events/all`)
+  const data = await axios.get(
+    `${process.env.REACT_APP_STRAPI_API_URL}/api/events/all`
+  )
 
   if (data.status === 200) {
     console.log("[Events Service] Get All OK", data.status)

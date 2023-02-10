@@ -1,77 +1,92 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Typography, Container, Box, Avatar } from "@mui/material"
 import { isLoggedIn, getUser } from "../../services/authentication"
 import { isBrowser } from "../../util"
 import { useTheme } from "@mui/material/styles"
+import useInterval from "react-useinterval"
 
 // TODO - make this a temp dev tool and then into a real header with styling and breadcrumbs.
-export default function Header({ heading, img, ...props }) {
-  const authenticated = isLoggedIn()
-  const user = getUser()
+export default function Header({ heading, images }) {
+  const [imageActive, setImageActive] = useState(0)
   const theme = useTheme()
 
-  console.log("[Header] props/data:", {
-    props: {
-      heading,
-      img,
-    },
-    data: {
-      authenticated,
-      user: user,
-    },
-  })
+  console.log("header", images)
 
-  const ud = user?.data
+  const _images = images || [
+    "https://images.unsplash.com/photo-1593111774240-d529f12cf4bb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGdvbGZ8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60",
+  ]
 
-  const style = {
-    fontSize: "0.75rem",
-    wordBreak: "break-all",
-    color: "white",
+  const increaseCount = (amount) => {
+    console.log("count", imageActive)
+
+    if (imageActive < _images.length - 1) {
+      setImageActive(imageActive + amount)
+    } else {
+      setImageActive(0)
+    }
   }
 
-  // const styleHeader = {
-  //   backgroundImage: `url(${null})`
-  // }
-
-  // const images = [
-  //   "https://images.unsplash.com/photo-1593111774240-d529f12cf4bb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGdvbGZ8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60",
-  // ]
-
-  const imgUrl =
-    img ||
-    "https://images.unsplash.com/photo-1593111774240-d529f12cf4bb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGdvbGZ8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60"
-
-  const styleHeader = {
-    backgroundImage: `linear-gradient(to left bottom, rgba(245, 246, 252, 0.32), ${theme.palette.secondary.main} ), url(${imgUrl})`,
-    backgroundPosition: "center",
-    backgroundSize: "cover",
-    padding: "0",
-    color: "white",
-  }
-
-  const styleContainer = {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-end",
-    alignItems: "start",
-  }
+  useInterval(increaseCount, _images.length > 1 ? 4000 : null, 1)
 
   return (
     <Box
-      style={styleHeader}
       component="header"
-      color="seconary"
-      sx={{ height: 288, p: 0 }}
+      color="secondary"
+      sx={{
+        height: 288,
+        p: 0,
+        position: "relative"
+      }}
     >
-      {/* <ImageSlider /> */}
-      <Container sx={{ py: 0, px: 2, position: "relative", ...styleContainer }}>
+      <Box sx={{ overflow: "hidden", height: 288, position: "relative" }}>
+        {_images.map((image, index) => {
+          const isActive = imageActive === index ? true : false
+          return (
+            <Box
+              style={{
+                backgroundImage: `linear-gradient(to left bottom, rgba(245, 246, 252, 0.32), ${theme.palette.primary.main} ), url(${_images[index]})`,
+                transition: "3000ms",
+                backgroundPosition: "center",
+                backgroundSize: "cover",
+                padding: "0",
+                height: "308px",
+                width: "100%",
+                position: "absolute",
+                opacity: isActive ? 1 : 0,
+                transform: `scale(${isActive ? 1 : 1.1}) translateY(${isActive ? "-20px" : "20px"})`,
+              }}
+            />
+          )
+        })}
+      </Box>
+
+      <Container
+        sx={{
+          py: 0,
+          px: 2,
+          transform: "translateY(-100%)",
+          width: "100%",
+          margin: "auto",
+          bottom: 0,
+          color: "white",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-end",
+          alignItems: "flex-start",
+        }}
+      >
         <Typography
           component="h1"
           variant="h2"
-          sx={{ display: "block", p: 0, fontWeight: "bold", py: 0 }}
+          sx={{
+            display: "block",
+            py: 1,
+            fontWeight: "bold",
+          }}
         >
           {heading}
         </Typography>
+
         {isBrowser() &&
         isLoggedIn() &&
         window.location.pathname.includes("/app") ? (

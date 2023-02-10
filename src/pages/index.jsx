@@ -20,17 +20,22 @@ const IndexPage = (data) => {
     })
   }, [])
 
+  const images = [
+    "https://plus.unsplash.com/premium_photo-1661774316407-56209baefa8c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
+    "https://images.unsplash.com/photo-1535131749006-b7f58c99034b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
+    "https://images.unsplash.com/photo-1611374243147-44a702c2d44c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGdvbGZ8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60"
+  ]
+  
   return (
-    <Layout heading={`Welcome to the ${new Date().getFullYear()} Tour`}>
+    <Layout heading="The Paradise Junior Golf Tour" images={images}>
       <Typography variant="h3" component="h1">
-        Home Sweet Home
+        {`Welcome to the ${new Date().getFullYear()} Tour`}
       </Typography>
       <Typography variant="h5" component="h2">
         So glad to finally make it back.
       </Typography>
       <hr />
       <p>This is the homepage.</p>
-      {/* <br /> */}
 
       {/* //     _____ _    _  ______          __  __  __ ______  __          ___    _       _______  __     ______  _    _    _____  ____ _______ 
 //    / ____| |  | |/ __ \ \        / / |  \/  |  ____| \ \        / / |  | |   /\|__   __| \ \   / / __ \| |  | |  / ____|/ __ \__   __|
@@ -41,12 +46,6 @@ const IndexPage = (data) => {
 //                                                                                                                                       
 //  */}
       <section>
-        {/* <p>Welcome to The 2022 Paradise Junior Golf Tour.</p> */}
-        {/* <p>THE 2022 SUMMER TOURNAMENT SCHEDULE IS NOW LIVE!!!</p>
-        <p>REGISTRATION IS NOW OPEN! </p> */}
-        {/* <p>WE HAVE A FUN SCHEDULE FOR YOU THIS YEAR. </p> */}
-        {/* <p>REGISTER NOW! DO NOT MISS OUT ON ALL THE FUN! </p> */}
-        {/* <p>STAY SAFE AND HEALTHY, AND KEEP IT IN THE SHORT GRASS!</p> */}
         <p>
           ANY QUESTIONS CALL COACH TONY
           <a href="tel:727-776-0450">@727-776-0450</a>

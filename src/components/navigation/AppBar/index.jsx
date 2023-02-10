@@ -25,6 +25,7 @@ import GolfCourseIcon from "@mui/icons-material/GolfCourse"
 import { portalRoot } from "../../../config"
 import { isLoggedIn, logout } from "../../../services/authentication"
 import AppNavigation from "../authenticated"
+import Logo from "../../logo"
 
 const drawerWidth = 340
 const navItem2 = [
@@ -36,8 +37,6 @@ const navItem2 = [
   { name: "Contact", link: "/contact" },
   { name: "Sandbox", link: "/sandbox" },
 ]
-
-
 
 export default function DrawerAppBar(props) {
   const { window } = props
@@ -57,20 +56,24 @@ export default function DrawerAppBar(props) {
     }, 0)
   }
 
-  console.log(ListItemButton)
-
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Box variant="h6" sx={{ my: 2 }}>
+    <Box
+      onClick={handleDrawerToggle}
+      sx={{ textAlign: "center",  }}
+    >
+      <Box variant="h6" sx={{ bgcolor: "primary.main", p: "1rem 0" }}>
         <Typography>
-          <GolfCourseIcon />
+          <Logo fill="white" height="3rem" />
         </Typography>
       </Box>
       <Divider />
       <List>
         {navItem2.map((item) => (
           <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }} onClick={() => navigate(item.link)}>
+            <ListItemButton
+              sx={{ textAlign: "center" }}
+              onClick={() => navigate(item.link)}
+            >
               <ListItemText primary={item.name} />
             </ListItemButton>
           </ListItem>
@@ -103,7 +106,7 @@ export default function DrawerAppBar(props) {
               component="div"
               sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
             >
-              <GolfCourseIcon color="inherit" />
+              <Logo fill="white" />
             </Typography>
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
               {navItem2.map((item) => (

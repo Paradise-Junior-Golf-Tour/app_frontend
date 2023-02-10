@@ -11,6 +11,7 @@ import {
   Snackbar,
   Alert,
   AlertTitle,
+  Box,
 } from "@mui/material"
 import Grid from "@mui/material/Unstable_Grid2"
 import axios from "axios"
@@ -18,21 +19,27 @@ import Button from "@mui/material/Button"
 
 class AdminEventsNew extends React.Component {
   state = {
-    eventName: ``,
-    description: ``,
     loading: false,
     toastOpen: false,
-    eventImage: null,
+    eventImage: null, // this needs to move to a seperate form.
+  }
+
+  handleImageUpload = (event) => {
+    console.log('event image upload')
   }
 
   handleUpdate = (event) => {
-    // const formData = new FormData();
-    // formData.append('File', event.target.files[0]);
-    // console.log(formData)
+    if (event.target.type === "file") {
+      console.log("event form", event.target)
 
-    this.setState({
-      [event.target.name]: event.target.value,
-    })
+      this.setState({
+        [event.target.name]: URL.createObjectURL(event.target.files[0]),
+      })
+    } else {
+      this.setState({
+        [event.target.name]: event.target.value,
+      })
+    }
   }
 
   closeToast = () => {
@@ -55,19 +62,28 @@ class AdminEventsNew extends React.Component {
 
     // formData.append('File', selectedFile);
     // console.log(formData)
+    // <input type="text" name="ref" value="api::restaurant.restaurant" />
+    // <input type="text" name="refId" value="5c126648c7415f0c0ef1bccd" />
+    // <input type="text" name="field" value="cover" />
 
     eventsNew({
-      eventName: this.state.eventName,
-      eventDescription: this.state.description,
+      ...this.state,
     })
       .then((res) => {
-        console.log("[Event New] created", res)
+        console.log("[Event New] created", res.data)
         const event = res
-
+        // fetch('/api/upload', {
+        //   method: 'post',
+        //   body: new FormData({
+        //     files: this.state.eventImage,
+        //     ref: 'api::event.event',
+        //     refId: res.data.id,
+        //     field: 'image'
+        //   })
+        // });
         setTimeout((event) => {
-          console.log("[Event New] start TO", event)
           axios
-            .post(`${process.env.REACT_APP_STRAPI_API_URL}/__refresh`) // Refresh data in Gatsby static queries
+            .post(`http://localhost:8000/__refresh`) // Refresh data in Gatsby static queries dev only
             .then((res) => {
               console.log("[Event New] schema refreshed")
             })
@@ -75,13 +91,17 @@ class AdminEventsNew extends React.Component {
               console.log("[Event New] schema failed to refresh", err)
               this.setState({
                 toastOpen: true,
+                loading: false,
               })
             })
         }, 1000)
-        navigate(`/${portalRoot}/events/${event.data.id}`, { state: res })
+        // navigate(`/${portalRoot}/events/${event.data.id}`, { state: res })
       })
       .catch((err) => {
         console.log("[Event New] error", err)
+        this.setState({
+          loading: false,
+        })
       })
   }
 
@@ -100,6 +120,7 @@ class AdminEventsNew extends React.Component {
 
         <br />
         <form
+          onChange={this.handleUpdate}
           method="post"
           name="login"
           onSubmit={(event) => {
@@ -115,10 +136,10 @@ class AdminEventsNew extends React.Component {
               <TextField
                 required
                 sx={{ width: "100%" }}
-                id="event_name"
+                id="name"
                 label="Name"
                 type="text"
-                name="event_name"
+                name="name"
                 placeholder="Event Name"
                 // sx={{ width: 220 }}
                 InputLabelProps={{
@@ -130,10 +151,10 @@ class AdminEventsNew extends React.Component {
               <TextField
                 required
                 sx={{ width: "100%" }}
-                id="event_date"
+                id="date"
                 label="Event Date"
                 type="date"
-                name="event_date"
+                name="date"
                 // defaultValue="2017-05-24"
                 // sx={{ width: 220 }}
                 InputLabelProps={{
@@ -144,11 +165,11 @@ class AdminEventsNew extends React.Component {
             <Grid xs={12}>
               <TextField
                 required
-                id="event_description"
+                id="description"
                 label="Description"
                 type="textarea"
                 multiline
-                name="event_name"
+                name="description"
                 placeholder="Event Name"
                 sx={{ width: "100%" }}
                 InputLabelProps={{
@@ -169,8 +190,8 @@ class AdminEventsNew extends React.Component {
               <TextField
                 required
                 autoComplete="off"
-                id="event_registration_fee"
-                name="event_registration_fee"
+                id="fee"
+                name="fee"
                 label="Registration Fee"
                 variant="outlined"
                 type="number"
@@ -234,51 +255,68 @@ class AdminEventsNew extends React.Component {
           </ContentGrid>
           <br />
           <br />
-          <Button
-            disabled
-            variant="contained"
-            color="secondary"
-            component="label"
-            name="event_image"
-            id="event_image"
-            onChange={this.handleUpdate}
-          >
-            Upload Image
-            <label htmlFor="eventImage">
-              <input type="file" name="eventImage" hidden />
-            </label>
-          </Button>
-          {this.state.eventImage ? (
-            <Button
-              variant="outlined"
-              color="secondary"
-              component="label"
-              name="event_image"
-              id="event_image"
-              onChange={this.handleUpdate}
-            >
-              Remove Image
-              <label htmlFor="eventImage">
-                <input type="file" name="eventImage" hidden />
-              </label>
-            </Button>
-          ) : null}
-          {this.state.eventImage?.name ? (
-            <p>
-              Image currently selected for upload:{" "}
-              <strong>{this.state.eventImage.name}</strong>.{" "}
-            </p>
-          ) : (
-            ""
-          )}
+          <Typography component="h3" variant="h5">
+            Event Image (primary)
+          </Typography>
           <br />
+          <ContentGrid>
+            <Grid sm={12}>
+              <Box
+                style={{
+                  height: "20rem",
+                  // width: "600px",
+                  backgroundImage: `url(${this.state.eventImage})`,
+                  backgroundSize: "cover",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center",
+                  border: "1px solid rgba(0, 0, 0, 0.23)",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                {this.state.eventImage ? null : "No image selected."}
+              </Box>
+            </Grid>
+            <Grid>
+              <Button
+                variant="contained"
+                color="secondary"
+                component="label"
+                name="event_image"
+                id="event_image"
+                onChange={this.handleUpdate}
+              >
+                {this.state.eventImage ? "Change Image" : "Upload Image"}
+                <label htmlFor="eventImage">
+                  <input type="file" name="eventImage" hidden />
+                </label>
+              </Button>
+            </Grid>
+            <Grid>
+              {this.state.eventImage ? (
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  component="label"
+                  name="event_image"
+                  id="event_image"
+                  onClick={() => {
+                    this.setState({ eventImage: "" })
+                  }}
+                >
+                  Remove Image
+                </Button>
+              ) : null}
+            </Grid>
+          </ContentGrid>
           <br />
           <LoadingButton
             variant="contained"
             loading={this.state.loading}
             type="submit"
           >
-            Create New Event
+            Create Event
           </LoadingButton>
         </form>
         <br />

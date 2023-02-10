@@ -1,10 +1,9 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
+import { isBrowser } from "../../util"
 import { Container, Typography, Box, Modal, Button } from "@mui/material"
 
 const Banner = () => {
-  // fetch announcements
-
-  const [dismissed, setDismissed] = useState(false)
+  const [showBanner, setShowBanner] = useState()
   const [open, setOpen] = useState(false)
 
   const toggleOpen = () => {
@@ -12,8 +11,17 @@ const Banner = () => {
   }
 
   const dismissBanner = () => {
-    setDismissed(true)
+    if (isBrowser()) {
+      setShowBanner(false)
+      localStorage.setItem("showBanner", false)
+    }
   }
+
+  useEffect(() => {
+    if (isBrowser()) {
+      setShowBanner(localStorage.getItem("showBanner"))
+    }
+  }, [])
 
   const style = {
     position: "absolute",
@@ -27,12 +35,12 @@ const Banner = () => {
     p: 4,
   }
 
-  if (dismissed) return null
+  if (!showBanner) return null
 
   return (
     <>
       <Box sx={{ backgroundColor: "warning.main", borderRadius: "0" }}>
-        <Container color="primary.main">
+        <Container sx={{ color: "warning.contrastText" }}>
           <div
             style={{
               display: "flex",
@@ -44,10 +52,16 @@ const Banner = () => {
               Announcements! Welcome to The 2022 Paradise Junior Golf Tour.
             </strong>
             <span>
-              <Button color="primary" onClick={toggleOpen}>
+              <Button
+                sx={{ color: "warning.contrastText" }}
+                onClick={toggleOpen}
+              >
                 View More
               </Button>
-              <Button color="primary" onClick={dismissBanner}>
+              <Button
+                sx={{ color: "warning.contrastText" }}
+                onClick={dismissBanner}
+              >
                 Dismiss
               </Button>
             </span>

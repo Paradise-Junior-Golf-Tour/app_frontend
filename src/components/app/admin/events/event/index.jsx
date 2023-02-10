@@ -70,8 +70,7 @@ const AdminEvent = (props) => {
           <div className="dev">Update with custom query for users, tee times, etc.</div>
           <br />
           <Typography variant="h5" component="p">
-            {moment(data?.attributes?.date_start).format("MMMM Do YYYY")} -{" "}
-            {moment(data?.attributes?.date_end).format("MMMM Do YYYY")}
+            {moment(data?.attributes?.date).format("MMMM Do YYYY")}
           </Typography>
           <p>About this event: {data?.attributes?.description}</p>
           <p>
