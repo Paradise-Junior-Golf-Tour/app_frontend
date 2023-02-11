@@ -22,7 +22,7 @@ export default function TopLayout(props) {
         <ThemeProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
-          {/* <Banner /> */}
+          <Banner />
           {/* 'include here versus in the ssr and browser files - possibly a difference in rendered state?  Normal html seems fine - components with state maybe a no-go' */}
           {props.children}
         </ThemeProvider>

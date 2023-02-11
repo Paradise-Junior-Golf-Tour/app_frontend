@@ -95,7 +95,7 @@ class AdminEventsNew extends React.Component {
               })
             })
         }, 1000)
-        // navigate(`/${portalRoot}/events/${event.data.id}`, { state: res })
+        navigate(`/${portalRoot}/events/${event.data.id}`, { state: res })
       })
       .catch((err) => {
         console.log("[Event New] error", err)

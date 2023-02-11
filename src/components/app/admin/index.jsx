@@ -18,15 +18,31 @@ const AdminIndex = () => (
     <ul>
       <li style={navListItemStyle}>
         <Link activeStyle={linkActive} to={`/${portalRoot}/events`}>
-          Admin Events
+          Manage Events
+        </Link>
+      </li>
+      <li style={navListItemStyle}>
+        <Link activeStyle={linkActive} to={`/${portalRoot}/events/new`}>
+          Create a New Event
+        </Link>
+      </li>
+      <li style={navListItemStyle}>
+        <Link activeStyle={linkActive} to={`/${portalRoot}/events`}>
+          Manage Users
+        </Link>
+      </li>
+      <li style={navListItemStyle}>
+        <Link activeStyle={linkActive} to={`/${portalRoot}/events`}>
+          Manage Results
         </Link>
       </li>
       <li style={navListItemStyle}>
         <Link activeStyle={linkActive} to={`/${portalRoot}/resources`}>
-          Admin Resources
+          Developer Resources
         </Link>
       </li>
     </ul>
+    
   </Layout>
 )
 

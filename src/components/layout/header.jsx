@@ -35,7 +35,8 @@ export default function Header({ heading, images }) {
       sx={{
         height: 288,
         p: 0,
-        position: "relative"
+        position: "relative",
+        bgcolor: theme.palette.primary.main
       }}
     >
       <Box sx={{ overflow: "hidden", height: 288, position: "relative" }}>
@@ -45,15 +46,15 @@ export default function Header({ heading, images }) {
             <Box
               style={{
                 backgroundImage: `linear-gradient(to left bottom, rgba(245, 246, 252, 0.32), ${theme.palette.primary.main} ), url(${_images[index]})`,
-                transition: "3000ms",
+                transition: "2000ms",
                 backgroundPosition: "center",
                 backgroundSize: "cover",
                 padding: "0",
-                height: "308px",
+                height: "298px",
                 width: "100%",
                 position: "absolute",
                 opacity: isActive ? 1 : 0,
-                transform: `scale(${isActive ? 1 : 1.1}) translateY(${isActive ? "-20px" : "20px"})`,
+                transform: `scale(${isActive ? 1 : 1.05}) translateY(${isActive ? "-10px" : "10px"})`,
               }}
             />
           )

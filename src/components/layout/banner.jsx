@@ -3,7 +3,7 @@ import { isBrowser } from "../../util"
 import { Container, Typography, Box, Modal, Button } from "@mui/material"
 
 const Banner = () => {
-  const [showBanner, setShowBanner] = useState()
+  const [isVisible, setIsVisible] = useState(true)
   const [open, setOpen] = useState(false)
 
   const toggleOpen = () => {
@@ -12,16 +12,29 @@ const Banner = () => {
 
   const dismissBanner = () => {
     if (isBrowser()) {
-      setShowBanner(false)
-      localStorage.setItem("showBanner", false)
+      setIsVisible(false)
+      // localStorage.setItem("isVisible", false)
     }
   }
 
-  useEffect(() => {
-    if (isBrowser()) {
-      setShowBanner(localStorage.getItem("showBanner"))
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (isBrowser()) {
+  //     const isVisible = localStorage.getItem("isVisible")
+
+  //     console.log('banner local storage mount', isVisible)
+
+
+  //     if (isVisible === null || isVisible) {
+  //       localStorage.setItem("isVisible", true)
+  //       setIsVisible(true)
+  //       return
+  //     }
+  //   }
+  // }, [])
+
+  // useEffect(() => {
+  //   console.log('banner local storage update', isVisible)
+  // }, [isVisible])
 
   const style = {
     position: "absolute",
@@ -35,7 +48,7 @@ const Banner = () => {
     p: 4,
   }
 
-  if (!showBanner) return null
+  if (!isVisible) return null
 
   return (
     <div>

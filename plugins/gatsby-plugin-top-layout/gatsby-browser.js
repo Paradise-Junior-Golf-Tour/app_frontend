@@ -8,9 +8,5 @@ import "../../src/styles/global.css"
 export const wrapRootElement = ({ element }) => {
   console.log("[gatsby-browser.js] wrap root element with:", TopLayout)
 
-  return (
-    <TopLayout>
-      {element}
-    </TopLayout>
-  )
+  return <TopLayout>{element}</TopLayout>
 }
