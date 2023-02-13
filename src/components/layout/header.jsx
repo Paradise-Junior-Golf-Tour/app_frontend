@@ -36,7 +36,7 @@ export default function Header({ heading, images }) {
         height: 288,
         p: 0,
         position: "relative",
-        bgcolor: theme.palette.primary.main
+        bgcolor: theme.palette.primary.main,
       }}
     >
       <Box sx={{ overflow: "hidden", height: 288, position: "relative" }}>
@@ -54,7 +54,9 @@ export default function Header({ heading, images }) {
                 width: "100%",
                 position: "absolute",
                 opacity: isActive ? 1 : 0,
-                transform: `scale(${isActive ? 1 : 1.05}) translateY(${isActive ? "-10px" : "10px"})`,
+                transform: `scale(${isActive ? 1 : 1.05}) translateY(${
+                  isActive ? "-10px" : "10px"
+                })`,
               }}
             />
           )
@@ -96,11 +98,11 @@ export default function Header({ heading, images }) {
             sx={{
               display: { xs: "none", sm: "block" },
               border: "2px solid white",
-              width: { sm: 128, md: 160 },
-              height: { sm: 128, md: 160 },
+              width: { sm: 128 },
+              height: { sm: 128 },
               position: "absolute",
               right: 0,
-              bottom: { sm: -64, md: -80 },
+              bottom: { sm: -64 },
               mx: { sm: 4, md: 6 },
             }}
             src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80"

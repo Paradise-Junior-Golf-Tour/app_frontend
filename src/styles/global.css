@@ -28,7 +28,9 @@ main {
     min-height: 80vh;
 }
 
-
+hr {
+    opacity: 0.2;
+}
 
 section {
     outline: 1px dashed #3475cb76;

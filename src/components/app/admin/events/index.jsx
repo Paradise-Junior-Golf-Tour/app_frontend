@@ -53,35 +53,10 @@ const AdminEvents = ({ location }) => {
   // if (!data) return <div>Loading</div>
 
   return (
-    <Layout heading="Admin Events">
+    <Layout heading="Manage Events">
       <Typography variant="h5" component="h2">
-        Manage and create events.
+        Manage all upcoming and past Events or create a new Event.
       </Typography>
-      <hr />
-      <p>CRUD operations and the associated services.</p>
-      <ul>
-        <li style={navListItemStyle}>
-          <Link activeStyle={linkActive} to={`/${portalRoot}`}>
-            Admin Index
-          </Link>
-        </li>
-        <li style={navListItemStyle}>
-          <Link activeStyle={linkActive} to={`/${portalRoot}/resources`}>
-            Admin Resources
-          </Link>
-        </li>
-        <li style={navListItemStyle}>
-          <Link activeStyle={linkActive} to={`/${portalRoot}/events/new`}>
-            Admin Events New
-          </Link>
-        </li>
-      </ul>
-      <br />
-      <hr />
-      <Typography variant="h4" component="h2">
-        Events
-      </Typography>
-      <hr />
       <br />
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table" size="small">
@@ -118,11 +93,7 @@ const AdminEvents = ({ location }) => {
               >
                 <TableCell align="left">{row.id}</TableCell>
                 <TableCell component="th" scope="row">
-                  <Link
-                    to={`/${portalRoot}/events/` + row.id}
-                  >
-                    {row.name}
-                  </Link>
+                  <Link to={`/${portalRoot}/events/` + row.id}>{row.name}</Link>
                 </TableCell>
 
                 <TableCell
@@ -147,6 +118,25 @@ const AdminEvents = ({ location }) => {
           </TableBody>
         </Table>
       </TableContainer>
+      <br />
+      <ul>
+        <li style={navListItemStyle}>
+          <Link activeStyle={linkActive} to={`/${portalRoot}`}>
+            Admin Index
+          </Link>
+        </li>
+        <li style={navListItemStyle}>
+          <Link activeStyle={linkActive} to={`/${portalRoot}/resources`}>
+            Admin Resources
+          </Link>
+        </li>
+        <li style={navListItemStyle}>
+          <Link activeStyle={linkActive} to={`/${portalRoot}/events/new`}>
+            Admin Events New
+          </Link>
+        </li>
+      </ul>
+
       {/* 
       <Snackbar
         open={toastOpen}

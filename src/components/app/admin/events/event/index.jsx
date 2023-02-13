@@ -6,13 +6,13 @@ import { portalRoot } from "../../../../../config"
 import moment from "moment"
 import TransactionsByEvent from "../../transactions"
 import Layout from "../../../../layout"
-// import { useQueryParam, NumberParam, StringParam } from "use-query-params"
+// import { useQueryParam, NumberParam, StringParam } from "use-query-params"x
 
 const AdminEvent = (props) => {
   const [data, setData] = useState(null)
 
   const event = {
-    id: props.location?.state?.id || props.location?.state?.event?.id,
+    id: props.location?.state?.id || props.location?.state?.event?.id, // why both?
     slug: props.location.pathname.substr(
       props.location.pathname.lastIndexOf("/")
     ),
@@ -44,21 +44,22 @@ const AdminEvent = (props) => {
   }, [data, event.id, event.slug, props])
 
   // Render no event found.
-  // if (!props.id) {
-  //   return (
-  //     <Layout heading="Event Admin">
-  //       <Typography variant="h3" component="h1">
-  //         Admin Event
-  //       </Typography>
-  //       <div>
-  //         Event not found.
-  //         <Link to={`/${portalRoot}/events/new`}>
-  //           Click here to create a new one.
-  //         </Link>
-  //       </div>
-  //     </Layout>
-  //   )
-  // }
+  if (!data) {
+    return (
+      <Layout heading="Event Not Found">
+        <Typography variant="h5" component="h2">
+          The requested event does not exist.
+        </Typography>
+        <p>
+          If you think this page may have been reached in error please contact
+          your developer.
+        </p>
+        <Link to={`/${portalRoot}/events/new`}> Create a new event.</Link>{" "}
+        <br />
+        <Link to={`/${portalRoot}/events`}> View all events.</Link>
+      </Layout>
+    )
+  }
 
   // Render event found.
   return (
@@ -67,7 +68,9 @@ const AdminEvent = (props) => {
         <section>
           <hr />
           <br />
-          <div className="dev">Update with custom query for users, tee times, etc.</div>
+          <div className="dev">
+            Update with custom query for users, tee times, etc.
+          </div>
           <br />
           <Typography variant="h5" component="p">
             {moment(data?.attributes?.date).format("MMMM Do YYYY")}

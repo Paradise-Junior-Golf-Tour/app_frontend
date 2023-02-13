@@ -21,11 +21,7 @@ class AdminEventsNew extends React.Component {
   state = {
     loading: false,
     toastOpen: false,
-    eventImage: null, // this needs to move to a seperate form.
-  }
-
-  handleImageUpload = (event) => {
-    console.log('event image upload')
+    imageData: null, // this needs to move to a seperate form.
   }
 
   handleUpdate = (event) => {
@@ -33,7 +29,8 @@ class AdminEventsNew extends React.Component {
       console.log("event form", event.target)
 
       this.setState({
-        [event.target.name]: URL.createObjectURL(event.target.files[0]),
+        [`imagePreview`]: URL.createObjectURL(event.target.files[0]),
+        [event.target.name]: event.target.files[0],
       })
     } else {
       this.setState({
@@ -58,83 +55,73 @@ class AdminEventsNew extends React.Component {
       loading: true,
     })
 
-    // const formData = new FormData();
+    let file = new FormData()
+    file.append("files", this.state.imageData)
 
-    // formData.append('File', selectedFile);
-    // console.log(formData)
-    // <input type="text" name="ref" value="api::restaurant.restaurant" />
-    // <input type="text" name="refId" value="5c126648c7415f0c0ef1bccd" />
-    // <input type="text" name="field" value="cover" />
+    console.log("Event New", file)
 
-    eventsNew({
-      ...this.state,
-    })
-      .then((res) => {
-        console.log("[Event New] created", res.data)
-        const event = res
-        // fetch('/api/upload', {
-        //   method: 'post',
-        //   body: new FormData({
-        //     files: this.state.eventImage,
-        //     ref: 'api::event.event',
-        //     refId: res.data.id,
-        //     field: 'image'
-        //   })
-        // });
-        setTimeout((event) => {
-          axios
-            .post(`http://localhost:8000/__refresh`) // Refresh data in Gatsby static queries dev only
-            .then((res) => {
-              console.log("[Event New] schema refreshed")
+    axios
+      .post(`${process.env.REACT_APP_STRAPI_API_URL}/api/upload`, file)
+      .then((response) => {
+        const image = response.data[0].id
+        console.log("Event Upload", image)
+
+        eventsNew({
+          image,
+          ...this.state,
+        })
+          .then((res) => {
+            console.log("[Event New] created", res.data)
+            const event = res
+
+            navigate(`/${portalRoot}/events/${event.data.id}`, { state: res })
+          })
+          .catch((err) => {
+            console.log("[Event New] error", err)
+            this.setState({
+              loading: false,
+              toastOpen: true,
             })
-            .catch((err) => {
-              console.log("[Event New] schema failed to refresh", err)
-              this.setState({
-                toastOpen: true,
-                loading: false,
-              })
-            })
-        }, 1000)
-        navigate(`/${portalRoot}/events/${event.data.id}`, { state: res })
+          })
       })
-      .catch((err) => {
-        console.log("[Event New] error", err)
+      .catch((error) => {
+        //handle error
         this.setState({
           loading: false,
+          toastOpen: true,
         })
       })
   }
 
   render() {
     return (
-      <Layout heading="New Event">
-        <Typography component="h2" variant="h4">
-          Administrator's form to create an event.
-        </Typography>
-        <hr />
-        <br />
-        <Typography component="p" variant="body1">
+      <Layout heading="Create New Event">
+        <Typography component="h2" variant="h5">
           Add a new Event entry and generate the corresponding Tee Times and
           Results records.
         </Typography>
-
+        <p>
+          You will be able to further edit this event once it has been created.
+        </p>
         <br />
         <form
           onChange={this.handleUpdate}
           method="post"
-          name="login"
+          name="new-event"
           onSubmit={(event) => {
             this.handleSubmit(event)
           }}
         >
           <Typography component="h3" variant="h5">
-            Event Name, Date, and Description
+            Name, Date, and Description
           </Typography>
+
           <br />
           <ContentGrid>
             <Grid xs={12} sm={6}>
               <TextField
-                required
+                // required
+                disabled={this.state.loading}
                 sx={{ width: "100%" }}
                 id="name"
                 label="Name"
@@ -149,7 +136,8 @@ class AdminEventsNew extends React.Component {
             </Grid>
             <Grid xs={12} sm={6}>
               <TextField
-                required
+                // required
+                disabled={this.state.loading}
                 sx={{ width: "100%" }}
                 id="date"
                 label="Event Date"
@@ -164,7 +152,8 @@ class AdminEventsNew extends React.Component {
             </Grid>
             <Grid xs={12}>
               <TextField
-                required
+                // required
+                disabled={this.state.loading}
                 id="description"
                 label="Description"
                 type="textarea"
@@ -182,13 +171,15 @@ class AdminEventsNew extends React.Component {
           <br />
           <br />
           <Typography component="h3" variant="h5">
-            Event Registration
+            Registration
           </Typography>
+
           <br />
           <ContentGrid>
             <Grid xs={12} sm={6}>
               <TextField
-                required
+                // required
+                disabled={this.state.loading}
                 autoComplete="off"
                 id="fee"
                 name="fee"
@@ -206,7 +197,8 @@ class AdminEventsNew extends React.Component {
             </Grid>
             <Grid xs={12} sm={6}>
               <TextField
-                required
+                // required
+                disabled={this.state.loading}
                 autoComplete="off"
                 id="max_users"
                 name="max_users"
@@ -224,7 +216,8 @@ class AdminEventsNew extends React.Component {
             </Grid>
             <Grid xs={12} sm={6}>
               <TextField
-                required
+                // required
+                disabled={this.state.loading}
                 id="registration_start_date"
                 label="Registration Start Date"
                 type="date"
@@ -239,10 +232,11 @@ class AdminEventsNew extends React.Component {
             </Grid>
             <Grid xs={12} sm={6}>
               <TextField
-                required
+                // required
                 id="registration_end_date"
                 label="Registration End Date"
                 type="date"
+                disabled={this.state.loading}
                 name="registration_end_date"
                 // defaultValue="2017-05-24"
                 // sx={{ width: 220 }}
@@ -256,7 +250,12 @@ class AdminEventsNew extends React.Component {
           <br />
           <br />
           <Typography component="h3" variant="h5">
-            Event Image (primary)
+            Header Image
+          </Typography>
+
+          <Typography component="p" variant="p">
+            This will be the primary image for the event. It will be featured in
+            the header and all thumbnails.
           </Typography>
           <br />
           <ContentGrid>
@@ -265,7 +264,7 @@ class AdminEventsNew extends React.Component {
                 style={{
                   height: "20rem",
                   // width: "600px",
-                  backgroundImage: `url(${this.state.eventImage})`,
+                  backgroundImage: `url(${this.state.imagePreview})`,
                   backgroundSize: "cover",
                   backgroundRepeat: "no-repeat",
                   backgroundPosition: "center",
@@ -275,11 +274,16 @@ class AdminEventsNew extends React.Component {
                   alignItems: "center",
                 }}
               >
-                {this.state.eventImage ? null : "No image selected."}
+                {this.state.imagePreview ? null : "No image selected."}
               </Box>
+              <p>
+                You will be able to add more images later from this event's
+                management page.
+              </p>
             </Grid>
             <Grid>
               <Button
+                disabled={this.state.loading}
                 variant="contained"
                 color="secondary"
                 component="label"
@@ -287,22 +291,23 @@ class AdminEventsNew extends React.Component {
                 id="event_image"
                 onChange={this.handleUpdate}
               >
-                {this.state.eventImage ? "Change Image" : "Upload Image"}
-                <label htmlFor="eventImage">
-                  <input type="file" name="eventImage" hidden />
+                {this.state.imageData ? "Change Image" : "Select Image"}
+                <label htmlFor="imageData">
+                  <input type="file" name="imageData" hidden />
                 </label>
               </Button>
             </Grid>
             <Grid>
-              {this.state.eventImage ? (
+              {this.state.imageData ? (
                 <Button
+                  disabled={this.state.loading}
                   variant="outlined"
                   color="secondary"
                   component="label"
                   name="event_image"
                   id="event_image"
                   onClick={() => {
-                    this.setState({ eventImage: "" })
+                    this.setState({ imageData: "", imagePreview: "" })
                   }}
                 >
                   Remove Image
@@ -311,6 +316,9 @@ class AdminEventsNew extends React.Component {
             </Grid>
           </ContentGrid>
           <br />
+
+          <br />
+
           <LoadingButton
             variant="contained"
             loading={this.state.loading}
@@ -319,13 +327,6 @@ class AdminEventsNew extends React.Component {
             Create Event
           </LoadingButton>
         </form>
-        <br />
-        <p className="dev">Need to add all fields from CMS.</p>
-        <p className="dev">
-          This may be the only data that requires a new build of the site.
-          Consider triggering it in the pipeline, via a plugin, or calling the
-          refresh (yarn schema) endpoint.
-        </p>
 
         <Snackbar
           open={this.state.toastOpen}

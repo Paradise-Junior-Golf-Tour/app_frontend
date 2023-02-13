@@ -19,19 +19,30 @@ class Signup extends React.Component {
   state = {
     email: ``,
     username: ``,
-    password: `Happymarmot87*`,
-    name_first: `Abe`,
-    name_last: `Candler`,
-    gender: "",
+    password: ``,
+    name_first: ``,
+    name_last: ``,
+    gender: ``,
     birthday: ``,
     address_one: ``,
     address_zip: ``,
   }
 
   handleUpdate = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    })
+    if (event.target.name === "email") {
+      this.setState({
+        [event.target.name]: event.target.value,
+        [`username`]: event.target.value,
+      })
+    } else {
+      this.setState({
+        [event.target.name]: event.target.value,
+      })
+    }
+  }
+
+  componentDidUpdate() {
+    console.log("Signup Form Data", this.state)
   }
 
   handleSubmit = async (event) => {
@@ -89,6 +100,7 @@ class Signup extends React.Component {
             autoComplete="off"
             id="username"
             name="username"
+            value={this.state.username}
             type="text"
             label="Username"
             variant="outlined"

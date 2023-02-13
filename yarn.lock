@@ -2461,6 +2461,25 @@
   resolved "https://registry.yarnpkg.com/@socket.io/component-emitter/-/component-emitter-3.1.0.tgz#96116f2a912e0c02817345b3c10751069920d553"
   integrity sha512-+9jVqKhRSpsc591z5vX+X5Yyw+he/HCB4iQ/RYxw35CEPaY1gnsNE43nf9n9AaYjAQrTiI/mOwKUKdUs9vf7Xg==
 
+"@square/web-payments-sdk-types@^1.1.1":
+  version "1.45.3"
+  resolved "https://registry.yarnpkg.com/@square/web-payments-sdk-types/-/web-payments-sdk-types-1.45.3.tgz#a563f4c507b472c2ec70ad4167d91a9c635842b1"
+  integrity sha512-NbempcQCPuudfArHhsqXdG7VLppjuVL9HesQZvueAn9SlyD8zlDUFtBEVCQb1u/Y01F6zeLDSN1u0rqXUdezOQ==
+  dependencies:
+    typescript "^4.9.4"
+
+"@square/web-sdk@^2.0.0":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@square/web-sdk/-/web-sdk-2.0.1.tgz#ef01fa6955ff0134a2aaf6e2227e9e96bb7e66a7"
+  integrity sha512-m+pauPLJUHO4qzBNKlHRMe+qDAhQdbEd7g/v/SW8BWZARwJC0liHB4AnVAJuM/7JMFEPiT2ZO3SRt1VQsCeoYg==
+  dependencies:
+    "@square/web-payments-sdk-types" "^1.1.1"
+
+"@stitches/react@^1.2.8":
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/@stitches/react/-/react-1.2.8.tgz#954f8008be8d9c65c4e58efa0937f32388ce3a38"
+  integrity sha512-9g9dWI4gsSVe8bNLlb+lMkBYsnIKCZTmvqvDG+Avnn69XfmHZKiaMrx7cgTaddq7aTPPmXiTsbFcUy0xgI4+wA==
+
 "@swc/helpers@^0.4.12":
   version "0.4.14"
   resolved "https://registry.yarnpkg.com/@swc/helpers/-/helpers-0.4.14.tgz#1352ac6d95e3617ccb7c1498ff019654f1e12a74"
@@ -9831,6 +9850,14 @@ react-slick@^0.29.0:
     lodash.debounce "^4.0.8"
     resize-observer-polyfill "^1.5.0"
 
+react-square-web-payments-sdk@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/react-square-web-payments-sdk/-/react-square-web-payments-sdk-3.2.1.tgz#bab3e162b71b557a457e500cd0fc4fb0400ff524"
+  integrity sha512-XhW4snpCfUNaVqS652dDWSWJd+r9OftkqmvP9hix5ISEV8Foo9QrGDe33t1w+uMIl9ox1EWlexGb0yDe8ZYamQ==
+  dependencies:
+    "@square/web-sdk" "^2.0.0"
+    "@stitches/react" "^1.2.8"
+
 react-transition-group@^4.4.5:
   version "4.4.5"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.4.5.tgz#e53d4e3f3344da8521489fbef8f2581d42becdd1"
@@ -11210,6 +11237,11 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==
+
+typescript@^4.9.4:
+  version "4.9.5"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.9.5.tgz#095979f9bcc0d09da324d58d03ce8f8374cbe65a"
+  integrity sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==
 
 ua-parser-js@^0.7.30:
   version "0.7.32"

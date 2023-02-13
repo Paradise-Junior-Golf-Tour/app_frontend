@@ -1,5 +1,4 @@
 import axios from "axios"
-import { getUser } from "./authentication"
 
 // TODO - fix error messaging...
 // Create a new Event and it's associated Tee Time record.
@@ -9,15 +8,15 @@ export const eventsNew = async ({
   fee,
   date,
   max_users,
+  image
 }) => {
-  const user = getUser()
   let event = null
 
   console.log(
     `[Events Service] Create New: ${
       name || "No name provided - validation needed..."
     }`,
-    { name, description, fee, date, max_users }
+    { name, description, fee, date, max_users, image }
   )
 
   await axios
@@ -28,6 +27,7 @@ export const eventsNew = async ({
         fee,
         date,
         max_users,
+        image
       },
     })
     .then((res) => {

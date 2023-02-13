@@ -2,7 +2,8 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
-console.log(`[gatsby-config.js] Starting ${process.env.NODE_ENV} denvironment.`)
+console.log(`[gatsby-config.js] Starting ${process.env.NODE_ENV} environment.`)
+console.log(`[gatsby-config.js] Strapi Token ${process.env.STRAPI_TOKEN}.`)
 console.log("[gatsby-config.js] Registering metadata and plugins.")
 
 module.exports = {
@@ -43,7 +44,7 @@ module.exports = {
         apiURL:
           process.env.NODE_ENV === "production"
             ? "https://paradise-junior-golf-tour.herokuapp.com"
-            : `http://127.0.0.1:1337`,
+            : `${process.env.REACT_APP_STRAPI_API_URL}`,
         accessToken: process.env.STRAPI_TOKEN,
         collectionTypes: [
           {
