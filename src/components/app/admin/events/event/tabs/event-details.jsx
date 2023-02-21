@@ -10,26 +10,42 @@ const Details = ({ data }) => {
         Event Info and Details
       </Typography>
       <br />
-      <TextField label={`Name`} value={data?.attributes?.name} />
+      <TextField
+        label={`Name`}
+        value={data?.name}
+        InputLabelProps={{
+          shrink: data?.name ? true : false,
+        }}
+      />
       <br />
       <br />
       <TextField
         label={`Date`}
         type="date"
         InputLabelProps={{
-          shrink: true,
+          shrink: data?.date ? true : false,
         }}
-        value={data?.attributes?.date}
+        value={data?.date}
       />
       <br />
       <br />
-      <TextField label={`Fee`} type="number" value={data?.attributes?.fee} />
+      <TextField
+        label={`Fee`}
+        type="number"
+        value={data?.fee}
+        InputLabelProps={{
+          shrink: data?.fee ? true : false,
+        }}
+      />
       <br />
       <br />
       <TextField
         label={`Max Golfers`}
         type="number"
-        value={data?.attributes?.max_users}
+        value={data?.max_users}
+        InputLabelProps={{
+          shrink: data?.max_users ? true : false,
+        }}
       />
       <br />
       <br />
@@ -40,47 +56,30 @@ const Details = ({ data }) => {
           shrink: true,
         }}
         type="textarea"
-        value={data?.attributes?.description}
+        value={data?.description}
       />
       <br />
       <br />
       <TextField
-        className="dev"
         label={"Registration Start Date"}
         InputLabelProps={{
           shrink: true,
         }}
         type="date"
-        value={data?.attributes?.registration_start_date}
+        value={data?.registration_start_date}
       />
       <br />
       <br />
       <TextField
-        className="dev"
         label={"Registration End Date"}
         InputLabelProps={{
           shrink: true,
         }}
         type="date"
-        value={data?.attributes?.registration_end_date}
+        value={data?.registration_end_date}
       />
       <br />
-      <br />
-      {/* <Typography variant="h5" component="p">
-            {moment(data?.attributes?.date).format("MMMM Do YYYY")}
-          </Typography> */}
-
       <p className="dev">
-        It may be a good idea to conditionally hide the tee times if the event
-        has completed.
-      </p>
-      <p className="dev">
-        Some sections below may require their own queries to populate
-        relationships and other fields.
-      </p>
-      <p className="dev">
-        Their should be a way to edit these fields. Perhaps modals or links to
-        the specific sections,{" "}
         <strong>
           or event better - clicking edit for each section shows the editor in
           its place.

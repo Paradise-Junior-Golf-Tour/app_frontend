@@ -78,6 +78,7 @@ export const eventsOneById = async ({ identifier }) => {
   return event
 }
 
+
 export const eventsUpdate = () => {
   console.log("[Events Service] Update")
 }
@@ -106,6 +107,27 @@ export const register = async ({ events, type }) => {
         `[Events Service] Create New Error: ${events}`,
         (event = err.message)
       )
+    })
+
+  return event
+}
+
+
+export const eventDetails = async ({ id }) => {
+  console.log("[Events Service] Find One", id)
+  let event
+
+  await axios
+    .get(`${process.env.REACT_APP_STRAPI_API_URL}/api/events/details?id=${id}`)
+    .then((res) => {
+      console.log(`[Events Service] Found One: ${res}`)
+      if (res.status === 200) {
+        console.log("[services - event]", res.data)
+        event = res.data
+      }
+    })
+    .catch((err) => {
+      console.log(`[Events Service] Create New Error`, (event = err.message))
     })
 
   return event

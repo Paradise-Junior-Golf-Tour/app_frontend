@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react"
 import { Link } from "gatsby"
 import { Typography } from "@mui/material"
-import { eventsOneById } from "../../../../../services/event"
+import { eventsOneById, eventDetails } from "../../../../../services/event"
 import { portalRoot } from "../../../../../config"
 import moment from "moment"
 import Layout from "../../../../layout"
 import VerticalTabs from "./tabs"
+import { imageUrl } from '../../../../../util'
 
 const AdminEvent = (props) => {
   const [data, setData] = useState(null)
@@ -24,10 +25,10 @@ const AdminEvent = (props) => {
     console.log("[Event Manage]", event.id)
 
     if (event.id) {
-      eventsOneById({ identifier: event.id })
+      eventDetails({ id: event.id })
         .then((event) => {
           console.log("[Event Manage] res", event)
-          setData(event.data)
+          setData(event)
         })
         .catch((error) => {
           console.log("[Event Manage] Error", error)
@@ -66,7 +67,7 @@ const AdminEvent = (props) => {
 
   // // Render event found.
   return (
-    <Layout heading={data?.attributes?.name} images={[""]}>
+    <Layout heading={data?.name} images={[imageUrl(data?.image?.formats?.large?.url)]}>
       <VerticalTabs data={data} />
     </Layout>
   )

@@ -75,27 +75,16 @@ export default function VerticalTabs({ data }) {
             Registered Users
           </Typography>
           <hr />
-          {/* {data?.attributes?.users?.map((x) => {
+          {data?.users?.map((x) => {
             return (
               <div>
                 {x.name_first || x.name_last
                   ? x.name_first + " " + x.name_last
                   : null}{" "}
-                - <strong>{x.username}</strong>
+                - <strong>{x.email}</strong>
               </div>
             )
-          })} */}
-          <p className="dev">
-            This can be made into a resuable component shared in both
-            authenticated and public routes.
-          </p>
-          <p className="dev">
-            Should be able to add or remove users from the event. This would
-            also need to remove them from the tee times. Also consider the
-            tangential effects - should adding a user create or update a
-            transaction? Results and Tee Times? Also, this could be locked once
-            the registration is over.
-          </p>
+          })}
         </section>
       </TabPanel>
       <TabPanel value={value} index={2}>
@@ -104,11 +93,16 @@ export default function VerticalTabs({ data }) {
             Tee Times
           </Typography>
           <hr />
-          <p>Not available just yet.</p>
-          <p className="dev">
-            This can be made into a resuable component shared in both
-            authenticated and public routes.
-          </p>
+          {data?.tee_time_slots?.map((x) => {
+            return (
+              <div>
+                <h4>{x.time}</h4>
+                {x.users_permissions_users?.map((x) => {
+                  return <div>{x.name_first + ' ' + x.name_last} - {x.email}</div>
+                })}
+              </div>
+            )
+          })}
         </section>
       </TabPanel>
       <TabPanel value={value} index={3}>
