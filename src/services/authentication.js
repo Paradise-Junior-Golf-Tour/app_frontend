@@ -8,7 +8,6 @@ import { isBrowser } from "../util/index.js"
 //     : {}
 
 export const getUser = () => {
-  console.log(`[Service - Authentication]`, isBrowser)
   let user = {}
   if (isBrowser()) {
     user = isBrowser() && window.localStorage.getItem("gatsbyUser")
@@ -18,18 +17,10 @@ export const getUser = () => {
 
   return user
 }
-// isBrowser && window.localStorage.getItem("gatsbyUser")
-//   ? JSON.parse(window.localStorage.getItem("gatsbyUser"))
-//   : {}
-
-// if(typeof window !== "undefined"){
-//   //your window calculation
-// }
 
 export const setUser = (user) => {
   // let user = {}
   if (isBrowser()) {
-    console.log('Browser')
     return window.localStorage.setItem("gatsbyUser", JSON.stringify(user))
   }
   // return user

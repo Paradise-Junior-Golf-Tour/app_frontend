@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { navigate } from "gatsby"
 import { eventsNew } from "../../../../../services/event"
 import ContentGrid from "../../../../layout/content-grid"
@@ -16,18 +16,32 @@ import {
 import Grid from "@mui/material/Unstable_Grid2"
 import axios from "axios"
 import Button from "@mui/material/Button"
+import { uploadFileSingle } from "../../../../../services/upload"
 
 class AdminEventsNew extends React.Component {
   state = {
     loading: false,
+    error: null,
     toastOpen: false,
-    imageData: null, // this needs to move to a seperate form.
+
+    // Form and image upload data.  TODO: Make these controlled.
+    name: "",
+    date: "",
+    description: "",
+    fee: "",
+    max_users: "",
+    registration_start_date: "",
+    registration_end_date: "",
+    imageData: null,
+    imagePreview: null,
+  }
+
+  componentDidUpdate() {
+    // Nada for now. :)
   }
 
   handleUpdate = (event) => {
     if (event.target.type === "file") {
-      console.log("event form", event.target)
-
       this.setState({
         [`imagePreview`]: URL.createObjectURL(event.target.files[0]),
         [event.target.name]: event.target.files[0],
@@ -42,11 +56,8 @@ class AdminEventsNew extends React.Component {
   closeToast = () => {
     this.setState({
       toastOpen: false,
+      error: null,
     })
-  }
-
-  componentDidUpdate() {
-    console.log("[Event]", this.state)
   }
 
   handleSubmit = async (event) => {
@@ -58,37 +69,46 @@ class AdminEventsNew extends React.Component {
     let file = new FormData()
     file.append("files", this.state.imageData)
 
-    console.log("Event New", file)
-
+    // uploadFileSingle(file)
     axios
-      .post(`${process.env.REACT_APP_STRAPI_API_URL}/api/upload`, file)
+      .post(`${process.env.REACT_APP_STRAPI_API_URL}/api/upload`, file) // TODO - replace with service.
       .then((response) => {
         const image = response.data[0].id
-        console.log("Event Upload", image)
 
         eventsNew({
           image,
-          ...this.state,
+          ...this.state, // Passing extra state data but it's fine.
+          // Would be cleaner using a functional component and hooks.
         })
           .then((res) => {
-            console.log("[Event New] created", res.data)
             const event = res
 
-            navigate(`/${portalRoot}/events/${event.data.id}`, { state: res })
-          })
-          .catch((err) => {
-            console.log("[Event New] error", err)
             this.setState({
               loading: false,
               toastOpen: true,
             })
+
+            setTimeout(() => {
+              this.setState({
+                loading: false,
+                toastOpen: false,
+              })
+              navigate(`/${portalRoot}/events/${event.data.id}`, { state: res })
+            }, 3000)
+          })
+          .catch((error) => {
+            this.setState({
+              loading: false,
+              toastOpen: true,
+              error: error.message,
+            })
           })
       })
       .catch((error) => {
-        //handle error
         this.setState({
           loading: false,
           toastOpen: true,
+          error: error.message,
         })
       })
   }
@@ -101,7 +121,10 @@ class AdminEventsNew extends React.Component {
           Results records.
         </Typography>
         <p>
-          You will be able to further edit this event once it has been created.
+          You will be able to further edit this event once it has been created.{" "}
+          <strong>
+            New events will appear on the site after several minutes (the site rebuilds on new events to provide optimized search engine results).
+          </strong>
         </p>
         <br />
         <form
@@ -120,15 +143,15 @@ class AdminEventsNew extends React.Component {
           <ContentGrid>
             <Grid xs={12} sm={6}>
               <TextField
-                // required
+                required
                 disabled={this.state.loading}
                 sx={{ width: "100%" }}
                 id="name"
                 label="Name"
                 type="text"
                 name="name"
+                value={this.state.name}
                 placeholder="Event Name"
-                // sx={{ width: 220 }}
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -136,15 +159,14 @@ class AdminEventsNew extends React.Component {
             </Grid>
             <Grid xs={12} sm={6}>
               <TextField
-                // required
+                required
                 disabled={this.state.loading}
                 sx={{ width: "100%" }}
                 id="date"
                 label="Event Date"
                 type="date"
                 name="date"
-                // defaultValue="2017-05-24"
-                // sx={{ width: 220 }}
+                value={this.state.date}
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -152,13 +174,14 @@ class AdminEventsNew extends React.Component {
             </Grid>
             <Grid xs={12}>
               <TextField
-                // required
+                required
                 disabled={this.state.loading}
                 id="description"
                 label="Description"
                 type="textarea"
                 multiline
                 name="description"
+                value={this.state.description}
                 placeholder="Event Name"
                 sx={{ width: "100%" }}
                 InputLabelProps={{
@@ -178,11 +201,12 @@ class AdminEventsNew extends React.Component {
           <ContentGrid>
             <Grid xs={12} sm={6}>
               <TextField
-                // required
+                required
                 disabled={this.state.loading}
                 autoComplete="off"
                 id="fee"
                 name="fee"
+                value={this.state.fee}
                 label="Registration Fee"
                 variant="outlined"
                 type="number"
@@ -197,11 +221,12 @@ class AdminEventsNew extends React.Component {
             </Grid>
             <Grid xs={12} sm={6}>
               <TextField
-                // required
+                required
                 disabled={this.state.loading}
                 autoComplete="off"
                 id="max_users"
                 name="max_users"
+                value={this.state.max_users}
                 label="Maximum Participants"
                 variant="outlined"
                 type="number"
@@ -216,12 +241,13 @@ class AdminEventsNew extends React.Component {
             </Grid>
             <Grid xs={12} sm={6}>
               <TextField
-                // required
+                required
                 disabled={this.state.loading}
                 id="registration_start_date"
                 label="Registration Start Date"
                 type="date"
                 name="registration_start_date"
+                value={this.state.registration_start_date}
                 // defaultValue="2017-05-24"
                 // sx={{ width: 220 }}
                 InputLabelProps={{
@@ -232,12 +258,13 @@ class AdminEventsNew extends React.Component {
             </Grid>
             <Grid xs={12} sm={6}>
               <TextField
-                // required
+                required
                 id="registration_end_date"
                 label="Registration End Date"
                 type="date"
                 disabled={this.state.loading}
                 name="registration_end_date"
+                value={this.state.registration_end_date}
                 // defaultValue="2017-05-24"
                 // sx={{ width: 220 }}
                 InputLabelProps={{
@@ -255,7 +282,9 @@ class AdminEventsNew extends React.Component {
 
           <Typography component="p" variant="p">
             This will be the primary image for the event. It will be featured in
-            the header and all thumbnails.
+            the header and all thumbnails. <br />
+            You will be able to add more images later from this event's
+            management page.
           </Typography>
           <br />
           <ContentGrid>
@@ -263,7 +292,6 @@ class AdminEventsNew extends React.Component {
               <Box
                 style={{
                   height: "20rem",
-                  // width: "600px",
                   backgroundImage: `url(${this.state.imagePreview})`,
                   backgroundSize: "cover",
                   backgroundRepeat: "no-repeat",
@@ -276,10 +304,6 @@ class AdminEventsNew extends React.Component {
               >
                 {this.state.imagePreview ? null : "No image selected."}
               </Box>
-              <p>
-                You will be able to add more images later from this event's
-                management page.
-              </p>
             </Grid>
             <Grid>
               <Button
@@ -288,6 +312,7 @@ class AdminEventsNew extends React.Component {
                 color="secondary"
                 component="label"
                 name="event_image"
+                value={this.state.event_image}
                 id="event_image"
                 onChange={this.handleUpdate}
               >
@@ -304,8 +329,6 @@ class AdminEventsNew extends React.Component {
                   variant="outlined"
                   color="secondary"
                   component="label"
-                  name="event_image"
-                  id="event_image"
                   onClick={() => {
                     this.setState({ imageData: "", imagePreview: "" })
                   }}
@@ -315,8 +338,6 @@ class AdminEventsNew extends React.Component {
               ) : null}
             </Grid>
           </ContentGrid>
-          <br />
-
           <br />
 
           <LoadingButton
@@ -332,16 +353,22 @@ class AdminEventsNew extends React.Component {
           open={this.state.toastOpen}
           autoHideDuration={6000}
           onClose={this.closeToast}
-          color="error"
+          color={this.state.error ? "error" : "info"}
         >
           <Alert
             onClose={this.closeToast}
-            severity="error"
+            severity={this.state.error ? "error" : "info"}
             sx={{ width: "100%" }}
             variant="filled"
           >
-            <AlertTitle>Error!</AlertTitle>
-            An error occurred while trying to create this event.
+            <AlertTitle>
+              {this.state.error
+                ? "An error occurred while trying to create this event."
+                : `Succesfully created the new event '${this.state.name}'`}
+            </AlertTitle>
+            {this.state.error
+              ? `${this.state.error}.`
+              : "You will be directed to the new event."}
           </Alert>
         </Snackbar>
       </Layout>

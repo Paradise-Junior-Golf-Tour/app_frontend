@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react"
 import { useStaticQuery, graphql, Link, navigate } from "gatsby"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
 import { Chip, Typography } from "@mui/material"
@@ -10,13 +10,11 @@ import { getUser, isLoggedIn } from "../../services/authentication"
 import { portalRoot } from "../../config"
 import LinkEvent from "../../components/routing/link-event"
 import BasicGrid from "./components/event-grid"
+import { eventsAll } from "../../services/event"
 
 // TODO - replace static query with page query.
 
 const EventsPage = (props) => {
-  const user = getUser()
-  const authenticated = isLoggedIn()
-  //  const { data, setData } = useState({}); // dyamically fetch any event data not listed.
   const data = useStaticQuery(graphql`
     query allEvents {
       events: allStrapiEvent {
@@ -55,38 +53,12 @@ const EventsPage = (props) => {
     }
   `)
 
-  // const renderLink = () => {
-  //   console.log("Log [Events Page] | creating links.")
-  // }
-
-  // renderLink()
-
-  // description {
-  //   data {
-  //     description
-  //   }
-  // }
-  // image {
-  //   formats {
-  //     large {
-  //       url
-  //     }
-  //     medium {
-  //       url
-  //     }
-  //     small {
-  //       url
-  //     }
-  //     thumbnail {
-  //       url
-  //     }
-  //   }
-  // }
-
   useEffect(() => {
-    console.log("Log [Events Page] | data", data.events)
-    console.log("Log [Events Page] | props", props)
-  }, [data, props])
+    console.log("[Events Page]", {
+      data: data.events.nodes,
+      props,
+    })
+  }, [])
 
   return (
     <Layout heading="Events">
@@ -149,7 +121,7 @@ const EventsPage = (props) => {
         EMAIL gregg@paradise-golf.com
       </p> */}
       <hr />
-      <BasicGrid events={data.events} />
+      <BasicGrid events={data.events.nodes} />
       <br />
     </Layout>
   )

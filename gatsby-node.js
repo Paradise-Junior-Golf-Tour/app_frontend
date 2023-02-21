@@ -20,6 +20,7 @@ exports.createPages = async ({ graphql, actions }) => {
                 }
               }
               image {
+                url
                 formats {
                   large {
                     url
@@ -30,8 +31,10 @@ exports.createPages = async ({ graphql, actions }) => {
                   small {
                     url
                   }
+                  thumbnail {
+                    url
+                  }
                 }
-                url
               }
             }
           }
@@ -48,7 +51,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const events = result.data.events.edges
   const EventTemplate = require.resolve("./src/templates/event.jsx")
   events.forEach((event, index) => {
-    console.log("Creating event page:", event.node.name)
+    console.log("Creating event page:", event)
     createPage({
       path: `/events/${event.node.slug}`,
       component: EventTemplate,
@@ -60,12 +63,13 @@ exports.createPages = async ({ graphql, actions }) => {
         registration: event.node.registration_open,
         fee: event.node?.fee,
         description: event.node?.description?.data?.description,
-        // image: {
-        //   small: event.node?.image.formats.small.url,
-        //   medium: event.node?.image.formats.medium.url,
-        //   large: event.node?.image.formats.small.url,
-        // },
-        image: event.node?.image?.url,
+        image: {
+          thumbnail: event.node?.image.formats.thumbnail.url,
+          small: event.node?.image.formats.small.url,
+          medium: event.node?.image.formats.medium.url,
+          large: event.node?.image.formats.large.url,
+        },
+        imageUrl: event.node?.image?.url,
       },
     })
   })

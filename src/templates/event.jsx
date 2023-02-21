@@ -37,26 +37,11 @@ const Event = ({ pageContext, location }) => {
     })
   }, [pageContext])
 
-  const imageStyle = {
-    height: "30vw ",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    color: "grey",
-    fontWeight: "bold",
-    borderRadius: "0.5rem",
-    border: `${!pageContext.image ? "1px dashed grey" : "none"}`,
-    opacity: `${!pageContext.image ? 0.25 : 1}`,
-    backgroundImage: `url(${pageContext.image})`,
-    overflow: "hidden",
-    textAlign: "center",
-  }
-
   return (
-    <Layout heading={pageContext.name} img={pageContext.image}>
+    <Layout
+      heading={pageContext.name}
+      images={[process.env.NODE_ENV !== "production" ? process.env.REACT_APP_STRAPI_API_URL + pageContext.image.large : pageContext.image.large]}
+    >
       {true ? (
         <article>
           <Typography component="h1" variant="h3">
@@ -81,7 +66,6 @@ const Event = ({ pageContext, location }) => {
                       },
                     })
                   }
-
                 }}
               />
             ) : null}
@@ -91,17 +75,7 @@ const Event = ({ pageContext, location }) => {
             Date, Time, Location, General Info
           </Typography>
           <hr />
-          <br />
-          <div style={imageStyle}>
-            {!pageContext.image ? (
-              <div>
-                <Typography variant="h3">{pageContext.name}</Typography>
-                <p>
-                  Replace this with a logo or default image or even remove it.
-                </p>
-              </div>
-            ) : null}
-          </div>
+
           <br />
           <div className="dev">To be replaced with the fullwidth HeaderV2.</div>
           <br />

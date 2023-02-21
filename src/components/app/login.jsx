@@ -72,23 +72,17 @@ class Login extends React.Component {
     if (isLoggedIn()) {
       const user = getUser()
 
-      console.log(user)
-
-      // if (user?.data?.admin) {
-      //   navigate(`/${portalRoot}/home`)
-      // } else {
-      //   navigate(`/${portalRoot}/profile`)
-      // }
-
-      // navigate(`/${portalRoot}`)
       return (
-        <Layout heading={`Howdy ${user.data?.username}!`}>
+        <Layout
+          heading={`Howdy${
+            user.data.name_first ? " " + user.data?.name_first : ""
+          }!`}
+        >
           <Typography component="h2" variant="h5">
-            You're logged in!
+            Looks like you're logged in.
           </Typography>
-          <p>Users and admins can log out of the app here.</p>
           <p>
-            If you got lost head here{" "}
+            Head here{" "}
             <Link to={`/${portalRoot}`}>
               to view your profile and get started.
             </Link>
@@ -114,8 +108,8 @@ class Login extends React.Component {
         </Typography>
         <hr />
         <p>
-          Not a member? An account is required to register for and manage
-          your events. You can sign up <Link to="/signup">right here.</Link>
+          Not a member? An account is required to register for and manage your
+          events. You can sign up <Link to="/signup">right here.</Link>
         </p>
         <br />
         <form

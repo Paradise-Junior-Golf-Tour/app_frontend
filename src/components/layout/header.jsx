@@ -10,14 +10,11 @@ export default function Header({ heading, images }) {
   const [imageActive, setImageActive] = useState(0)
   const theme = useTheme()
 
-  console.log("header", images)
-
   const _images = images || [
     "https://images.unsplash.com/photo-1593111774240-d529f12cf4bb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGdvbGZ8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60",
   ]
 
   const increaseCount = (amount) => {
-    console.log("count", imageActive)
 
     if (imageActive < _images.length - 1) {
       setImageActive(imageActive + amount)
@@ -48,13 +45,13 @@ export default function Header({ heading, images }) {
                 backgroundImage: `linear-gradient(to left bottom, rgba(245, 246, 252, 0.32), ${theme.palette.primary.main} ), url(${_images[index]})`,
                 transition: "2000ms",
                 backgroundPosition: "center",
-                backgroundSize: "cover",
+                backgroundSize: "100%",
                 padding: "0",
                 height: "298px",
                 width: "100%",
                 position: "absolute",
                 opacity: isActive ? 1 : 0,
-                transform: `scale(${isActive ? 1 : 1.05}) translateY(${
+                transform: `scale(${isActive ? 1 : 1.025}) translateY(${
                   isActive ? "-10px" : "10px"
                 })`,
               }}

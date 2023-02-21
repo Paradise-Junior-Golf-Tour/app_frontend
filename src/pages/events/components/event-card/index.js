@@ -9,20 +9,30 @@ import { getUser, isLoggedIn } from "../../../../services/authentication"
 import { portalRoot } from "./../../../../config"
 import { navigate } from "gatsby"
 
-export default function EventCard(event) {
+export default function EventCard({ event }) {
   console.log("[Event Card]", event)
+  // console.log(
+  //   "EVENT IMAGE",
+  //   process.env.NODE_ENV === "production"
+  //     ? event?.image?.formats?.medium?.url
+  //     : process.env.REACT_APP_STRAPI_API_URL +
+  //         event?.image?.formats?.medium?.url
+  // )
 
   const user = getUser()
   const authenticated = isLoggedIn()
 
   return (
     <Card>
-      {event?.event?.image ? (
+      {event?.image ? (
         <CardMedia
           component="img"
           height="140"
           image={
-            event?.event?.image?.formats?.small?.url
+            process.env.NODE_ENV === "production"
+              ? event?.image?.formats?.medium?.url
+              : process.env.REACT_APP_STRAPI_API_URL +
+                event?.image?.formats?.medium?.url
           }
           alt=""
         />
@@ -40,12 +50,12 @@ export default function EventCard(event) {
             zIndex: 10,
           }}
         >
-          Hello
+          Image not available.
         </div>
       )}
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {event?.event?.name || "Event Name"}
+          {event?.name || "Event Name"}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           Dates
@@ -55,14 +65,14 @@ export default function EventCard(event) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button to={"/events/" + event?.event?.slug} size="small">
+        <Button to={"/events/" + event?.slug} size="small">
           More Info
         </Button>
         <Button
           size="small"
           to={
             user?.data?.admin
-              ? `/${portalRoot}/events/${event?.event?.strapi_id}`
+              ? `/${portalRoot}/events/${event?.strapi_id}`
               : `/${portalRoot}/events/register`
           }
           onClick={(e) => {
@@ -73,14 +83,14 @@ export default function EventCard(event) {
             e.preventDefault()
             navigate(
               `${authenticated ? `/${portalRoot}` : ""}/events/${
-                user?.data?.admin ? event?.event?.strapi_id : "register"
+                user?.data?.admin ? event?.strapi_id : "register"
               }`,
               {
                 state: {
                   event: {
-                    id: event?.event?.strapi_id,
-                    name: event?.event?.name,
-                    slug: event?.event?.slug,
+                    id: event?.strapi_id,
+                    name: event?.name,
+                    slug: event?.slug,
                   },
                 },
               }
@@ -88,9 +98,6 @@ export default function EventCard(event) {
           }}
         >
           {user?.data?.admin ? "Manage" : "Register"}
-        </Button>
-        <Button size="small" to="/sponsors">
-          Sponsor
         </Button>
       </CardActions>
     </Card>

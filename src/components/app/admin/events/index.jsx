@@ -136,24 +136,6 @@ const AdminEvents = ({ location }) => {
           </Link>
         </li>
       </ul>
-
-      {/* 
-      <Snackbar
-        open={toastOpen}
-        autoHideDuration={6000}
-        onClose={closeToast}
-        color="secondary"
-      >
-        <Alert
-          onClose={closeToast}
-          severity="success"
-          sx={{ width: "100%" }}
-          variant="filled"
-        >
-          <AlertTitle>Success!</AlertTitle>
-          Created the new event {location?.state?.data?.event?.name}.
-        </Alert>
-      </Snackbar> */}
     </Layout>
   )
 }

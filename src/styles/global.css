@@ -1,6 +1,6 @@
 
 html {
-    background: #323031;
+    background: #293241;
     font-size: 14px !important;
 }
 
@@ -8,7 +8,6 @@ body {
     padding: 0;
     margin: 0;
     font-size: 1rem;
-    /* background: #e5e5e5; */
 }
 
 * {
@@ -17,10 +16,10 @@ body {
 
 header,
 footer,
+section,
 nav,
 main {
-    /* outline: 1px dashed rgba(15, 15, 15, 0.386); */
-    /* margin: 0.25rem; */
+    /* outline: 1px dashed #ee6c4d; */
 }
 
 main {
@@ -33,7 +32,6 @@ hr {
 }
 
 section {
-    outline: 1px dashed #3475cb76;
     padding: 1rem;
     margin-bottom: 2rem;
 }
@@ -119,10 +117,10 @@ p {
 }
 
 .dev {
-    color: #e71d36;
-    outline: 1px solid #e71d36;
-    padding: 0.5rem;
-    background: #e71d351e;
+    color: #ee6c4d;
+    outline: 1px solid #ee6c4d;
+    padding: 1rem;
+    background: #ee6d4d19;
     border-radius: 0.15rem;
 }
 
