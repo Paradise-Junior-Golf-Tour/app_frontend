@@ -6,26 +6,26 @@ import FormControlLabel from "@mui/material/FormControlLabel"
 import Box from "@mui/material/Box"
 import FormLabel from "@mui/material/FormLabel"
 import FormHelperText from "@mui/material/FormHelperText"
-import { reduceObjects } from "../../../util"
-import { register, eventsAll } from "../../../services/event"
+import { reduceObjects } from "../../../../util"
+import { register, eventsAll } from "../../../../services/event"
 import { navigate } from "gatsby"
-import Layout from "../../layout"
+import Layout from "../../../layout"
+import { getUser } from "../../../../services/authentication"
+import { getUserEvents } from "../../../../services/user"
 
 export default function UserEventRegistration(props) {
   // const { name, id, slug } = props?.location?.state?.event
   const [events, setEvents] = useState([])
+  const user = getUser()
 
-  const registerTypes = []
-
-  useEffect(() => {
-    console.log("Register", {
-      events,
-    })
+  // const registerTypes = []
+  const checked = events.filter((obj) => {
+    return obj.checked === true
   })
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    register({ events: events.map((event) => event.id), type: "Event Single" })
+    register({ events: checked.map((event) => event.id), type: "Event Single" })
       .then((res) => {
         console.log(res)
         alert("Registration success!")
@@ -48,38 +48,31 @@ export default function UserEventRegistration(props) {
     setEvents(newState)
   }
 
-  // const error = [gilad, jason, antoine].filter((v) => v).length !== 2
+  // Check the event if user navigated from an stateful link
+  useEffect(async () => {
+    const userEvents = await getUserEvents()
 
-  useEffect(() => {
     eventsAll().then((res) => {
-      console.log("Log [Registration] Props / Data", { props, res }) // TODO: Add strapi id
+      // Check selected events... maybe use some?
+      res.forEach((x) => {
+        const location = props?.location?.state?.event?.name
+        const event = x.name
+
+        // if user event array has entries disable that entry
+        if (userEvents.some((userEvent) => x.name === userEvent.name)) {
+          x.registered = true
+        } else if (location === event) {
+          x.checked = true
+        }
+      })
+
       setEvents(res)
     })
-  }, [props])
+  }, [])
 
   useEffect(() => {
     console.log("Log [Registration] State", { events }) // TODO: Add strapi id
-
-    // 👇️ [{name: 'Tom', age: 30}, {name: 'Dillon', age: 30}]
   }, [events])
-
-  // useEffect(() => {
-  //   const results = events.filter((obj) => {
-  //     return obj.checked === true
-  //   })
-
-  //   const totalNew = results.reduce((accumulator, object) => {
-  //     return accumulator + object.Fee
-  //   }, 0)
-
-  //   setTotal(totalNew)
-
-  //   // 👇️ [{name: 'Tom', age: 30}, {name: 'Dillon', age: 30}]
-  // }, [events])
-
-  const checked = events.filter((obj) => {
-    return obj.checked === true
-  })
 
   const total = reduceObjects(checked, "fee")
 
@@ -98,11 +91,6 @@ export default function UserEventRegistration(props) {
       </p>
       <p>Choose the events you would like to register for.</p>
 
-      <div className="dev">
-        Need to filter out Events the user has previously registered for.
-      </div>
-      <br />
-
       <Box>
         <FormControl sx={{}} component="fieldset" variant="standard">
           <FormLabel component="legend">Select Your Events</FormLabel>
@@ -110,23 +98,19 @@ export default function UserEventRegistration(props) {
             {events
               ? events.map((event) => {
                   return (
-                    <div>
+                    <Box key={event.name + event.id}>
                       <FormControlLabel
                         control={
                           <Checkbox
-                            checked={
-                              props?.location?.state?.event?.name === event.name
-                                ? true
-                                : event.checked
-                            }
+                            checked={event.checked}
                             onChange={handleChangeNew}
                             name={event.name}
+                            disabled={event.registered}
                           />
                         }
-                        label={`${event.name}`}
+                        label={`${event.name + " - $" + event.fee}`}
                       />
-                      ${event.fee}
-                    </div>
+                    </Box>
                   )
                 })
               : null}
@@ -135,52 +119,11 @@ export default function UserEventRegistration(props) {
             You are registration total is <strong>${total}</strong>.
           </FormHelperText>
         </FormControl>
-        {/* <FormControl
-          required
-          error={error}
-          component="fieldset"
-          sx={{ m: 3 }}
-          variant="standard"
-        >
-          <FormLabel component="legend">Pick two</FormLabel>
-          <FormGroup>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={gilad}
-                  onChange={handleChange}
-                  name="gilad"
-                />
-              }
-              label="Gilad Gray"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={jason}
-                  onChange={handleChange}
-                  name="jason"
-                />
-              }
-              label="Jason Killian"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={antoine}
-                  onChange={handleChange}
-                  name="antoine"
-                />
-              }
-              label="Antoine Llorca"
-            />
-          </FormGroup>
-          <FormHelperText>You can display an error</FormHelperText>
-        </FormControl> */}
+
         <br />
         <br />
+
         <div>
-          {" "}
           <Button
             color="primary"
             variant="contained"
@@ -193,8 +136,7 @@ export default function UserEventRegistration(props) {
       </Box>
 
       <br />
-      <br />
-      <hr />
+
       <p className="dev">
         Should the option to sign up in foursomes be incorporated? Pick othe
         users? Invite if they are not signed up?

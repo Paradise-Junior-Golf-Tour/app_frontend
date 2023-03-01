@@ -8,16 +8,9 @@ export const eventsNew = async ({
   fee,
   date,
   max_users,
-  image
+  image,
 }) => {
   let event = null
-
-  console.log(
-    `[Events Service] Create New: ${
-      name || "No name provided - validation needed..."
-    }`,
-    { name, description, fee, date, max_users, image }
-  )
 
   await axios
     .post(`${process.env.REACT_APP_STRAPI_API_URL}/api/events/new`, {
@@ -27,7 +20,7 @@ export const eventsNew = async ({
         fee,
         date,
         max_users,
-        image
+        image,
       },
     })
     .then((res) => {
@@ -45,13 +38,11 @@ export const eventsNew = async ({
 }
 
 export const eventsAll = async () => {
-  console.log("[Events Service] Get All")
   const data = await axios.get(
     `${process.env.REACT_APP_STRAPI_API_URL}/api/events/all`
   )
 
   if (data.status === 200) {
-    console.log("[Events Service] Get All OK", data.status)
     return data.data.data
   }
 
@@ -59,25 +50,21 @@ export const eventsAll = async () => {
 }
 
 export const eventsOneById = async ({ identifier }) => {
-  console.log("[Events Service] Find One", identifier)
   let event
 
   await axios
     .get(`${process.env.REACT_APP_STRAPI_API_URL}/api/events/${identifier}`)
     .then((res) => {
-      console.log(`[Events Service] Found One: ${res}`)
       if (res.status === 200) {
-        console.log("[services - event]", res.data)
         event = res.data
       }
     })
     .catch((err) => {
-      console.log(`[Events Service] Create New Error`, (event = err.message))
+      console.error(`[Events Service] Create New Error`, (event = err.message))
     })
 
   return event
 }
-
 
 export const eventsUpdate = () => {
   console.log("[Events Service] Update")
@@ -96,22 +83,21 @@ export const register = async ({ events, type }) => {
       // },
     })
     .then((res) => {
-      console.log(`[Events Service] Create New Success: ${res.status}`)
+      console.log(`[Events Service] Register: ${res.status}`)
       if (res.status === 200) {
         console.log(res.data)
         event = res.data
       }
     })
     .catch((err) => {
-      console.log(
-        `[Events Service] Create New Error: ${events}`,
+      console.error(
+        `[Events Service] Register Error: ${events}`,
         (event = err.message)
       )
     })
 
   return event
 }
-
 
 export const eventDetails = async ({ id }) => {
   console.log("[Events Service] Find One", id)

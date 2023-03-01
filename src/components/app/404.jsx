@@ -6,10 +6,10 @@ const FourOhFour = () => {
   return (
     <Layout heading="404">
       <Typography variant="h5" component="h2">
-        Oh no. There really isn't much here.
+        Oh no. You may need that mulligan.
       </Typography>
       <hr />
-      <p>Seriously it might be time to take that mulligan.</p>
+      <p>We were not able to find this resource, but here are some helpful links to get you back on track!</p>
     </Layout>
   )
 }

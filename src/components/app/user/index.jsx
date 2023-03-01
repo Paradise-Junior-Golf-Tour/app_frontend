@@ -6,10 +6,10 @@ import { getUser } from "../../../services/authentication"
 // Custom messaging for user and time of day.
 const UserIndex = () => {
   const user = getUser()
-  console.log('USERRR', user.data)
+  console.log('User', user.data)
 
   return (
-    <Layout heading={`${user.data.name_first} ${user.data.name_last}`}>
+    <Layout heading={`${user?.data?.name_first} ${user?.data?.name_last}`}>
       <Typography variant="h5" component="h2">
         This is the User Index page.
       </Typography>

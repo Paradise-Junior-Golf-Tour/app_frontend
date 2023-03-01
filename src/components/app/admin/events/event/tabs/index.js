@@ -1,9 +1,17 @@
 import * as React from "react"
 import Tabs from "@mui/material/Tabs"
 import Tab from "@mui/material/Tab"
-import { Typography, TextField } from "@mui/material"
+import {
+  Typography,
+  TextField,
+  Button,
+  FormControl,
+  InputLabel,
+  Select,
+} from "@mui/material"
 import Box from "@mui/material/Box"
 import Details from "./event-details"
+import TeeTimes from "./tee-times/tee-times"
 
 function TabPanel(props) {
   const { children, value, index, data, ...other } = props
@@ -88,22 +96,7 @@ export default function VerticalTabs({ data }) {
         </section>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <section>
-          <Typography variant="h4" component="h2">
-            Tee Times
-          </Typography>
-          <hr />
-          {data?.tee_time_slots?.map((x) => {
-            return (
-              <div>
-                <h4>{x.time}</h4>
-                {x.users_permissions_users?.map((x) => {
-                  return <div>{x.name_first + ' ' + x.name_last} - {x.email}</div>
-                })}
-              </div>
-            )
-          })}
-        </section>
+        <TeeTimes data={data} />
       </TabPanel>
       <TabPanel value={value} index={3}>
         <section>

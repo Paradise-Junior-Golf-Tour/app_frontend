@@ -1,29 +1,22 @@
 import axios from "axios"
 import { isBrowser } from "../util/index.js"
 
-
-// export const getUser = () =>
-//   isBrowser && window.localStorage.getItem("gatsbyUser")
-//     ? JSON.parse(window.localStorage.getItem("gatsbyUser"))
-//     : {}
-
 export const getUser = () => {
   let user = {}
   if (isBrowser()) {
-    user = isBrowser() && window.localStorage.getItem("gatsbyUser")
-      ? JSON.parse(window.localStorage.getItem("gatsbyUser"))
-      : {}
+    user =
+      isBrowser() && window.localStorage.getItem("gatsbyUser")
+        ? JSON.parse(window.localStorage.getItem("gatsbyUser"))
+        : {}
   }
 
   return user
 }
 
 export const setUser = (user) => {
-  // let user = {}
   if (isBrowser()) {
     return window.localStorage.setItem("gatsbyUser", JSON.stringify(user))
   }
-  // return user
 }
 
 export const handleLogin = async ({ username, password }) => {

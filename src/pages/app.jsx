@@ -19,6 +19,7 @@ import AdminTransactions from "../components/app/admin/transactions/event"
 import AdminEventsUpdate from "../components/app/admin/events/event"
 import { useLocation } from "@reach/router"
 import services from "../services"
+import SignupFamily from "../components/app/user/signup-family"
 
 const App = () => {
   const user = getUser()
@@ -63,6 +64,7 @@ const App = () => {
       ) : (
         <>
           <Authenticated path={`/`} component={UserIndex} />
+          <Authenticated path={`/family`} component={SignupFamily} />
           <Authenticated path={`/profile`} component={UserProfile} />
           <Authenticated path={`/events`} component={UserEvents} />
           <Authenticated

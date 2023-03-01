@@ -9,23 +9,30 @@ import {
   Select,
   InputLabel,
   MenuItem,
+  Box,
 } from "@mui/material"
+import ContentGrid from "../../components/layout/content-grid"
 import { portalRoot } from "../../config"
 import Layout from "../../components/layout"
 import axios from "axios"
+import Grid from "@mui/material/Unstable_Grid2"
 
 // TODO - refactor to a functinoal component.
 class Signup extends React.Component {
   state = {
-    email: ``,
-    username: ``,
-    password: ``,
-    name_first: ``,
-    name_last: ``,
-    gender: ``,
-    birthday: ``,
-    address_one: ``,
-    address_zip: ``,
+    email: "",
+    username: "",
+    password: "",
+    name_first: "",
+    name_last: "",
+    gender: "",
+    birthday: "",
+    address_one: "",
+    address_two: "",
+    address_city: "",
+    address_state: "",
+    address_zip: "",
+    family_account: "",
   }
 
   handleUpdate = (event) => {
@@ -42,7 +49,7 @@ class Signup extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log("Signup Form Data", this.state)
+    console.log("Signup FormControl Data", this.state)
   }
 
   handleSubmit = async (event) => {
@@ -60,133 +67,194 @@ class Signup extends React.Component {
           user: response.data.user,
           jwt: response.data.jwt,
         })
-        navigate(`/${portalRoot}`)
+        navigate(
+          `/${
+            response.data.user.family_account
+              ? portalRoot + "/family"
+              : portalRoot
+          }`
+        )
       })
       .catch((error) => {
         console.log("An error occurred:", error)
       })
-    // Submit form and such.
   }
 
   render() {
     return (
       <Layout heading="Signup">
-        <Typography component="h1" variant="h3">
-          Signup
-        </Typography>
-        <Typography component="h2" variant="h5">
-          Users and admins sign up for the app here.
-        </Typography>
-        <br />
-        <form
+        <Box
+          component="form"
+          noValidate
+          autoComplete="off"
           method="post"
           name="signup"
           onSubmit={(event) => {
             this.handleSubmit(event)
           }}
         >
-          {/* <br /> <br /> */}
-          <TextField
-            autoComplete="off"
-            id="email"
-            type="email"
-            name="email"
-            label="Email"
-            variant="outlined"
-            onChange={this.handleUpdate}
-          />
-          <br /> <br />
-          <TextField
-            autoComplete="off"
-            id="username"
-            name="username"
-            value={this.state.username}
-            type="text"
-            label="Username"
-            variant="outlined"
-            onChange={this.handleUpdate}
-          />
-          <br /> <br />
-          <TextField
-            autoComplete="off"
-            id="password"
-            type="password"
-            name="password"
-            label="Password"
-            variant="outlined"
-            onChange={this.handleUpdate}
-          />
-          <br /> <br />
-          <TextField
-            autoComplete="off"
-            id="name_first"
-            type="text"
-            name="name_first"
-            label="First Name"
-            variant="outlined"
-            onChange={this.handleUpdate}
-          />
-          <br /> <br />
-          <TextField
-            autoComplete="off"
-            id="name_last"
-            type="text"
-            name="name_last"
-            label="Last Name"
-            variant="outlined"
-            onChange={this.handleUpdate}
-          />
-          <br /> <br />
-          <InputLabel id="gender">Gender</InputLabel>
-          <Select
-            labelId="gender"
-            id="gender"
-            name="gender"
-            value={this.state.gender}
-            label="Gender"
-            onChange={this.handleUpdate}
-          >
-            <MenuItem value={"male"}>Male</MenuItem>
-            <MenuItem value={"female"}>Female</MenuItem>
-          </Select>
-          <br /> <br />
-          <FormControl>
-            <TextField
-              autoComplete="off"
-              id="birthday"
-              type="date"
-              name="birthday"
-              // label="Birthday"
-              variant="outlined"
-              onChange={this.handleUpdate}
-            />
-          </FormControl>
-          <br /> <br />
-          <TextField
-            autoComplete="off"
-            id="address_one"
-            type="text"
-            name="address_one"
-            label="Address"
-            variant="outlined"
-            onChange={this.handleUpdate}
-          />
-          <br /> <br />
-          <TextField
-            autoComplete="off"
-            id="address_zip"
-            type="text"
-            name="address_zip"
-            label="Zip"
-            variant="outlined"
-            onChange={this.handleUpdate}
-          />
-          <br /> <br />
+          <ContentGrid>
+            <Grid xs={12} sm={6}>
+              <FormControl sx={{ width: "100%" }}>
+                <TextField
+                  sx={{ width: "100%" }}
+                  autoComplete="off"
+                  id="email"
+                  type="email"
+                  name="email"
+                  label="Email"
+                  variant="outlined"
+                  onChange={this.handleUpdate}
+                />
+              </FormControl>
+            </Grid>
+            <Grid xs={12} sm={6}>
+              <FormControl sx={{ width: "100%" }}>
+                <TextField
+                  sx={{ width: "100%" }}
+                  autoComplete="off"
+                  id="username"
+                  name="username"
+                  value={this.state.username}
+                  type="text"
+                  label="Username"
+                  variant="outlined"
+                  onChange={this.handleUpdate}
+                />
+              </FormControl>
+            </Grid>
+            <Grid xs={12} sm={6}>
+              <FormControl sx={{ width: "100%" }}>
+                <TextField
+                  sx={{ width: "100%" }}
+                  autoComplete="off"
+                  id="password"
+                  type="password"
+                  name="password"
+                  label="Password"
+                  variant="outlined"
+                  onChange={this.handleUpdate}
+                />
+              </FormControl>
+            </Grid>
+            <Grid xs={12} sm={6}>
+              <FormControl sx={{ width: "100%" }}>
+                <TextField
+                  sx={{ width: "100%" }}
+                  autoComplete="off"
+                  id="name_first"
+                  type="text"
+                  name="name_first"
+                  label="First Name"
+                  variant="outlined"
+                  onChange={this.handleUpdate}
+                />
+              </FormControl>
+            </Grid>
+            <Grid xs={12} sm={6}>
+              <FormControl sx={{ width: "100%" }}>
+                <TextField
+                  sx={{ width: "100%" }}
+                  autoComplete="off"
+                  id="name_last"
+                  type="text"
+                  name="name_last"
+                  label="Last Name"
+                  variant="outlined"
+                  onChange={this.handleUpdate}
+                />
+              </FormControl>
+            </Grid>
+            <Grid xs={12} sm={6}>
+              <FormControl sx={{ width: "100%" }}>
+                <InputLabel id="family_account">Family Account</InputLabel>
+                <Select
+                  sx={{ width: "100%" }}
+                  labelId="family_account"
+                  id="family_account"
+                  name="family_account"
+                  value={this.state.family_account}
+                  label="Family Account"
+                  onChange={this.handleUpdate}
+                >
+                  <MenuItem value={true}>Yes</MenuItem>
+                  <MenuItem value={false}>No</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+          </ContentGrid>
+          <br />
+          <hr />
+          <br />
+          <ContentGrid>
+            <Grid xs={12} sm={6}>
+              <FormControl sx={{ width: "100%" }}>
+                <InputLabel id="gender">Gender</InputLabel>
+                <Select
+                  labelId="gender"
+                  id="gender"
+                  name="gender"
+                  value={this.state.gender}
+                  label="Gender"
+                  onChange={this.handleUpdate}
+                >
+                  <MenuItem value={"male"}>Male</MenuItem>
+                  <MenuItem value={"female"}>Female</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid xs={12} sm={6}>
+              <FormControl sx={{ width: "100%" }}>
+                <TextField
+                  sx={{ width: "100%" }}
+                  autoComplete="off"
+                  id="birthday"
+                  type="date"
+                  name="birthday"
+                  label="Birthday"
+                  variant="outlined"
+                  onChange={this.handleUpdate}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </FormControl>
+            </Grid>
+            <Grid xs={12} sm={6}>
+              <FormControl sx={{ width: "100%" }}>
+                <TextField
+                  sx={{ width: "100%" }}
+                  autoComplete="off"
+                  id="address_one"
+                  type="text"
+                  name="address_one"
+                  label="Address"
+                  variant="outlined"
+                  onChange={this.handleUpdate}
+                />
+              </FormControl>
+            </Grid>
+            <Grid xs={12} sm={6}>
+              <FormControl sx={{ width: "100%" }}>
+                <TextField
+                  sx={{ width: "100%" }}
+                  autoComplete="off"
+                  id="address_zip"
+                  type="text"
+                  name="address_zip"
+                  label="Zip"
+                  variant="outlined"
+                  onChange={this.handleUpdate}
+                />
+              </FormControl>
+            </Grid>
+          </ContentGrid>
+
+          <br />
           <Button variant="contained" loading={true} type="submit">
             Create My Profile
           </Button>
-        </form>
-        {/* </Layout> */}
+        </Box>
       </Layout>
     )
   }
