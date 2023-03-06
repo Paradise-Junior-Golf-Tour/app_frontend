@@ -9,7 +9,7 @@ import { linkActive } from "../../styles"
 import { getUser, isLoggedIn } from "../../services/authentication"
 import { portalRoot } from "../../config"
 import LinkEvent from "../../components/routing/link-event"
-import BasicGrid from "./components/event-grid"
+import EventGrid from "./components/event-grid"
 import { eventsAll } from "../../services/event"
 
 // TODO - replace static query with page query.
@@ -121,7 +121,7 @@ const EventsPage = (props) => {
         EMAIL gregg@paradise-golf.com
       </p> */}
       <hr />
-      <BasicGrid events={data.events.nodes} />
+      <EventGrid events={data.events.nodes} />
       <br />
     </Layout>
   )
@@ -130,40 +130,3 @@ const EventsPage = (props) => {
 export default EventsPage
 
 export const Head = () => <SEO title="Events | The Paradise Junior Golf Tour" />
-
-// const EventsPage = (props) => {
-//   //  const { data, setData } = useState({}); // dyamically fetch any event data not listed.
-//   // const data = useStaticQuery(graphql`
-//   //   query allEvents {
-//   //     allStrapiEvent {
-//   //       edges {
-//   //         node {
-//   //           id
-//   //           Name
-//   //           Fee
-//   //           strapi_id
-//   //           Registration
-//   //           Description {
-//   //             data {
-//   //               Description
-//   //             }
-//   //           }
-//   //           image {
-//   //             url
-//   //           }
-//   //           Slug
-//   //         }
-//   //       }
-//   //     }
-//   //   }
-//   // `)
-
-//   // useEffect(() => {
-//   //   console.log("Log [Events Page] data", data.allStrapiEvent.edges)
-//   //   console.log("Log [Events Page] Props", props)
-//   // }, [data, props])
-
-//   return <Layout heading="Events">hello world</Layout>
-// }
-
-// export default EventsPage

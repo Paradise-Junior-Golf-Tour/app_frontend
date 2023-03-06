@@ -57,10 +57,7 @@ export default function DrawerAppBar(props) {
   }
 
   const drawer = (
-    <Box
-      onClick={handleDrawerToggle}
-      sx={{ textAlign: "center",  }}
-    >
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Box variant="h6" sx={{ bgcolor: "primary.main", p: "1rem 0" }}>
         <Typography>
           <Logo fill="white" height="3rem" />
@@ -69,7 +66,7 @@ export default function DrawerAppBar(props) {
       <Divider />
       <List>
         {navItem2.map((item) => (
-          <ListItem key={item} disablePadding>
+          <ListItem key={item.name} disablePadding>
             <ListItemButton
               sx={{ textAlign: "center" }}
               onClick={() => navigate(item.link)}
@@ -112,7 +109,7 @@ export default function DrawerAppBar(props) {
               {navItem2.map((item) => (
                 <Button
                   className="btn"
-                  key={item}
+                  key={item.name}
                   to={item.link}
                   color="inherit"
                 >

@@ -28,13 +28,11 @@ const AppNavigation = ({ location }) => {
   const id = open ? "app-navigation" : undefined
 
   const contentAuthenticated = routes.map((x) => (
-    <ul>
-      <li onClick={handleClose}>
+      <li onClick={handleClose} key={x.route}>
         <Link activeStyle={linkActive} to={`/${portalRoot}/` + x.route}>
           {user?.data?.admin ? "Admin" : "User"} {x.name}
         </Link>
       </li>
-    </ul>
   ))
 
   const renderToolTip = () => {

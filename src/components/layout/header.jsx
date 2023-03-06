@@ -15,7 +15,6 @@ export default function Header({ heading, images }) {
   ]
 
   const increaseCount = (amount) => {
-
     if (imageActive < _images.length - 1) {
       setImageActive(imageActive + amount)
     } else {
@@ -41,6 +40,7 @@ export default function Header({ heading, images }) {
           const isActive = imageActive === index ? true : false
           return (
             <Box
+              key={_images[index]}
               style={{
                 backgroundImage: `linear-gradient(to left bottom, rgba(245, 246, 252, 0.32), ${theme.palette.primary.main} ), url(${_images[index]})`,
                 transition: "2000ms",

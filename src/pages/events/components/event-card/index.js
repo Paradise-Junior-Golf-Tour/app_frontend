@@ -4,32 +4,25 @@ import CardActions from "@mui/material/CardActions"
 import CardContent from "@mui/material/CardContent"
 import CardMedia from "@mui/material/CardMedia"
 import { Button } from "gatsby-theme-material-ui"
+import { Box } from "@mui/material"
 import Typography from "@mui/material/Typography"
 import { getUser, isLoggedIn } from "../../../../services/authentication"
 import { portalRoot } from "./../../../../config"
 import { navigate } from "gatsby"
+import { style } from "./style"
 
 export default function EventCard({ event }) {
-  console.log("[Event Card]", event)
-  // console.log(
-  //   "EVENT IMAGE",
-  //   process.env.NODE_ENV === "production"
-  //     ? event?.image?.formats?.medium?.url
-  //     : process.env.REACT_APP_STRAPI_API_URL +
-  //         event?.image?.formats?.medium?.url
-  // )
-
   const user = getUser()
   const authenticated = isLoggedIn()
 
   return (
     <Card>
-      {event?.image ? (
+      {!event?.image ? (
         <CardMedia
           component="img"
           height="140"
           image={
-            process.env.NODE_ENV === "production"
+            process.env.NODE_ENV === "production" // make this a util function?
               ? event?.image?.formats?.medium?.url
               : process.env.REACT_APP_STRAPI_API_URL +
                 event?.image?.formats?.medium?.url
@@ -37,21 +30,7 @@ export default function EventCard({ event }) {
           alt=""
         />
       ) : (
-        <div
-          style={{
-            position: "relative",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            top: 0,
-            left: 0,
-            height: "140px",
-            background: "white",
-            zIndex: 10,
-          }}
-        >
-          Image not available.
-        </div>
+        <Box sx={style}>Image not available.</Box>
       )}
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">

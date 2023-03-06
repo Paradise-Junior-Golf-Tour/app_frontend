@@ -38,15 +38,15 @@ const IndexPage = (data) => {
           Current here for reference.
         </a>
       </p>
-      <p className="dev">
-        <ul>
-          <li>Select 4some or individual and/or hole sponsorship.</li>
-          <li>Collect information on user and billing info.</li>
-          <li>Checkout</li>
-          <li></li>
-          <li></li>
-        </ul>
-      </p>
+
+      <ul className="dev">
+        <li>Select 4some or individual and/or hole sponsorship.</li>
+        <li>Collect information on user and billing info.</li>
+        <li>Checkout</li>
+        <li></li>
+        <li></li>
+      </ul>
+
       <ul>
         <li>
           <Link to="/fundraiser/register">Register</Link>

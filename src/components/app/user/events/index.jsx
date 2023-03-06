@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react"
 import { Typography, Box, Avatar } from "@mui/material"
-import { navListItemStyle, linkActive } from "../../../styles"
+import { navListItemStyle, linkActive } from "../../../../styles"
 import { Link } from "gatsby"
-import { portalRoot } from "../../../config"
-import { getUserEvents } from "../../../services/user"
-import Layout from "../../layout"
+import { portalRoot } from "../../../../config"
+import { getUserEvents } from "../../../../services/user"
+import Layout from "../../../layout"
 
 const UserEvents = () => {
   const [events, setEvents] = useState(undefined)
+  
   useEffect(() => {
     getUserEvents()
       .then((res) => {

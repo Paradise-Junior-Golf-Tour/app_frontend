@@ -6,14 +6,14 @@ import FormControlLabel from "@mui/material/FormControlLabel"
 import Box from "@mui/material/Box"
 import FormLabel from "@mui/material/FormLabel"
 import FormHelperText from "@mui/material/FormHelperText"
-import { reduceObjects } from "../../../../util"
-import { register, eventsAll } from "../../../../services/event"
+import { reduceObjects } from "../../../../../util"
+import { register, eventsAll } from "../../../../../services/event"
 import { navigate } from "gatsby"
-import Layout from "../../../layout"
-import { getUser } from "../../../../services/authentication"
-import { getUserEvents } from "../../../../services/user"
+import Layout from "../../../../layout"
+import { getUser } from "../../../../../services/authentication"
+import { getUserEvents } from "../../../../../services/user"
 
-export default function UserEventRegistration(props) {
+export default function RegisterEventsFamily(props) {
   // const { name, id, slug } = props?.location?.state?.event
   const [events, setEvents] = useState([])
   const user = getUser()
@@ -70,14 +70,10 @@ export default function UserEventRegistration(props) {
     })
   }, [])
 
-  useEffect(() => {
-    console.log("Log [Registration] State", { events }) // TODO: Add strapi id
-  }, [events])
-
   const total = reduceObjects(checked, "fee")
 
   return (
-    <Layout heading="Tour Event Registration">
+    <Layout heading="Family Event Registration">
       <Typography variant="h3" component="h1">
         Tour Event Registration
       </Typography>
@@ -134,13 +130,6 @@ export default function UserEventRegistration(props) {
           </Button>
         </div>
       </Box>
-
-      <br />
-
-      <p className="dev">
-        Should the option to sign up in foursomes be incorporated? Pick othe
-        users? Invite if they are not signed up?
-      </p>
     </Layout>
   )
 }
