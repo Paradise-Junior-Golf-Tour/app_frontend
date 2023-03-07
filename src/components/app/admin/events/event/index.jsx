@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react"
 import { Link } from "gatsby"
 import { Typography } from "@mui/material"
-import { eventsOneById, eventDetails } from "../../../../../services/event"
+import { eventDetails } from "../../../../../services/event"
 import { portalRoot } from "../../../../../config"
 import moment from "moment"
 import Layout from "../../../../layout"
 import VerticalTabs from "./tabs"
-import { imageUrl } from '../../../../../util'
+import { imageUrl } from "../../../../../util"
 
 const AdminEvent = (props) => {
   const [data, setData] = useState(null)
@@ -51,7 +51,7 @@ const AdminEvent = (props) => {
   if (!data) {
     return (
       <Layout heading="Event Not Found">
-        <Typography variant="h5" component="h2">
+        <Typography variant="h2" component="h2">
           The requested event does not exist.
         </Typography>
         <p>
@@ -67,7 +67,15 @@ const AdminEvent = (props) => {
 
   // // Render event found.
   return (
-    <Layout heading={data?.name} images={[imageUrl(data?.image?.formats?.large?.url)]}>
+    <Layout
+      heading={data?.name}
+      images={[imageUrl(data?.image?.formats?.large?.url)]}
+    >
+      <Typography component="h2" variant="h2">
+        View and update event details.
+      </Typography>
+      <hr />
+      <br />
       <VerticalTabs data={data} />
     </Layout>
   )

@@ -5,7 +5,7 @@ import { Typography, Chip } from "@mui/material"
 import Layout from "../components/layout"
 import "react-loading-skeleton/dist/skeleton.css"
 import SEO from "../components/seo"
-// import { eventsOneById } from "../services/event"
+
 import { usersByEvent } from "../services/user"
 // Other imports here as needed
 import Skeleton from "react-loading-skeleton"
@@ -18,17 +18,6 @@ const Event = ({ pageContext, location }) => {
   // PageContext provides - static Event data needed for SEO (Name, Fee, Dates, Description, Location, etc.).
   // Fetch data for Event Users, Tee Times, Results dynamically as they will change more often.
   const [users, setUsers] = useState([])
-  // const [data, setData] = useState(null)
-
-  // TODO - decide on one large query or several smaller specific ones.  Leaning large.
-  // useEffect(async () => {
-  //   eventsOneById({ identifier: pageContext.strapiId }).then((data) => {
-  //     console.log("Log [Event - Single] - API data", data)
-  //     setTimeout(() => {
-  //       setData(data)
-  //     }, 0)
-  //   })
-  // }, [pageContext])
 
   useEffect(() => {
     console.log(`[Events Template]`, pageContext)

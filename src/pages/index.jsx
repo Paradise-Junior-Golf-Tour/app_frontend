@@ -1,12 +1,16 @@
 // import { useStaticQuery, graphql } from "gatsby";
 import React, { useEffect, useState } from "react"
 import Layout from "../components/layout"
-import { Typography } from "@mui/material"
+import { Typography, Box } from "@mui/material"
 import { Link } from "gatsby"
 import Grid from "@mui/material/Unstable_Grid2"
+import AccountCircleIcon from "@mui/icons-material/AccountCircle"
+import AddCircleIcon from "@mui/icons-material/AddCircle"
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth"
+import { isLoggedIn } from "../services/authentication"
 
 const IndexPage = (data) => {
-  console.log(`[index.js] Index page.`)
+  const loggedIn = isLoggedIn()
   const [dataClient, setDataClient] = useState()
 
   useEffect(() => {
@@ -30,86 +34,52 @@ const IndexPage = (data) => {
   ]
 
   return (
-    <Layout heading="The Paradise Junior Golf Tour" images={images}>
-      <section>
-        <Typography variant="h5" component="h2">
-          {`Welcome to the ${new Date().getFullYear()} Tour`}!
+    <Layout heading={`Paradise Junior Golf Tour ${new Date().getFullYear()}`} images={images}>
+      <Box component="section">
+        <Typography variant="h2" component="h2">
+          What We Do
         </Typography>
-        <p className="dev">
-          Make sure the tab index works here. This may need to be replaced with
-          a MUI component. Add icons wrapped in link.
-        </p>
         <br />
-
-        <Grid container>
-          <Grid
-            xs={12}
-            sm={4}
-            sx={{ textAlign: "center", p: "1rem 0", border: "1px solid grey" }}
-          >
-            <Link to="/app/login">Login</Link>
-          </Grid>
-          <Grid
-            xs={12}
-            sm={4}
-            sx={{ textAlign: "center", p: "1rem 0", border: "1px solid grey" }}
-          >
-            <Link to="/signup">Signup</Link>
-          </Grid>
-          <Grid
-            xs={12}
-            sm={4}
-            sx={{ textAlign: "center", p: "1rem 0", border: "1px solid grey" }}
-          >
-            <Link to="/events">Events</Link>
-          </Grid>
-        </Grid>
-        <br />
-      </section>
-
-      <section>
-        <Typography variant="h5" component="h2" sx={{ margin: "auto" }}>
-          Once again we have a college age division this year! Ages 19-22.
+        <Typography className="dev" variant="body1" component="p">
+          Information to be added once available from client.
         </Typography>
-        <p className="dev">
-          Most recent announcement here! Link to all other announcements....
-        </p>
-      </section>
-
-      <section>
-        <p>
-          ANY QUESTIONS CALL COACH TONY
-          <a href="tel:727-776-0450">@727-776-0450</a>
-        </p>
-
-        {/* <p>
-          <a
-            href="https://www2.cybergolf.com/guestbook/view.asp?courseid=3452&id=3922"
-            target={"_blank"}
-            rel="noreferrer"
-          >
-            CLICK HERE
-          </a>
-          to register to be added to our email list.
-        </p> */}
-        <p>Best of luck with your game!</p>
-        <p>Tony, Paradise Golf Junior Golf Tour</p>
-        <p>Gregg, Paradise Golf</p>
-      </section>
-
-      <section>
-        <Typography variant="h4" component="h3">
-          News (formerly a banner.)
-        </Typography>
-        <hr />
-        <br />
-        <Typography variant="h4" component="h3">
+      </Box>
+      <Box component="section">
+        <Typography variant="h2" component="h2">
           Upcoming Events
         </Typography>
-        <hr />
-        <p>Highlight a specifc event or two.</p>
         <br />
-      </section>
+        <Typography className="dev" variant="body1" component="p">
+          Information to be added once available from client.
+        </Typography>
+      </Box>
+      <Box component="section">
+        <Typography variant="h2" component="h2">
+          Give Now Button
+        </Typography>
+        <br />
+        <Typography className="dev" variant="body1" component="p">
+          Information to be added once available from client.
+        </Typography>
+      </Box>
+      <Box component="section">
+        <Typography variant="h2" component="h2">
+          What's Happening Lately
+        </Typography>
+        <br />
+        <Typography className="dev" variant="body1" component="p">
+          Information to be added once available from client.
+        </Typography>
+      </Box>
+      <Box component="section">
+        <Typography variant="h2" component="h2">
+          Weather Widget
+        </Typography>
+        <br />
+        <Typography className="dev" variant="body1" component="p">
+          Secondary concern - not needed for launch.
+        </Typography>
+      </Box>
     </Layout>
   )
 }

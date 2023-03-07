@@ -1,6 +1,4 @@
 import * as React from "react"
-import Tabs from "@mui/material/Tabs"
-import Tab from "@mui/material/Tab"
 import {
   Typography,
   TextField,
@@ -13,7 +11,7 @@ import {
 import Box from "@mui/material/Box"
 
 const TeeTimes = ({ data }) => {
-
+  const [time, setTime] = React.useState("")
   const [golfer1, setGolfer1] = React.useState("")
   const [golfer2, setGolfer2] = React.useState("")
   const [golfer3, setGolfer3] = React.useState("")
@@ -33,6 +31,10 @@ const TeeTimes = ({ data }) => {
 
   // Placeholder to manage the selected users.
   const updateSelected = () => {}
+
+  const handleChangeTime = (event) => {
+    setTime(event.target.value)
+  }
 
   const handleChange = (event) => {
     console.log({ n: event.target.name, v: event.target.value })
@@ -65,8 +67,8 @@ const TeeTimes = ({ data }) => {
 
   return (
     <section>
-      <Typography variant="h4" component="h2">
-        Tee Times
+      <Typography variant="h2" component="h2">
+        Event Tee Times
       </Typography>
       <br />
       <Typography variant="body1" component="p">
@@ -76,6 +78,12 @@ const TeeTimes = ({ data }) => {
       <br />
 
       <Box>
+        <br />
+        <FormControl>
+          
+          <TextField value={time} onChange={handleChangeTime} label="Tee Time" />
+        </FormControl>
+        <br />
         <br />
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Golfer 1</InputLabel>

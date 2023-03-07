@@ -24,18 +24,20 @@ export default function Header({ heading, images }) {
 
   useInterval(increaseCount, _images.length > 1 ? 4000 : null, 1)
 
+  const height = 500
+
   return (
     <Box
       component="header"
       color="secondary"
       sx={{
-        height: 288,
+        height: height,
         p: 0,
         position: "relative",
         bgcolor: theme.palette.primary.main,
       }}
     >
-      <Box sx={{ overflow: "hidden", height: 288, position: "relative" }}>
+      <Box sx={{ overflow: "hidden", height: height, position: "relative" }}>
         {_images.map((image, index) => {
           const isActive = imageActive === index ? true : false
           return (
@@ -43,16 +45,17 @@ export default function Header({ heading, images }) {
               key={_images[index]}
               style={{
                 backgroundImage: `linear-gradient(to left bottom, rgba(245, 246, 252, 0.32), ${theme.palette.primary.main} ), url(${_images[index]})`,
-                transition: "2000ms",
+                transition: "1000ms",
                 backgroundPosition: "center",
-                backgroundSize: "100%",
+                backgroundSize: "cover",
+                backgroundRepeat: "repeat-x",
                 padding: "0",
-                height: "298px",
+                height: height * 1.1,
                 width: "100%",
                 position: "absolute",
                 opacity: isActive ? 1 : 0,
-                transform: `scale(${isActive ? 1 : 1.025}) translateY(${
-                  isActive ? "-10px" : "10px"
+                transform: `scale(${isActive ? 1 : 1.005}) translateY(${
+                  isActive ? "0" : "0"
                 })`,
               }}
             />
@@ -71,17 +74,17 @@ export default function Header({ heading, images }) {
           color: "white",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "flex-end",
+          justifyContent: "center",
           alignItems: "flex-start",
         }}
       >
         <Typography
           component="h1"
-          variant="h2"
+          variant="h1"
           sx={{
             display: "block",
-            py: 1,
-            fontWeight: "bold",
+            py: 4,
+            // fontWeight: "bold",
           }}
         >
           {heading}

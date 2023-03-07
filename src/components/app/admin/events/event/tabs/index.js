@@ -79,8 +79,8 @@ export default function VerticalTabs({ data }) {
       </TabPanel>
       <TabPanel value={value} index={1}>
         <section>
-          <Typography variant="h4" component="h2">
-            Registered Users
+          <Typography variant="h2" component="h2">
+            Event Golfers
           </Typography>
           <hr />
           {data?.users?.map((x) => {
@@ -100,8 +100,8 @@ export default function VerticalTabs({ data }) {
       </TabPanel>
       <TabPanel value={value} index={3}>
         <section>
-          <Typography variant="h4" component="h2">
-            Results
+          <Typography variant="h2" component="h2">
+            Event Results
           </Typography>
           <hr />
           <p>Not available just yet.</p>
@@ -112,7 +112,11 @@ export default function VerticalTabs({ data }) {
         </section>
       </TabPanel>
       <TabPanel value={value} index={4}>
-        Images
+        <section>
+          <Typography variant="h2" component="h2">
+            Event Image Gallery
+          </Typography>
+        </section>
       </TabPanel>
     </Box>
   )

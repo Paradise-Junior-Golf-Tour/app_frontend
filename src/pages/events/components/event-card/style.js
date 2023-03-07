@@ -6,6 +6,5 @@ export const style = {
   top: 0,
   left: 0,
   height: "140px",
-  background: "white",
   zIndex: 10,
 }

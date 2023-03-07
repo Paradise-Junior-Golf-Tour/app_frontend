@@ -17,7 +17,7 @@ export default function EventCard({ event }) {
 
   return (
     <Card>
-      {!event?.image ? (
+      {event?.image ? (
         <CardMedia
           component="img"
           height="140"
@@ -30,7 +30,9 @@ export default function EventCard({ event }) {
           alt=""
         />
       ) : (
-        <Box sx={style}>Image not available.</Box>
+          <Box sx={style}>
+            <span className="dev">Image not available. Default needed.</span>
+        </Box>
       )}
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
@@ -45,7 +47,7 @@ export default function EventCard({ event }) {
       </CardContent>
       <CardActions>
         <Button to={"/events/" + event?.slug} size="small">
-          More Info
+          Details
         </Button>
         <Button
           size="small"
@@ -76,7 +78,10 @@ export default function EventCard({ event }) {
             )
           }}
         >
-          {user?.data?.admin ? "Manage" : "Register"}
+          {true? "Register" : "Results"}
+        </Button>
+        <Button size="small" to={"/events/" + event?.slug + "/gallery"}>
+          Pictures
         </Button>
       </CardActions>
     </Card>

@@ -73,6 +73,21 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     })
   })
+
+  const EventGalleryTemplate = require.resolve("./src/templates/gallery.jsx")
+  events.forEach((event, index) => {
+    console.log("Creating event page:", event)
+    createPage({
+      path: `/events/${event.node.slug}/gallery`,
+      component: EventGalleryTemplate,
+      context: {
+        name: event.node.name,
+        id: event.node.id,
+        strapiId: event.node.strapi_id,
+        imageUrl: event.node?.image?.url,
+      },
+    })
+  })
 }
 
 // Implement the Gatsby API “onCreatePage”. This is
@@ -114,7 +129,7 @@ exports.onCreatePage = async ({ page, actions }) => {
   // })
 }
 
-// Exlcude node modules that utilize window during build.
+// Exclude node modules that utilize window during build.
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
   if (stage === "build-html") {
     actions.setWebpackConfig({

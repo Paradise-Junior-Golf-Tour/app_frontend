@@ -49,22 +49,6 @@ export const eventsAll = async () => {
   return false // TODO - Decide on a general format for no results?
 }
 
-export const eventsOneById = async ({ identifier }) => {
-  let event
-
-  await axios
-    .get(`${process.env.REACT_APP_STRAPI_API_URL}/api/events/${identifier}`)
-    .then((res) => {
-      if (res.status === 200) {
-        event = res.data
-      }
-    })
-    .catch((err) => {
-      console.error(`[Events Service] Create New Error`, (event = err.message))
-    })
-
-  return event
-}
 
 export const eventsUpdate = () => {
   console.log("[Events Service] Update")
@@ -105,6 +89,26 @@ export const eventDetails = async ({ id }) => {
 
   await axios
     .get(`${process.env.REACT_APP_STRAPI_API_URL}/api/events/details?id=${id}`)
+    .then((res) => {
+      console.log(`[Events Service] Found One: ${res}`)
+      if (res.status === 200) {
+        console.log("[services - event]", res.data)
+        event = res.data
+      }
+    })
+    .catch((err) => {
+      console.log(`[Events Service] Create New Error`, (event = err.message))
+    })
+
+  return event
+}
+
+export const eventGallery = async ({ id }) => {
+  console.log("[Events Service] Find One", id)
+  let event
+
+  await axios
+    .get(`${process.env.REACT_APP_STRAPI_API_URL}/api/events/gallery?id=${id}`)
     .then((res) => {
       console.log(`[Events Service] Found One: ${res}`)
       if (res.status === 200) {
