@@ -15,6 +15,7 @@ import { getUserEvents } from "../../../../../services/user"
 
 export default function RegisterEventsIndividual(props) {
   const [events, setEvents] = useState([])
+  const eventReferrerId = props?.location?.state?.event?.id
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -74,65 +75,78 @@ export default function RegisterEventsIndividual(props) {
   // Total cost (pass to checkout)
   const total = reduceObjects(checked, "fee")
 
+  const checkEventReferrarRegistered = (events, event) => {
+    if (!events) {
+      return
+    }
+
+    if (events.filter((x) => x.registered).some((e) => e.id === event)) {
+      return true
+    }
+  }
+
   if (!events) return "Loading"
 
   return (
-    <Layout heading="Individual Event Registration">
-      <Typography variant="h3" component="h1">
-        Tour Event Registration
-      </Typography>
-      <Typography variant="h5" component="h2">
-        Register for the {props?.location?.state?.event?.name || "event"}.
-      </Typography>
-      <hr />
-      <p>
-        This is the Event Registration page. The form can be dynamically set
-        based on the user's slection from the Events page.
-      </p>
-      <p>Choose the events you would like to register for.</p>
-
-      <Box>
-        <FormControl sx={{}} component="fieldset" variant="standard">
-          <FormLabel component="legend">Select Your Events</FormLabel>
-          <FormGroup>
-            {events
-              ? events.map((event) => {
-                  return (
-                    <Box key={event.name + event.id}>
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            checked={event.checked}
-                            onChange={handleChangeNew}
-                            name={event.name}
-                            disabled={event.registered}
-                          />
-                        }
-                        label={`${event.name + " - $" + event.fee}`}
-                      />
-                    </Box>
-                  )
-                })
-              : null}
-          </FormGroup>
-          <FormHelperText>
-            You are registration total is <strong>${total}</strong>.
-          </FormHelperText>
-        </FormControl>
-
+    <Layout
+      heading="Event Registration"
+      subHeading={`Register for ${
+        props?.location?.state?.event?.name
+          ? props?.location?.state?.event?.name
+          : "event"
+      }`}
+    >
+      <Box component="section">
+        <Typography variant="h2" component="h2">
+          Events
+        </Typography>
+        <Typography variant="h5" component="h2">
+          {checkEventReferrarRegistered(events, eventReferrerId) ? `You have previously registered for ${props?.location?.state?.event?.name}, but you can still select events from the available options below.` : `You have selected ${props?.location?.state?.event?.name}.  Additional events can also be selected.` || "Choose the events for which you would like to register."}
+        </Typography>
         <br />
-        <br />
+        <Box>
+          <FormControl sx={{}} component="fieldset" variant="standard">
+            <FormLabel component="legend">Select Your Events</FormLabel>
+            <FormGroup>
+              {events
+                ? events.map((event) => {
+                    return (
+                      <Box key={event.name + event.id}>
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              checked={event.checked}
+                              onChange={handleChangeNew}
+                              name={event.name}
+                              disabled={event.registered}
+                            />
+                          }
+                          label={`${event.name + " - $" + event.fee}`}
+                        />
+                      </Box>
+                    )
+                  })
+                : null}
+            </FormGroup>
+            <FormHelperText>
+              You are registration total is <strong>${total}</strong>.
+            </FormHelperText>
+          </FormControl>
 
-        <div>
-          <Button
-            color="primary"
-            variant="contained"
-            onClick={handleSubmit}
-            disabled={!checked.length}
-          >
-            Submit
-          </Button>
-        </div>
+          <br />
+          <br />
+
+          <div>
+            <Button
+              color="primary"
+              variant="contained"
+              onClick={handleSubmit}
+              disabled={!checked.length}
+            >
+              Submit
+            </Button>
+          </div>
+        </Box>
       </Box>
     </Layout>
   )

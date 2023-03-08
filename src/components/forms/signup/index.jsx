@@ -115,6 +115,22 @@ class SignupForm extends React.Component {
           </Grid>
           <Grid xs={12} sm={6}>
             <FormControl sx={{ width: "100%" }}>
+              <InputLabel id="gender">Gender</InputLabel>
+              <Select
+                labelId="gender"
+                id="gender"
+                name="gender"
+                value={this.state.gender}
+                label="Gender"
+                onChange={this.handleUpdate}
+              >
+                <MenuItem value={"male"}>Male</MenuItem>
+                <MenuItem value={"female"}>Female</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid xs={12} sm={6} sx={{ display: "none" }}>
+            <FormControl sx={{ width: "100%" }}>
               <TextField
                 sx={{ width: "100%" }}
                 autoComplete="off"
@@ -147,6 +163,21 @@ class SignupForm extends React.Component {
               <TextField
                 sx={{ width: "100%" }}
                 autoComplete="off"
+                id="password"
+                type="password"
+                name="password"
+                label="Password Confirm"
+                variant="outlined"
+                onChange={this.handleUpdate}
+              />
+            </FormControl>
+          </Grid>
+
+          <Grid xs={12} sm={6}>
+            <FormControl sx={{ width: "100%" }}>
+              <TextField
+                sx={{ width: "100%" }}
+                autoComplete="off"
                 id="name_first"
                 type="text"
                 name="name_first"
@@ -170,44 +201,11 @@ class SignupForm extends React.Component {
               />
             </FormControl>
           </Grid>
-          <Grid xs={12} sm={6}>
-            <FormControl sx={{ width: "100%" }}>
-              <InputLabel id="family_account">Family Account</InputLabel>
-              <Select
-                sx={{ width: "100%" }}
-                labelId="family_account"
-                id="family_account"
-                name="family_account"
-                value={this.state.family_account}
-                label="Family Account"
-                onChange={this.handleUpdate}
-              >
-                <MenuItem value={true}>Yes</MenuItem>
-                <MenuItem value={false}>No</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
         </ContentGrid>
         <br />
-        <hr />
+
         <br />
         <ContentGrid>
-          <Grid xs={12} sm={6}>
-            <FormControl sx={{ width: "100%" }}>
-              <InputLabel id="gender">Gender</InputLabel>
-              <Select
-                labelId="gender"
-                id="gender"
-                name="gender"
-                value={this.state.gender}
-                label="Gender"
-                onChange={this.handleUpdate}
-              >
-                <MenuItem value={"male"}>Male</MenuItem>
-                <MenuItem value={"female"}>Female</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
           <Grid xs={12} sm={6}>
             <FormControl sx={{ width: "100%" }}>
               <TextField
@@ -253,10 +251,27 @@ class SignupForm extends React.Component {
               />
             </FormControl>
           </Grid>
+          <Grid xs={12} sm={6}>
+            <FormControl sx={{ width: "100%" }}>
+              <InputLabel id="family_account">Family Account</InputLabel>
+              <Select
+                sx={{ width: "100%" }}
+                labelId="family_account"
+                id="family_account"
+                name="family_account"
+                value={this.state.family_account}
+                label="Family Account"
+                onChange={this.handleUpdate}
+              >
+                <MenuItem value={true}>Yes</MenuItem>
+                <MenuItem value={false}>No</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
         </ContentGrid>
 
         <br />
-        <Button variant="contained" loading={true} type="submit">
+        <Button variant="contained" loading={true} type="submit" size="large">
           Submit
         </Button>
       </Box>

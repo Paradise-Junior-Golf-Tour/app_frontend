@@ -6,12 +6,11 @@ import Main from "./main"
 import { Box } from "@mui/material"
 import Header from "./header"
 
-export default function Layout({ heading, children, images }) {
-
+export default function Layout({ heading, subHeading, children, images }) {
   return (
     <Box style={layoutStyles}>
       <Navigation />
-      <Header heading={heading} images={images} />
+      <Header heading={heading} subHeading={subHeading} images={images} />
       <Main children={children} />
       <Footer />
     </Box>

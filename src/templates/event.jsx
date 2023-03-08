@@ -29,35 +29,16 @@ const Event = ({ pageContext, location }) => {
   return (
     <Layout
       heading={pageContext.name}
-      images={[process.env.NODE_ENV !== "production" ? process.env.REACT_APP_STRAPI_API_URL + pageContext.image.large : pageContext.image.large]}
+      images={[
+        process.env.NODE_ENV !== "production"
+          ? process.env.REACT_APP_STRAPI_API_URL + pageContext.image.large
+          : pageContext.image.large,
+      ]}
     >
       {true ? (
         <article>
           <Typography component="h1" variant="h3">
-            {pageContext.name}{" "}
-            {pageContext.registration ? (
-              <Chip
-                size="large"
-                variant="outlined"
-                href="/events/register"
-                component="a"
-                label="Register"
-                onClick={(event) => {
-                  event.preventDefault()
-                  if (typeof window !== "undefined") {
-                    navigate("/events/register", {
-                      state: {
-                        event: {
-                          id: pageContext.strapi_id,
-                          name: pageContext.name,
-                          slug: pageContext.slug,
-                        },
-                      },
-                    })
-                  }
-                }}
-              />
-            ) : null}
+            {pageContext.date}{" "}
           </Typography>
 
           <Typography component="h3" variant="h5">

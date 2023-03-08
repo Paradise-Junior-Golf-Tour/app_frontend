@@ -9,6 +9,13 @@ export const eventsNew = async ({
   date,
   max_users,
   image,
+  registration_start_date,
+  registration_end_date,
+  address_1,
+  address_2,
+  address_city,
+  address_state,
+  address_zip,
 }) => {
   let event = null
 
@@ -21,6 +28,13 @@ export const eventsNew = async ({
         date,
         max_users,
         image,
+        registration_start_date,
+        registration_end_date,
+        address_1,
+        address_2,
+        address_city,
+        address_state,
+        address_zip,
       },
     })
     .then((res) => {
@@ -49,7 +63,6 @@ export const eventsAll = async () => {
   return false // TODO - Decide on a general format for no results?
 }
 
-
 export const eventsUpdate = () => {
   console.log("[Events Service] Update")
 }
@@ -61,10 +74,8 @@ export const register = async ({ events, type }) => {
   await axios
     .post(`${process.env.REACT_APP_STRAPI_API_URL}/api/events/register`, {
       method: "POST",
-      // body: {
       events: events,
       type: type,
-      // },
     })
     .then((res) => {
       console.log(`[Events Service] Register: ${res.status}`)

@@ -1,4 +1,4 @@
-export const style = {
+export const cardNoImageStyle = {
   position: "relative",
   display: "flex",
   alignItems: "center",

@@ -85,7 +85,7 @@ export default function DrawerAppBar(props) {
 
   return (
     <>
-      <AppBar component="nav" position="relative" sx={{ borderRadius: "0" }}>
+      <AppBar component="nav" position="relative" sx={{ borderRadius: "0", pt: 2, pb: 2 }}>
         <Container>
           <Toolbar>
             <IconButton

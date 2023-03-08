@@ -30,10 +30,17 @@ class EventDetailsForm extends React.Component {
     max_users: this.props.data?.max_users || "",
     registration_start_date: this.props.data?.registration_start_date || "",
     registration_end_date: this.props.data?.registration_end_date || "",
-    imageData:
-      process.env.REACT_APP_STRAPI_API_URL + this.props.data?.image.url || null,
-    imagePreview:
-      process.env.REACT_APP_STRAPI_API_URL + this.props.data?.image.url || "",
+    imageData: this.props.data?.image.url
+      ? process.env.REACT_APP_STRAPI_API_URL + this.props.data?.image.url
+      : null,
+    imagePreview: this.props.data?.image.url
+      ? process.env.REACT_APP_STRAPI_API_URL + this.props.data?.image.url
+      : null,
+    address_1: this.props.data?.address_1 || "",
+    address_2: this.props.data?.address_2 || "",
+    address_city: this.props.data?.address_city || "",
+    address_state: this.props.data?.address_state || "",
+    address_zip: this.props.data?.address_zip || "",
   }
 
   componentDidUpdate() {
@@ -43,7 +50,10 @@ class EventDetailsForm extends React.Component {
 
   componentDidMount() {
     // Nada for now. :)
-    console.log(this.props)
+    console.log({
+      props: this.props,
+      state: this.state,
+    })
   }
 
   handleUpdate = (event) => {
@@ -76,8 +86,6 @@ class EventDetailsForm extends React.Component {
 
     let file = new FormData()
     file.append("files", this.state.imageData)
-
-   
 
     if (this.post) {
       // uploadFileSingle(file)
@@ -140,10 +148,9 @@ class EventDetailsForm extends React.Component {
             this.handleSubmit(event)
           }}
         >
-          <Typography component="h3" variant="h4">
+          <Typography component="h3" variant="h5">
             Basic Info
           </Typography>
-
           <br />
           <ContentGrid>
             <Grid xs={12} sm={6}>
@@ -157,9 +164,6 @@ class EventDetailsForm extends React.Component {
                 name="name"
                 value={this.state.name}
                 placeholder="Event Name"
-                InputLabelProps={{
-                  shrink: true,
-                }}
               />
             </Grid>
             <Grid xs={12} sm={6}>
@@ -189,19 +193,93 @@ class EventDetailsForm extends React.Component {
                 value={this.state.description}
                 placeholder="Event Name"
                 sx={{ width: "100%" }}
-                InputLabelProps={{
-                  shrink: true,
-                }}
               />
             </Grid>
           </ContentGrid>
-
           <br />
           <br />
-          <Typography component="h3" variant="h4">
+          <Typography component="h3" variant="h5">
+            Address
+          </Typography>
+          <br />
+          <ContentGrid>
+            <Grid xs={12} sm={6}>
+              <TextField
+                required
+                disabled={this.state.loading}
+                sx={{ width: "100%" }}
+                id="address_1"
+                label="Address 1"
+                type="text"
+                name="address_1"
+                value={this.state.address_1}
+                placeholder="Event Name"
+              />
+            </Grid>
+            <Grid xs={12} sm={6}>
+              <TextField
+                disabled={this.state.loading}
+                sx={{ width: "100%" }}
+                id="address_2"
+                label="Address 2"
+                type="text"
+                name="address_2"
+                value={this.state.address_2}
+                placeholder="Event Name"
+              />
+            </Grid>
+            <Grid xs={12} sm={6}>
+              <TextField
+                required
+                disabled={this.state.loading}
+                sx={{ width: "100%" }}
+                id="address_city"
+                label="City"
+                type="text"
+                name="address_city"
+                value={this.state.address_city}
+                placeholder="Event Name"
+              />
+            </Grid>
+            <Grid xs={12} sm={6}>
+              <TextField
+                required
+                disabled={this.state.loading}
+                sx={{ width: "100%" }}
+                id="address_state"
+                label="State"
+                type="text"
+                name="address_state"
+                value={this.state.address_state}
+                placeholder="Event Name"
+              />
+            </Grid>
+            <Grid xs={12} sm={6}>
+              <TextField
+                required
+                disabled={this.state.loading}
+                autoComplete="off"
+                id="address_zip"
+                name="address_zip"
+                value={this.state.address_zip}
+                label="Zip"
+                variant="outlined"
+                type="number"
+                placeholder="0"
+                onChange={this.handleUpdate}
+                // sx={{ width: 220 }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                sx={{ width: "100%" }}
+              />
+            </Grid>
+          </ContentGrid>
+          <br />
+          <br />
+          <Typography component="h3" variant="h5">
             Registration
           </Typography>
-
           <br />
           <ContentGrid>
             <Grid xs={12} sm={6}>
@@ -281,10 +359,9 @@ class EventDetailsForm extends React.Component {
           </ContentGrid>
           <br />
           <br />
-          <Typography component="h3" variant="h4">
+          <Typography component="h3" variant="h5">
             Header Image
           </Typography>
-
           <br />
           <ContentGrid>
             <Grid sm={12}>
@@ -301,7 +378,7 @@ class EventDetailsForm extends React.Component {
                   alignItems: "center",
                 }}
               >
-                {this.state.imagePreview ? null : "No image selected."}
+                {this.state?.imagePreview ? null : "No image selected."}
               </Box>
             </Grid>
             <Grid>
@@ -329,7 +406,7 @@ class EventDetailsForm extends React.Component {
                   color="secondary"
                   component="label"
                   onClick={() => {
-                    this.setState({ imageData: "", imagePreview: "" })
+                    this.setState({ imageData: null, imagePreview: null })
                   }}
                 >
                   Remove Image
@@ -339,18 +416,15 @@ class EventDetailsForm extends React.Component {
           </ContentGrid>
           <br />
           <br />
-
-          <Typography component="h3" variant="h4">
+          <Typography component="h3" variant="h5">
             Submit
           </Typography>
           <hr />
-
           <Typography variant="h5" component="p" color="error.main">
             New events will appear on the site after several minutes in order to
             optimize search engine results.
           </Typography>
           <br />
-
           <LoadingButton
             variant="contained"
             loading={this.state.loading}

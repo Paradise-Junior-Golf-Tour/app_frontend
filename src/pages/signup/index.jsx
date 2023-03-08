@@ -21,8 +21,18 @@ import SignupForm from "../../components/forms/signup"
 // TODO - refactor to a functinoal component.
 const Signup = () => {
   return (
-    <Layout heading="Signup">
-      <SignupForm />
+    <Layout heading="Start Your Membership" subHeading={"Gain access to the Paradise Junior app"}>
+      <Box component="section">
+        <Typography variant="h2" component="h2">
+            Signup Form
+        </Typography>
+        <Typography variant="h5" component="div">
+            Joining is free!  Once signed up, you will be able to register for tour events.
+        </Typography>
+        <br />
+        <br />
+        <SignupForm />
+      </Box>
     </Layout>
   )
 }

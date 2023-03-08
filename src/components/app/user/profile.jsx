@@ -7,33 +7,28 @@ import { portalRoot } from "../../../config"
 import Layout from "../../layout"
 
 const UserProfile = () => (
-  <Layout heading="Your Profile">
-    <Typography
-      variant="h3"
-      component="h1"
-      display="flex"
-      justifyContent="space-between"
-    >
-      <Box>
-        <Typography variant="h4" component="p">
-          View and manage your profile.
-        </Typography>
-      </Box>
-    </Typography>
-    <hr />
-    <Typography variant="subtitle1" component="p">
-      Change Picture
-    </Typography>
-    <Typography variant="subtitle1" component="p">
-      Change Password
-    </Typography>
-    <ul>
-      <li style={navListItemStyle}>
-        <Link activeStyle={linkActive} to={`/${portalRoot}/events`}>
-          Events
-        </Link>
-      </li>
-    </ul>
+  <Layout heading="My Profile" subHeading="View and manage your account">
+    <Box component="section">
+      <Typography variant="h2" component="h2">
+        General Information
+      </Typography>
+    </Box>
+    <Box component="section">
+      <Typography variant="h2" component="h2">
+        Address
+      </Typography>
+    </Box>
+    <Box component="section">
+      <Typography variant="h2" component="h2">
+        Contact Information
+      </Typography>
+    </Box>
+
+    <Box component="section">
+      <Typography variant="h2" component="h2">
+        Transaction History
+      </Typography>
+    </Box>
   </Layout>
 )
 

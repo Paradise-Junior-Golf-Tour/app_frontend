@@ -8,5 +8,5 @@ export default function UserEventRegistration(props) {
 
   if (user?.user?.family_account) return "Family Account"
 
-  return <RegisterEventsIndividual />
+  return <RegisterEventsIndividual {...props} />
 }

@@ -6,12 +6,12 @@ import { useTheme } from "@mui/material/styles"
 import useInterval from "react-useinterval"
 
 // TODO - make this a temp dev tool and then into a real header with styling and breadcrumbs.
-export default function Header({ heading, images }) {
+export default function Header({ heading, subHeading, images }) {
   const [imageActive, setImageActive] = useState(0)
   const theme = useTheme()
 
   const _images = images || [
-    "https://images.unsplash.com/photo-1593111774240-d529f12cf4bb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGdvbGZ8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60",
+    "https://images.unsplash.com/photo-1591546324939-bc2638640783?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGdvbGYlMjBjb3Vyc2UlMjBiZWFjaHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
   ]
 
   const increaseCount = (amount) => {
@@ -37,6 +37,19 @@ export default function Header({ heading, images }) {
         bgcolor: theme.palette.primary.main,
       }}
     >
+      {/* overlay */}
+      <Box
+        sx={{
+          bgcolor: "black",
+          opacity: 0.75,
+          position: "absolute",
+          top: 0,
+          height: height,
+          width: "100%",
+          zIndex: 1,
+        }}
+      ></Box>
+
       <Box sx={{ overflow: "hidden", height: height, position: "relative" }}>
         {_images.map((image, index) => {
           const isActive = imageActive === index ? true : false
@@ -44,11 +57,12 @@ export default function Header({ heading, images }) {
             <Box
               key={_images[index]}
               style={{
-                backgroundImage: `linear-gradient(to left bottom, rgba(245, 246, 252, 0.32), ${theme.palette.primary.main} ), url(${_images[index]})`,
+                backgroundImage: `url(${_images[index]})`,
                 transition: "1000ms",
                 backgroundPosition: "center",
                 backgroundSize: "cover",
                 backgroundRepeat: "repeat-x",
+                backgroundColor: "white",
                 padding: "0",
                 height: height * 1.1,
                 width: "100%",
@@ -69,6 +83,8 @@ export default function Header({ heading, images }) {
           px: 2,
           transform: "translateY(-100%)",
           width: "100%",
+          zIndex: 2,
+          position: "relative",
           margin: "auto",
           bottom: 0,
           color: "white",
@@ -83,11 +99,25 @@ export default function Header({ heading, images }) {
           variant="h1"
           sx={{
             display: "block",
-            py: 4,
-            // fontWeight: "bold",
+            // maxWidth: 600,
+            fontWeight: 500,
+            // textShadow: `1px 1px 1px ${theme.palette.primary.background}`,
           }}
         >
           {heading}
+        </Typography>
+
+        <Typography
+          component="div"
+          variant="h3"
+          sx={{
+            display: "block",
+            // maxWidth: 600,
+            // fontWeight: 500,
+            // textShadow: `1px 1px 1px ${theme.palette.primary.background}`,
+          }}
+        >
+          {subHeading}
         </Typography>
 
         {isBrowser() &&

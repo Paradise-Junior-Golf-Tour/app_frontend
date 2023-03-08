@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react"
 import { Link } from "gatsby"
-import { Typography } from "@mui/material"
+import { Typography, Box } from "@mui/material"
 import { eventDetails } from "../../../../../services/event"
 import { portalRoot } from "../../../../../config"
 import moment from "moment"
 import Layout from "../../../../layout"
 import VerticalTabs from "./tabs"
-import { imageUrl } from "../../../../../util"
+import { imageUrl, dateFormat } from "../../../../../util"
 
 const AdminEvent = (props) => {
   const [data, setData] = useState(null)
@@ -37,30 +37,21 @@ const AdminEvent = (props) => {
     }
   }, [event.id, event.slug])
 
-  // useEffect(() => {
-  //   console.log("[Admin Events Manage Page] Props/Data", {
-  //     id: event.id,
-  //     slug: event.slug,
-  //     props,
-  //     data,
-  //   })
-  // }, [data, event.id, event.slug, props])
-
-  // Render no event found.
-
   if (!data) {
     return (
-      <Layout heading="Event Not Found">
-        <Typography variant="h2" component="h2">
-          The requested event does not exist.
-        </Typography>
-        <p>
-          If you think this page may have been reached in error please contact
-          your developer.
-        </p>
-        <Link to={`/${portalRoot}/events/new`}> Create a new event.</Link>{" "}
-        <br />
-        <Link to={`/${portalRoot}/events`}> View all events.</Link>
+      <Layout
+        heading="Event Not Found"
+        subHeading={"The requested event does not exist"}
+      >
+        <Box>
+          <p>
+            If you think this page may have been reached in error please contact
+            your developer.
+          </p>
+          <Link to={`/${portalRoot}/events/new`}> Create a new event.</Link>{" "}
+          <br />
+          <Link to={`/${portalRoot}/events`}> View all events.</Link>
+        </Box>
       </Layout>
     )
   }
@@ -69,14 +60,17 @@ const AdminEvent = (props) => {
   return (
     <Layout
       heading={data?.name}
+      subHeading={`Created on ${dateFormat(data?.createdAt)}`}
       images={[imageUrl(data?.image?.formats?.large?.url)]}
     >
-      <Typography component="h2" variant="h2">
-        View and update event details.
-      </Typography>
-      <hr />
-      <br />
-      <VerticalTabs data={data} />
+      <Box component="section">
+        <Typography component="h2" variant="h2">
+          View and update event details.
+        </Typography>
+        <hr />
+        <br />
+        <VerticalTabs data={data} />
+      </Box>
     </Layout>
   )
 }

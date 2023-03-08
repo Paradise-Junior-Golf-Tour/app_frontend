@@ -13,28 +13,8 @@ const Banner = () => {
   const dismissBanner = () => {
     if (isBrowser()) {
       setIsVisible(false)
-      // localStorage.setItem("isVisible", false)
     }
   }
-
-  // useEffect(() => {
-  //   if (isBrowser()) {
-  //     const isVisible = localStorage.getItem("isVisible")
-
-  //     console.log('banner local storage mount', isVisible)
-
-
-  //     if (isVisible === null || isVisible) {
-  //       localStorage.setItem("isVisible", true)
-  //       setIsVisible(true)
-  //       return
-  //     }
-  //   }
-  // }, [])
-
-  // useEffect(() => {
-  //   console.log('banner local storage update', isVisible)
-  // }, [isVisible])
 
   const style = {
     position: "absolute",
@@ -52,8 +32,8 @@ const Banner = () => {
 
   return (
     <div>
-      <Box sx={{ backgroundColor: "warning.main", borderRadius: "0" }}>
-        <Container sx={{ color: "warning.contrastText" }}>
+      <Box sx={{ backgroundColor: "success.main", borderRadius: "0" }}>
+        <Container sx={{ color: "success.contrastText", pt: 1, pb: 1 }}>
           <div
             style={{
               display: "flex",
@@ -88,7 +68,7 @@ const Banner = () => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography id="modal-modal-title" variant="h2" component="h2">
             Announcements
           </Typography>
           <ul>

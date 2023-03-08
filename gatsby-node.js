@@ -12,7 +12,7 @@ exports.createPages = async ({ graphql, actions }) => {
               slug
               id
               strapi_id
-              registration_open
+              date
               fee
               description {
                 data {
@@ -58,6 +58,7 @@ exports.createPages = async ({ graphql, actions }) => {
       context: {
         slug: event.node.slug,
         name: event.node.name,
+        date: event.node.date,
         id: event.node.id,
         strapiId: event.node.strapi_id,
         registration: event.node.registration_open,

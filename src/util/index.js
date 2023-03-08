@@ -11,3 +11,17 @@ export const isBrowser = () => typeof window !== "undefined"
 export const imageUrl = (url) => {
   return process.env.REACT_APP_STRAPI_API_URL + url
 }
+
+export const dateFormat = (date) =>
+  new Date(date).toLocaleDateString("en-us", {
+    weekday: "long",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  })
+
+export const sort = (array, property) =>
+  array.sort(function (a, b) {
+    console.log('SORT', {a, b})
+    return new Date(b[property]) - new Date(a[property])
+  })

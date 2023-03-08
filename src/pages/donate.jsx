@@ -2,35 +2,20 @@
 import React, { useEffect, useState } from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { Typography } from "@mui/material"
+import { Typography, Box } from "@mui/material"
 
-const DonatePage = (data) => {
-  // const [dataClient, setDataClient] = useState()
-  // console.log("Log [Donate Page] Props", data)
-
-  // if (dataClient) {
-  //   console.log("Log [Donate Page] Props", dataClient)
-  // }
-
-  useEffect(() => {
-    // API calls on mount
-    setDataClient({
-      data: true,
-    })
-  }, [])
-
+const DonatePage = () => {
   return (
     <Layout heading="Donate">
-      <Typography variant="h3" component="h1">
-        Donations
-      </Typography>
-      <Typography variant="h5" component="h2">
-        Donations are always accepted here!
-      </Typography>
-      <hr />
-      <p>This is the Donations page.</p>
-      {/* <h1>{title}</h1>
-               <p>{description}</p> */}
+      <Box component="section">
+        <Typography variant="h2" component="h2">
+          Make your donation today.
+        </Typography>
+        <Typography variant="h4" component="h3">
+          Your contributions help us give juniors the opportunity to play and
+          compete without burdening them with exorbitant entry fees.
+        </Typography>
+      </Box>
     </Layout>
   )
 }

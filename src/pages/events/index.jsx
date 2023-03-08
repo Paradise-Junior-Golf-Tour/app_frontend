@@ -1,16 +1,10 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react"
-import { useStaticQuery, graphql, Link, navigate } from "gatsby"
-import { useEffect, useState } from "react"
+import { useStaticQuery, graphql } from "gatsby"
+import { Box } from "@mui/system"
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
-import { Chip, Typography } from "@mui/material"
-import { linkActive } from "../../styles"
-import { getUser, isLoggedIn } from "../../services/authentication"
-import { portalRoot } from "../../config"
-import LinkEvent from "../../components/routing/link-event"
-import EventGrid from "./components/event-grid"
-import { eventsAll } from "../../services/event"
+import EventCardGrid from "../../components/event-card-grid"
 
 // TODO - replace static query with page query.
 
@@ -21,6 +15,7 @@ const EventsPage = (props) => {
         nodes {
           name
           slug
+          date
           description {
             data {
               description
@@ -53,16 +48,14 @@ const EventsPage = (props) => {
     }
   `)
 
-  useEffect(() => {
-    console.log("[Events Page]", {
-      data: data.events.nodes,
-      props,
-    })
-  }, [])
-
   return (
-    <Layout heading="Events">
-      <EventGrid events={data.events.nodes} />
+    <Layout
+      heading="Events"
+      subHeading="Check out all of our upcoming and past events."
+    >
+      <Box component="section">
+        <EventCardGrid events={data.events.nodes} />
+      </Box>
     </Layout>
   )
 }

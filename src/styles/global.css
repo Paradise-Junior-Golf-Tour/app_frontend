@@ -1,4 +1,3 @@
-
 html {
     background: #293241;
     font-size: 14px !important;
@@ -12,6 +11,10 @@ body {
 
 * {
     box-sizing: border-box;
+}
+
+footer {
+    padding: 1rem 0
 }
 
 header,
@@ -32,17 +35,15 @@ hr {
 }
 
 section {
-    padding: 1rem;
-    margin-bottom: 2rem;
+    padding: 6rem 0;
+    /* margin-bottom: 2rem; */
 }
 
 main>div {
-    padding-top: 5rem !important;
+    /* padding-top: 5rem !important; */
 }
 
 header {
-    /* background: #2c2c2c; */
-    /* color: white; */
     padding: 1rem 2rem;
     border-radius: 0rem;
 }
@@ -63,9 +64,13 @@ nav a {
     /* background: rgba(137, 136, 136, 0.04); */
 }
 
+.MuiButton-root {
+    /* border-radius: 100px; */
+}
+
 @media screen and (min-width: 800px) {
     .MuiContainer-root {
-        padding: 1rem 4rem;
+        /* padding: 1rem 4rem; */
     }
 }
 
@@ -109,7 +114,7 @@ h2 {
 } */
 
 p {
-    max-width: 700px;
+    max-width: 666px;
 }
 
 .app-nav-button:hover>* {
@@ -135,4 +140,4 @@ p {
 
 .btn {
     text-transform: unset !important;
-  }
+}

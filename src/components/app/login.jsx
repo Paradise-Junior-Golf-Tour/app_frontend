@@ -6,7 +6,7 @@ import {
   getUser,
   logout,
 } from "../../services/authentication"
-import { Button, TextField, Typography } from "@mui/material"
+import { Button, TextField, Typography, Box } from "@mui/material"
 import { portalRoot } from "../../config"
 import Layout from "../layout"
 
@@ -102,51 +102,67 @@ class Login extends React.Component {
     console.log("login props", this.props)
 
     return (
-      <Layout heading="Login">
-        <Typography component="h2" variant="h5">
-          Users and admins log in to the app here.
-        </Typography>
-        <hr />
-        <p>
-          Not a member? An account is required to register for and manage your
-          events. You can sign up <Link to="/signup">right here.</Link>
-        </p>
-        <br />
-        <form
-          method="post"
-          name="login"
-          onSubmit={(event) => {
-            this.handleSubmit(event)
-          }}
-        >
-          <TextField
-            autoComplete="off"
-            id="username"
-            name="username"
-            label="Username"
-            variant="outlined"
-            onChange={this.handleUpdate}
-          />
-          <br /> <br />
-          <TextField
-            autoComplete="off"
-            id="password"
-            type="password"
-            name="password"
-            label="Password"
-            variant="outlined"
-            onChange={this.handleUpdate}
-          />
-          <br /> <br />
-          <Button
-            variant="contained"
-            color="primary"
-            loading={true}
-            type="submit"
+      <Layout heading="Member Login" subHeading="Log in to access your account">
+        <Box component="section">
+          {" "}
+          <Typography component="h2" variant="h2">
+            App access requires an account
+          </Typography>
+          <br />
+          <Typography component="h2" variant="h5">
+            An account is required to register for and manage your events. <br />Not a member? You
+            can sign up <Link to="/signup">right here.</Link>
+          </Typography>
+          <br />
+          <br />
+          <form
+            method="post"
+            name="login"
+            onSubmit={(event) => {
+              this.handleSubmit(event)
+            }}
           >
-            Log In
-          </Button>
-        </form>
+            <TextField
+              autoComplete="off"
+              id="username"
+              name="username"
+              label="Username"
+              variant="outlined"
+              onChange={this.handleUpdate}
+            />
+            <br /> <br />
+            <TextField
+              autoComplete="off"
+              id="password"
+              type="password"
+              name="password"
+              label="Password"
+              variant="outlined"
+              onChange={this.handleUpdate}
+            />
+            <br /> <br />
+            <Button
+              variant="contained"
+              color="primary"
+              loading={true}
+              type="submit"
+              size="large"
+              sx={{mr: 2}}
+            >
+              Log In
+            </Button>
+            <Button
+              disabled
+              variant="outlined"
+              color="primary"
+              loading={true}
+              type="submit"
+              size="large"
+            >
+              Reset Password
+            </Button>
+          </form>
+        </Box>
       </Layout>
     )
   }
