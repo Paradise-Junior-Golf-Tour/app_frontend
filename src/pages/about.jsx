@@ -10,16 +10,49 @@ import Grid from "@mui/material/Unstable_Grid2"
 import GroupIcon from "@mui/icons-material/Group"
 import GolfCourseIcon from "@mui/icons-material/GolfCourse"
 import SchoolIcon from "@mui/icons-material/School"
+import { graphql, useStaticQuery } from "gatsby"
 
 // TODO - replace static query with page query.
 
 const AboutPage = (props) => {
   // Get data from page context or CMS.
-  //   const data = useStaticQuery(graphql`
-  //     query name {
-
-  //     }
-  //   `)
+  const data = useStaticQuery(graphql`
+    query allEvents {
+      events: allStrapiEvent {
+        nodes {
+          name
+          slug
+          date
+          description {
+            data {
+              description
+            }
+          }
+          image {
+            formats {
+              large {
+                url
+              }
+              medium {
+                url
+              }
+              small {
+                url
+              }
+              thumbnail {
+                url
+              }
+            }
+          }
+          id
+          fee
+          date_end
+          date_start
+          strapi_id
+        }
+      }
+    }
+  `)
 
   const renderLink = () => {
     console.log("Log [Events Page] | creating links.")

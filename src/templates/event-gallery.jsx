@@ -30,7 +30,9 @@ const EventGallery = ({ pageContext, location }) => {
         heading={pageContext.name}
         images={[process.env.REACT_APP_STRAPI_API_URL + pageContext.imageUrl]}
       >
-        <Typography variant="h2" compomnent="h2">No images are available yet.</Typography>
+        <Typography variant="h2" compomnent="h2">
+          No images are available yet.
+        </Typography>
       </Layout>
     )
 
@@ -61,30 +63,32 @@ const EventGallery = ({ pageContext, location }) => {
       heading={pageContext.name}
       images={[process.env.REACT_APP_STRAPI_API_URL + pageContext.imageUrl]}
     >
-      <Gallery
-        images={getFormats(images)}
-        onClick={handleClick}
-        enableImageSelection={false}
-      />
-      {!!currentImage && (
-        <Lightbox
-          mainSrc={process.env.REACT_APP_STRAPI_API_URL + currentImage.url}
-          mainSrcThumbnail={
-            process.env.REACT_APP_STRAPI_API_URL + currentImage.src
-          }
-          nextSrc={process.env.REACT_APP_STRAPI_API_URL + nextImage.original}
-          nextSrcThumbnail={
-            process.env.REACT_APP_STRAPI_API_URL + nextImage.src
-          }
-          prevSrc={process.env.REACT_APP_STRAPI_API_URL + prevImage.original}
-          prevSrcThumbnail={
-            process.env.REACT_APP_STRAPI_API_URL + prevImage.src
-          }
-          onCloseRequest={handleClose}
-          onMovePrevRequest={handleMovePrev}
-          onMoveNextRequest={handleMoveNext}
+      <Box component="section">
+        <Gallery
+          images={getFormats(images)}
+          onClick={handleClick}
+          enableImageSelection={false}
         />
-      )}
+        {!!currentImage && (
+          <Lightbox
+            mainSrc={process.env.REACT_APP_STRAPI_API_URL + currentImage.url}
+            mainSrcThumbnail={
+              process.env.REACT_APP_STRAPI_API_URL + currentImage.src
+            }
+            nextSrc={process.env.REACT_APP_STRAPI_API_URL + nextImage.original}
+            nextSrcThumbnail={
+              process.env.REACT_APP_STRAPI_API_URL + nextImage.src
+            }
+            prevSrc={process.env.REACT_APP_STRAPI_API_URL + prevImage.original}
+            prevSrcThumbnail={
+              process.env.REACT_APP_STRAPI_API_URL + prevImage.src
+            }
+            onCloseRequest={handleClose}
+            onMovePrevRequest={handleMovePrev}
+            onMoveNextRequest={handleMoveNext}
+          />
+        )}
+      </Box>
     </Layout>
   )
 }

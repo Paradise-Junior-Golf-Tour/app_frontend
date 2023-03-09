@@ -47,7 +47,6 @@ const IndexPage = () => {
             }
           }
           id
-          registration_open
           fee
           date_end
           date_start

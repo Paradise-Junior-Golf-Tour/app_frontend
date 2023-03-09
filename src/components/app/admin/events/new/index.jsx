@@ -17,7 +17,7 @@ import Grid from "@mui/material/Unstable_Grid2"
 import axios from "axios"
 import Button from "@mui/material/Button"
 import { uploadFileSingle } from "../../../../../services/upload"
-import EventDetailsForm from "../../../../forms/signup/event-details"
+import EventDetailsForm from "../../../../forms/event/event-details"
 
 const AdminEventsNew = () => {
   return (

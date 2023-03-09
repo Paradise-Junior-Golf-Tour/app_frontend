@@ -16,6 +16,7 @@ export const eventsNew = async ({
   address_city,
   address_state,
   address_zip,
+  start
 }) => {
   let event = null
 
@@ -35,6 +36,7 @@ export const eventsNew = async ({
         address_city,
         address_state,
         address_zip,
+        start
       },
     })
     .then((res) => {

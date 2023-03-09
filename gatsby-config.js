@@ -14,7 +14,6 @@ module.exports = {
   siteMetadata: {
     title: "The Paradise Junior Golf Tour",
     description: "This is my awesome golf site I made from scratch!",
-    twitterUsername: `@gatsbyjs`,
     image: `/gatsby-icon.png`,
     siteUrl: `https://www.yourdomain.tld`,
     menuLinks: [

@@ -102,9 +102,9 @@ const AdminEvents = ({ location }) => {
 
                   <TableCell
                     align="left"
-                    style={{ color: !row.registration_open ? "red" : "green" }}
+                    // style={{ color: !row.registration_open ? "red" : "green" }}
                   >
-                    {row.registration_open ? "Open" : "Closed"}
+               
                   </TableCell>
                   <TableCell align="left">
                     {row.fee ? "$" + row.fee : "- - - -"}

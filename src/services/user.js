@@ -44,3 +44,25 @@ export const getUserEvents = async () => {
 
   return events
 }
+
+
+export const getUserRelations = async () => {
+  console.log("[User Service] Details")
+  let events
+
+  await axios
+    .get(`${process.env.REACT_APP_STRAPI_API_URL}/api/users/details`)
+    .then((res) => {
+      console.log(`[User Service] Found Events: ${res.status}`, res)
+      if (res.status === 200) {
+        console.log("[User Service]", res.data)
+        events = res.data
+        return
+      }
+    })
+    .catch((err) => {
+      console.log(`[User Service] Error`, (events = err.message))
+    })
+
+  return events
+}

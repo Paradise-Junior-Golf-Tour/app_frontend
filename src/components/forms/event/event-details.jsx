@@ -15,6 +15,10 @@ import {
 import Grid from "@mui/material/Unstable_Grid2"
 import axios from "axios"
 import Button from "@mui/material/Button"
+import { TimeField } from "@mui/x-date-pickers/TimeField"
+import { LocalizationProvider } from "@mui/x-date-pickers"
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
+import dayjs from "dayjs"
 
 class EventDetailsForm extends React.Component {
   state = {
@@ -41,11 +45,12 @@ class EventDetailsForm extends React.Component {
     address_city: this.props.data?.address_city || "",
     address_state: this.props.data?.address_state || "",
     address_zip: this.props.data?.address_zip || "",
+    start: this.props.data?.start || "2022-04-17T12:00",
   }
 
   componentDidUpdate() {
     // Nada for now. :)
-    console.log(this.props)
+    console.log(this.state.start.$d)
   }
 
   componentDidMount() {
@@ -57,6 +62,7 @@ class EventDetailsForm extends React.Component {
   }
 
   handleUpdate = (event) => {
+    console.log("event update", event.target)
     if (event.target.type === "file") {
       this.setState({
         [`imagePreview`]: URL.createObjectURL(event.target.files[0]),
@@ -194,6 +200,26 @@ class EventDetailsForm extends React.Component {
                 placeholder="Event Name"
                 sx={{ width: "100%" }}
               />
+            </Grid>
+            <Grid xs={12} sm={6}>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <TimeField
+                  onChange={(newValue) =>
+                    this.setState({
+                      start: newValue,
+                    })
+                  }
+                  // leave uncontrolled - causes issues...
+                  disabled={this.state.loading}
+                  defaultValue={dayjs("2022-04-17T12:00")}
+                  value={this.state.start.$d}
+                  label="Start Time"
+                  name="start"
+                  id="start"
+                  noValidate
+                  sx={{ width: "100%" }}
+                />
+              </LocalizationProvider>
             </Grid>
           </ContentGrid>
           <br />

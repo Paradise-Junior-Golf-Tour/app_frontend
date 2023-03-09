@@ -1,6 +1,9 @@
+const axios = require('axios');
+
 console.log(`[gatsby-node.js] Starting ${process.env.NODE_ENV} denvironment.`)
 
 exports.createPages = async ({ graphql, actions }) => {
+  axios.get(`${process.env.REACT_APP_STRAPI_API_URL}/api/events`).then((res) => console.log("AXIOS SUCCESS")).catch((res) => console.log("AXIOS ERROR"))
   const { createPage } = actions
   const result = await graphql(
     `
@@ -61,7 +64,6 @@ exports.createPages = async ({ graphql, actions }) => {
         date: event.node.date,
         id: event.node.id,
         strapiId: event.node.strapi_id,
-        registration: event.node.registration_open,
         fee: event.node?.fee,
         description: event.node?.description?.data?.description,
         image: {
@@ -75,7 +77,9 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 
-  const EventGalleryTemplate = require.resolve("./src/templates/gallery.jsx")
+  const EventGalleryTemplate = require.resolve(
+    "./src/templates/event-gallery.jsx"
+  )
   events.forEach((event, index) => {
     console.log("Creating event page:", event)
     createPage({
@@ -91,12 +95,9 @@ exports.createPages = async ({ graphql, actions }) => {
   })
 }
 
-// Implement the Gatsby API “onCreatePage”. This is
 // called after every page is created.
 exports.onCreatePage = async ({ page, actions }) => {
   const { createPage, createRedirect } = actions
-  // console.log("*** app root config", portalRoot)
-
   // page.matchPath is a special key that's used for matching pages
   // only on the client.
   if (page.path.match(/^\/app/)) {

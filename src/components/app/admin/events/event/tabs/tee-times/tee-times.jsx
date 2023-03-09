@@ -98,7 +98,7 @@ const TeeTimes = ({ data }) => {
             {available.map((x) => {
               return (
                 <MenuItem value={x.id}>
-                  {x.name_first + " " + x.name_last}
+                  {x.name_first + " " + x.name_last + ' - ' +  x.birthday}
                 </MenuItem>
               )
             })}
