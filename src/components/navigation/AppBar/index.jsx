@@ -122,6 +122,7 @@ export default function DrawerAppBar(props) {
                 </Button>
               ) : null}
               <Button
+                to={`/${portalRoot}/login`}
                 className="btn"
                 color="inherit"
                 onClick={(event) => {
