@@ -1,9 +1,17 @@
-const axios = require('axios');
+const axios = require("axios")
 
 console.log(`[gatsby-node.js] Starting ${process.env.NODE_ENV} denvironment.`)
 
+console.log("env", {
+  root: process.env.GATSBY_REACT_APP_PORTAL_ROOT,
+  api: process.env.GATSBY_APP_STRAPI_API_URL,
+})
+
 exports.createPages = async ({ graphql, actions }) => {
-  axios.get(`${process.env.REACT_APP_STRAPI_API_URL}/api/events`).then((res) => console.log("AXIOS SUCCESS")).catch((res) => console.log("AXIOS ERROR"))
+  axios
+    .get(`${process.env.GATSBY_APP_STRAPI_API_URL}/api/events`)
+    .then((res) => console.log("AXIOS SUCCESS"))
+    .catch((res) => console.log("AXIOS ERROR"))
   const { createPage } = actions
   const result = await graphql(
     `
