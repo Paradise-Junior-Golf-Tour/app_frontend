@@ -9,7 +9,7 @@ export const reduceObjects = function (array, property) {
 export const isBrowser = () => typeof window !== "undefined"
 
 export const imageUrl = (url) => {
-  return process.env.GATSBY_REACT_APP_STRAPI_API_URL + url
+  return process.env.GATSBY_APP_STRAPI_API_URL + url
 }
 
 export const dateFormat = (date) =>

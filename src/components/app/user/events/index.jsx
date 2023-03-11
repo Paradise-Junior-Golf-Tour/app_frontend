@@ -7,7 +7,7 @@ import { getUserEvents } from "../../../../services/user"
 import Layout from "../../../layout"
 
 const UserEvents = () => {
-  const [events, setEvents] = useState(undefined)
+  const [events, setEvents] = useState([])
 
   useEffect(() => {
     getUserEvents()
@@ -35,16 +35,18 @@ const UserEvents = () => {
         </Typography>
 
         <br />
-        {events?.length > 0 ? (
-          events?.map((x) => {
-            return <div>{x.name}</div>
-          })
-        ) : (
-          <div>
-            You currently are not registered for any events.{" "}
-            <Link to="/events">Click here</Link> to browse Tour Events.
-          </div>
-        )}
+        {events ? (
+          events?.length > 0 ? (
+            events?.map((x) => {
+              return <div>{x.name}</div>
+            })
+          ) : (
+            <div>
+              You currently are not registered for any events.{" "}
+              <Link to="/events">Click here</Link> to browse Tour Events.
+            </div>
+          )
+        ) : null}
       </Box>
     </Layout>
   )

@@ -1,7 +1,7 @@
 import { isLoggedIn } from "../services/authentication"
 
 export const portalRoot = process.env.GATSBY_APP_ROOT
-console.log("*** app root", portalRoot)
+console.log("CONFIG app root", portalRoot)
 
 export const routes = {
   public: [

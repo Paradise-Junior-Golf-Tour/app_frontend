@@ -2,25 +2,22 @@ import React, { useState, useEffect } from "react"
 import Layout from "../components/layout"
 import { eventGallery } from "../services/event"
 import Box from "@mui/material/Box"
-import { styled } from "@mui/material/styles"
-import Paper from "@mui/material/Paper"
 import { Gallery } from "react-grid-gallery"
 import Lightbox from "react-image-lightbox"
 import { Typography } from "@mui/material"
 import "react-image-lightbox/style.css"
 
-const EventGallery = ({ pageContext, location }) => {
+const EventGallery = ({ pageContext }) => {
   const [images, setImages] = useState([])
   const [index, setIndex] = useState(-1)
 
   useEffect(() => {
     eventGallery({ id: pageContext.strapiId })
       .then((res) => {
-        console.log("gallery images", res.gallery)
         setImages(res.gallery)
       })
       .catch((err) => {
-        console.log("gallery images", err)
+        console.error("[event-gallery.jsx] Err", err)
       })
   }, [])
 
@@ -28,9 +25,7 @@ const EventGallery = ({ pageContext, location }) => {
     return (
       <Layout
         heading={pageContext.name}
-        images={[
-          process.env.GATSBY_REACT_APP_STRAPI_API_URL + pageContext.imageUrl,
-        ]}
+        images={[process.env.GATSBY_APP_STRAPI_API_URL + pageContext.imageUrl]}
       >
         <Typography variant="h2" compomnent="h2">
           No images are available yet.
@@ -51,8 +46,8 @@ const EventGallery = ({ pageContext, location }) => {
   const getFormats = (images) => {
     const _images = images.map((x) => {
       return {
-        src: process.env.GATSBY_REACT_APP_STRAPI_API_URL + x.url,
-        original: process.env.GATSBY_REACT_APP_STRAPI_API_URL + x.url,
+        src: process.env.GATSBY_APP_STRAPI_API_URL + x.url,
+        original: process.env.GATSBY_APP_STRAPI_API_URL + x.url,
         height: x.formats.medium.height,
         width: x.formats.medium.width,
       }
@@ -63,9 +58,7 @@ const EventGallery = ({ pageContext, location }) => {
   return (
     <Layout
       heading={pageContext.name}
-      images={[
-        process.env.GATSBY_REACT_APP_STRAPI_API_URL + pageContext.imageUrl,
-      ]}
+      images={[process.env.GATSBY_APP_STRAPI_API_URL + pageContext.imageUrl]}
     >
       <Box component="section">
         <Gallery
@@ -75,23 +68,17 @@ const EventGallery = ({ pageContext, location }) => {
         />
         {!!currentImage && (
           <Lightbox
-            mainSrc={
-              process.env.GATSBY_REACT_APP_STRAPI_API_URL + currentImage.url
-            }
+            mainSrc={process.env.GATSBY_APP_STRAPI_API_URL + currentImage.url}
             mainSrcThumbnail={
-              process.env.GATSBY_REACT_APP_STRAPI_API_URL + currentImage.src
+              process.env.GATSBY_APP_STRAPI_API_URL + currentImage.src
             }
-            nextSrc={
-              process.env.GATSBY_REACT_APP_STRAPI_API_URL + nextImage.original
-            }
+            nextSrc={process.env.GATSBY_APP_STRAPI_API_URL + nextImage.original}
             nextSrcThumbnail={
-              process.env.GATSBY_REACT_APP_STRAPI_API_URL + nextImage.src
+              process.env.GATSBY_APP_STRAPI_API_URL + nextImage.src
             }
-            prevSrc={
-              process.env.GATSBY_REACT_APP_STRAPI_API_URL + prevImage.original
-            }
+            prevSrc={process.env.GATSBY_APP_STRAPI_API_URL + prevImage.original}
             prevSrcThumbnail={
-              process.env.GATSBY_REACT_APP_STRAPI_API_URL + prevImage.src
+              process.env.GATSBY_APP_STRAPI_API_URL + prevImage.src
             }
             onCloseRequest={handleClose}
             onMovePrevRequest={handleMovePrev}
