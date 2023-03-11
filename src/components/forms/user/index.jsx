@@ -56,10 +56,6 @@ class SignupForm extends React.Component {
     })
   }
 
-  componentDidUpdate() {
-    console.log("Signup State", this.state)
-  }
-
   componentDidMount() {
     this.syncUser()
   }
@@ -70,10 +66,9 @@ class SignupForm extends React.Component {
       !this.state.password ||
       this.state.password !== this.state.passwordConfirmation
     ) {
+      // Alert here...
       return
     }
-
-    console.log(`Submitting...`, this.state)
 
     axios
       .post(
@@ -117,21 +112,11 @@ class SignupForm extends React.Component {
         }}
       >
         {this.state?.userData?.family_account ? (
-          <Box component="section">
-            <Typography variant="h2" component="h2">
-              Add Family Member
-            </Typography>
-            <Typography variant="h5" component="div">
-              Add a new user to this account.
-            </Typography>
-            <br />
-            <br />
-            <SignupUserPartial
-              formData={this.state}
-              handleUpdate={this.handleUpdate}
-              handleSubmit={this.handleSubmit}
-            />
-          </Box>
+          <SignupUserPartial
+            formData={this.state}
+            handleUpdate={this.handleUpdate}
+            handleSubmit={this.handleSubmit}
+          />
         ) : (
           <SignupUserFull
             formData={this.state}
@@ -147,7 +132,7 @@ class SignupForm extends React.Component {
           size="large"
           onClick={this.handleSubmit}
         >
-          Submit Here
+          Submit
         </Button>
       </Box>
     )

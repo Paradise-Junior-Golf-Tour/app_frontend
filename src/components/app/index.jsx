@@ -15,7 +15,8 @@ import AdminIndex from "../app/admin"
 import AdminEventsNew from "../app/admin/events/new"
 import AdminTransactions from "../app/admin/transactions/event"
 import AdminEventsUpdate from "../app/admin/events/event"
-import SignupFamily from "../app/user/signup-family"
+import UserFamily from "../app/user/family"
+import FamilyAddMember from "./user/family/add-user"
 
 const Application = () => {
   const user = getUser()
@@ -52,7 +53,8 @@ const Application = () => {
       ) : (
         <>
           <Authenticated path={`/`} component={UserIndex} />
-          <Authenticated path={`/family`} component={SignupFamily} />
+          <Authenticated path="/family" component={UserFamily} />
+          <Authenticated path={`/family/add`} component={FamilyAddMember} />
           <Authenticated path={`/profile`} component={UserProfile} />
           <Authenticated path={`/events`} component={UserEvents} />
           <Authenticated

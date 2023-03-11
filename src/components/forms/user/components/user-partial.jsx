@@ -12,7 +12,12 @@ import {
 import ContentGrid from "../../../layout/content-grid"
 import Grid from "@mui/material/Unstable_Grid2"
 
-const SignupUserPartial = ({ formData, handleUpdate, handleSubmit }) => {
+const SignupUserPartial = ({
+  formData,
+  handleUpdate,
+  handleSubmit,
+  children,
+}) => {
   return (
     <>
       <Typography variant="h5" component="div">
@@ -20,7 +25,9 @@ const SignupUserPartial = ({ formData, handleUpdate, handleSubmit }) => {
       </Typography>
       <hr />
       <Typography component="p">
-        We recommend using the same password as your primary account.
+        We recommend using the same password as your primary account. A unique
+        email is required, but leaving this field blank is fine - we will still
+        tie this account to your primary account.
       </Typography>
       <br />
       <ContentGrid>
@@ -158,10 +165,6 @@ const SignupUserPartial = ({ formData, handleUpdate, handleSubmit }) => {
           </FormControl>
         </Grid>
       </ContentGrid>
-      <br />
-      <Button variant="contained" loading={true} type="submit" size="large" onCLick={handleSubmit}>
-        Submit
-      </Button>
     </>
   )
 }

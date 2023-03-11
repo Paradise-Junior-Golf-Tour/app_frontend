@@ -36,6 +36,7 @@ hr {
 
 section {
     padding: 6rem 0;
+    border: 1px dashed lightgrey;
     /* margin-bottom: 2rem; */
 }
 
