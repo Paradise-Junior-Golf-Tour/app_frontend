@@ -7,7 +7,7 @@ import { Typography, Box } from "@mui/material"
 import Grid from "@mui/material/Unstable_Grid2"
 import GolfCourseIcon from "@mui/icons-material/GolfCourse"
 import SchoolIcon from "@mui/icons-material/School"
-import { iconStyles } from "./styles"
+import iconStyles from "./styles"
 
 const AboutPage = (props) => {
   return (

@@ -1,4 +1,4 @@
-export const iconStyles = {
+const iconStyles = {
   fontSize: "6rem",
   mt: 3,
   mb: 2,
@@ -7,3 +7,5 @@ export const iconStyles = {
   p: 2,
   borderRadius: 100,
 }
+
+export default iconStyles
