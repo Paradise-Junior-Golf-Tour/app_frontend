@@ -27,9 +27,14 @@ const EventGallery = ({ pageContext }) => {
         heading={pageContext.name}
         images={[process.env.GATSBY_APP_STRAPI_API_URL + pageContext.imageUrl]}
       >
-        <Typography variant="h2" compomnent="h2">
-          No images are available yet.
-        </Typography>
+        <Box component="section">
+          <Typography variant="h2" compomnent="h2">
+            No images are available yet.
+          </Typography>
+          <Typography variant="h5" compomnent="p">
+            Check back during and after the event to see all the action!
+          </Typography>
+        </Box>
       </Layout>
     )
 

@@ -1,11 +1,7 @@
-// import { useStaticQuery, graphql } from "gatsby";
 import React, { useEffect, useState } from "react"
 import Layout from "../components/layout"
 import { Typography, Box, useTheme } from "@mui/material"
-import { Link } from "gatsby"
-import SportsGolfIcon from "@mui/icons-material/SportsGolf"
 import Grid from "@mui/material/Unstable_Grid2"
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth"
 import { isLoggedIn } from "../services/authentication"
 import { Container } from "@mui/system"
 import EventCardGrid from "../components/event-card-grid"
@@ -14,7 +10,6 @@ import { Button } from "gatsby-theme-material-ui"
 import GolfCourseIcon from "@mui/icons-material/GolfCourse"
 
 const IndexPage = () => {
-  const loggedIn = isLoggedIn()
   const [dataClient, setDataClient] = useState()
   const theme = useTheme()
 
@@ -57,14 +52,6 @@ const IndexPage = () => {
   `)
 
   useEffect(() => {
-    console.log(data.events)
-    if (dataClient) {
-      console.log("Log [Index Page] Props/Data", { data, dataClient })
-    }
-  }, [dataClient, data])
-
-  useEffect(() => {
-    // API calls on mount
     setDataClient({
       data: true,
     })

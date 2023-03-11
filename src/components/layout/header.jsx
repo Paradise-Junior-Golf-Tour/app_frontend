@@ -10,11 +10,7 @@ export default function Header({ heading, subHeading, images }) {
   const [imageActive, setImageActive] = useState(0)
   const theme = useTheme()
 
-  console.log("env", {
-    root: process.env.GATSBY_APP_ROOT,
-    api: process.env.GATSBY_APP_STRAPI_API_URL,
-  })
-
+  // Replace with a default from CMS.
   const _images = images || [
     "https://images.unsplash.com/photo-1591546324939-bc2638640783?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGdvbGYlMjBjb3Vyc2UlMjBiZWFjaHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
   ]

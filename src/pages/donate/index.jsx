@@ -1,7 +1,7 @@
 // import { useStaticQuery, graphql } from "gatsby";
 import React, { useEffect, useState } from "react"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
+import Layout from "../../components/layout"
+import SEO from "../../components/seo"
 import { Typography, Box } from "@mui/material"
 
 const DonatePage = () => {

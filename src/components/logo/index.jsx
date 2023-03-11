@@ -3,7 +3,6 @@ import { useTheme } from "@emotion/react"
 
 const Logo = ({ fill, height }) => {
   const theme = useTheme()
-  console.log("theme:", theme)
 
   return (
     <svg

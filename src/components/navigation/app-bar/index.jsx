@@ -12,6 +12,7 @@ import MenuIcon from "@mui/icons-material/Menu"
 import Toolbar from "@mui/material/Toolbar"
 import Typography from "@mui/material/Typography"
 import { Container } from "@mui/material"
+import { useSiteMetadata } from "../../../hooks"
 import {
   // BottomNavigationAction,
   Button,
@@ -32,16 +33,17 @@ const navItem2 = [
   { name: "Home", link: "/" },
   { name: "Events", link: "/events" },
   { name: "Fundraiser", link: "/fundraiser" },
+  { name: "Donate", link: "/donate" },
   { name: "About", link: "/about" },
   { name: "Sponsors", link: "/sponsors" },
   { name: "Contact", link: "/contact" },
-  { name: "Sandbox", link: "/sandbox" },
 ]
 
 export default function DrawerAppBar(props) {
   const { window } = props
   const [mobileOpen, setMobileOpen] = React.useState(false)
   const authenticated = isLoggedIn()
+  const siteMetaData = useSiteMetadata()
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
@@ -85,7 +87,11 @@ export default function DrawerAppBar(props) {
 
   return (
     <>
-      <AppBar component="nav" position="relative" sx={{ borderRadius: "0", pt: 2, pb: 2 }}>
+      <AppBar
+        component="nav"
+        position="relative"
+        sx={{ borderRadius: "0", pt: 2, pb: 2 }}
+      >
         <Container>
           <Toolbar>
             <IconButton

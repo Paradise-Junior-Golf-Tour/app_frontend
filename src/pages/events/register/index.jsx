@@ -1,9 +1,9 @@
 import React from "react"
-import Layout from "../../components/layout"
+import Layout from "../../../components/layout"
 import { Link, navigate } from "gatsby"
 import { Typography } from "@mui/material"
-import { getUser } from "../../services/authentication"
-import { portalRoot } from "../../config"
+import { getUser } from "../../../services/authentication"
+import { portalRoot } from "../../../config"
 
 export default function EventRegistration(props) {
   const user = getUser()

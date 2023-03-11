@@ -6,7 +6,5 @@ import "../../src/styles/global.css"
 // Could also move setHeaders here?
 
 export const wrapRootElement = ({ element }) => {
-  console.log("[gatsby-browser.js] wrap root element with:", TopLayout)
-
   return <TopLayout>{element}</TopLayout>
 }

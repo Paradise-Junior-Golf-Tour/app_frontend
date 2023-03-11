@@ -1,7 +1,6 @@
-import { deepOrange, lime, indigo } from "@mui/material/colors"
 import { createTheme } from "@mui/material/styles"
 
-console.log(`[theme.js] Init custom theme overrides.`)
+console.log(`[theme.js] Initialize custom theme.`)
 
 // A custom theme for this app
 const theme = createTheme({
@@ -43,7 +42,5 @@ const theme = createTheme({
     },
   },
 })
-
-// export default theme
 
 export default theme

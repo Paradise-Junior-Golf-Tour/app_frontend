@@ -1,38 +1,6 @@
-import React, { useEffect } from "react"
-import { graphql, useStaticQuery } from "gatsby"
-import DrawerAppBar from "./AppBar"
+import React from "react"
+import DrawerAppBar from "./app-bar"
 
-// TODO - replace with the AppBar (or make a cutom implementation).
-export default function Navigation({ children, heading }) {
-  // const isAuthorized = isLoggedIn()
-  // const user = getUser()
-  const data = useStaticQuery(
-    graphql`
-      query MetadataQuery {
-        events: allStrapiEvent {
-          nodes {
-            name
-            slug
-          }
-        }
-        site {
-          siteMetadata {
-            title
-            description
-          }
-        }
-      }
-    `
-  )
-
-  useEffect(() => {
-    console.log("[Navigation] props (not passed - refactor needed):", {
-      data,
-      children,
-      heading,
-    })
-  }, [data, children, heading])
-
-  // TODO - make this dynamic!
+export default function Navigation() {
   return <DrawerAppBar />
 }

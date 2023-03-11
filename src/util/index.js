@@ -22,6 +22,5 @@ export const dateFormat = (date) =>
 
 export const sort = (array, property) =>
   array.sort(function (a, b) {
-    console.log("SORT", { a, b })
     return new Date(b[property]) - new Date(a[property])
   })

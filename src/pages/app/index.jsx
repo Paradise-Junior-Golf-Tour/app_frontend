@@ -1,4 +1,4 @@
-import Application from "../components/app"
+import Application from "../../components/app"
 import React from "react"
 
 const App = () => {

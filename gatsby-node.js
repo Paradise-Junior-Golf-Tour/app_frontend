@@ -1,17 +1,14 @@
 const axios = require("axios")
 
-console.log(`[gatsby-node.js] Starting ${process.env.NODE_ENV} denvironment.`)
-
-console.log("env", {
-  root: process.env.GATSBY_APP_ROOT,
-  api: process.env.GATSBY_APP_STRAPI_API_URL,
-})
+console.log(`[gatsby-node.js] Starting ${process.env.NODE_ENV} environment.`)
 
 exports.createPages = async ({ graphql, actions }) => {
-  axios
-    .get(`${process.env.GATSBY_APP_STRAPI_API_URL}/api/events`)
-    .then((res) => console.log("AXIOS SUCCESS"))
-    .catch((res) => console.log("AXIOS ERROR"))
+  // Simple example of querying data sources to aggregate into graphQL node layer.
+  // axios
+  //   .get(`${process.env.GATSBY_APP_STRAPI_API_URL}/api/events`)
+  //   .then((res) => console.log("AXIOS SUCCESS"))
+  //   .catch((res) => console.log("AXIOS ERROR"))
+
   const { createPage } = actions
   const result = await graphql(
     `
@@ -61,8 +58,8 @@ exports.createPages = async ({ graphql, actions }) => {
   // Create event (blog) articles pages.
   const events = result.data.events.edges
   const EventTemplate = require.resolve("./src/templates/event.jsx")
-  events.forEach((event, index) => {
-    console.log("Creating event page:", event)
+  events.forEach((event) => {
+    console.log("Compiling event page:", event.name)
     createPage({
       path: `/events/${event.node.slug}`,
       component: EventTemplate,
@@ -89,7 +86,7 @@ exports.createPages = async ({ graphql, actions }) => {
     "./src/templates/event-gallery.jsx"
   )
   events.forEach((event, index) => {
-    console.log("Creating event page:", event)
+    console.log("Compiling event image gallery page:", event.name)
     createPage({
       path: `/events/${event.node.slug}/gallery`,
       component: EventGalleryTemplate,

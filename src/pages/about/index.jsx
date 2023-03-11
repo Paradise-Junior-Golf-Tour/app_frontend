@@ -1,79 +1,15 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react"
-import { useEffect } from "react"
-// import Layout from "../../components/layout"
-import SEO from "../components/seo"
-import Layout from "../components/layout"
+import SEO from "../../components/seo"
+import Layout from "../../components/layout"
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents"
-import { Typography, Container, Box, Button } from "@mui/material"
+import { Typography, Box } from "@mui/material"
 import Grid from "@mui/material/Unstable_Grid2"
-import GroupIcon from "@mui/icons-material/Group"
 import GolfCourseIcon from "@mui/icons-material/GolfCourse"
 import SchoolIcon from "@mui/icons-material/School"
-import { graphql, useStaticQuery } from "gatsby"
-
-// TODO - replace static query with page query.
+import { iconStyles } from "./styles"
 
 const AboutPage = (props) => {
-  // Get data from page context or CMS.
-  const data = useStaticQuery(graphql`
-    query allEvents {
-      events: allStrapiEvent {
-        nodes {
-          name
-          slug
-          date
-          description {
-            data {
-              description
-            }
-          }
-          image {
-            formats {
-              large {
-                url
-              }
-              medium {
-                url
-              }
-              small {
-                url
-              }
-              thumbnail {
-                url
-              }
-            }
-          }
-          id
-          fee
-          date_end
-          date_start
-          strapi_id
-        }
-      }
-    }
-  `)
-
-  const renderLink = () => {
-    console.log("Log [Events Page] | creating links.")
-  }
-
-  renderLink()
-
-  useEffect(() => {
-    console.log("Log [Events Page] | props", props)
-  }, [props])
-
-  const iconStyles = {
-    fontSize: "6rem",
-    mt: 3,
-    mb: 2,
-    bgcolor: "secondary.main",
-    color: "white",
-    p: 2,
-    borderRadius: 100,
-  }
-
   return (
     <Layout
       heading="About Us"
@@ -90,15 +26,24 @@ const AboutPage = (props) => {
           </Typography>
         </Box>
         <br />
+        <br />
         <Grid container>
-          <Grid md={4}>
+          <Grid xs={12} md={4}>
             <Box sx={{ textAlign: "center" }}>
               <GolfCourseIcon sx={iconStyles} />
             </Box>
             <Typography
+              variant="h4"
+              component="h3"
+              sx={{ textAlign: "center", margin: "auto" }}
+            >
+              Affordable Fun
+            </Typography>
+            <br />
+            <Typography
               variant="body1"
               component="p"
-              sx={{ textAlign: "center" }}
+              sx={{ textAlign: "center", margin: "auto" }}
             >
               Our organization was founded with a goal of being able to grow the
               game of golf by making it fun, competitive, friendly, and most of
@@ -107,14 +52,22 @@ const AboutPage = (props) => {
               exorbitant entry fees.
             </Typography>
           </Grid>
-          <Grid md={4}>
+          <Grid xs={12} md={4}>
             <Box sx={{ textAlign: "center" }}>
               <EmojiEventsIcon sx={iconStyles} />
             </Box>
             <Typography
+              variant="h4"
+              component="h3"
+              sx={{ textAlign: "center", margin: "auto" }}
+            >
+              Positivite Growth
+            </Typography>
+            <br />
+            <Typography
               variant="body1"
               component="p"
-              sx={{ textAlign: "center" }}
+              sx={{ textAlign: "center", margin: "auto" }}
             >
               We strive to provide opportunities for the growth and development
               of young athletes by reinforcing positive influences,
@@ -125,14 +78,22 @@ const AboutPage = (props) => {
               golf.
             </Typography>
           </Grid>
-          <Grid md={4}>
+          <Grid xs={12} md={4}>
             <Box sx={{ textAlign: "center" }}>
               <SchoolIcon sx={iconStyles} />
             </Box>
             <Typography
+              variant="h4"
+              component="h3"
+              sx={{ textAlign: "center", margin: "auto" }}
+            >
+              Scholarships
+            </Typography>
+            <br />
+            <Typography
               variant="body1"
               component="p"
-              sx={{ textAlign: "center" }}
+              sx={{ textAlign: "center", margin: "auto" }}
             >
               We began awarding 2 scholarships of $500 each in 2016 to area high
               school seniors. Our efforts have grown, and even though our event
