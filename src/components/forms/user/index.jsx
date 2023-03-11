@@ -77,7 +77,7 @@ class SignupForm extends React.Component {
 
     axios
       .post(
-        `${process.env.REACT_APP_STRAPI_API_URL}/api/auth/local/register`,
+        `${process.env.GATSBY_REACT_APP_STRAPI_API_URL}/api/auth/local/register`,
         this.state
       )
       .then((response) => {

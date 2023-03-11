@@ -16,12 +16,12 @@ export const eventsNew = async ({
   address_city,
   address_state,
   address_zip,
-  start
+  start,
 }) => {
   let event = null
 
   await axios
-    .post(`${process.env.REACT_APP_STRAPI_API_URL}/api/events/new`, {
+    .post(`${process.env.GATSBY_APP_STRAPI_API_URL}/api/events/new`, {
       data: {
         name,
         description,
@@ -36,7 +36,7 @@ export const eventsNew = async ({
         address_city,
         address_state,
         address_zip,
-        start
+        start,
       },
     })
     .then((res) => {
@@ -55,7 +55,7 @@ export const eventsNew = async ({
 
 export const eventsAll = async () => {
   const data = await axios.get(
-    `${process.env.REACT_APP_STRAPI_API_URL}/api/events/all`
+    `${process.env.GATSBY_APP_STRAPI_API_URL}/api/events/all`
   )
 
   if (data.status === 200) {
@@ -74,7 +74,7 @@ export const register = async ({ events, type }) => {
 
   console.log(`[Events Service] args:`, { events, type })
   await axios
-    .post(`${process.env.REACT_APP_STRAPI_API_URL}/api/events/register`, {
+    .post(`${process.env.GATSBY_APP_STRAPI_API_URL}/api/events/register`, {
       method: "POST",
       events: events,
       type: type,
@@ -101,7 +101,7 @@ export const eventDetails = async ({ id }) => {
   let event
 
   await axios
-    .get(`${process.env.REACT_APP_STRAPI_API_URL}/api/events/details?id=${id}`)
+    .get(`${process.env.GATSBY_APP_STRAPI_API_URL}/api/events/details?id=${id}`)
     .then((res) => {
       console.log(`[Events Service] Found One: ${res}`)
       if (res.status === 200) {
@@ -121,7 +121,7 @@ export const eventGallery = async ({ id }) => {
   let event
 
   await axios
-    .get(`${process.env.REACT_APP_STRAPI_API_URL}/api/events/gallery?id=${id}`)
+    .get(`${process.env.GATSBY_APP_STRAPI_API_URL}/api/events/gallery?id=${id}`)
     .then((res) => {
       console.log(`[Events Service] Found One: ${res}`)
       if (res.status === 200) {

@@ -35,10 +35,10 @@ class EventDetailsForm extends React.Component {
     registration_start_date: this.props.data?.registration_start_date || "",
     registration_end_date: this.props.data?.registration_end_date || "",
     imageData: this.props.data?.image.url
-      ? process.env.REACT_APP_STRAPI_API_URL + this.props.data?.image.url
+      ? process.env.GATSBY_APP_STRAPI_API_URL + this.props.data?.image.url
       : null,
     imagePreview: this.props.data?.image.url
-      ? process.env.REACT_APP_STRAPI_API_URL + this.props.data?.image.url
+      ? process.env.GATSBY_APP_STRAPI_API_URL + this.props.data?.image.url
       : null,
     address_1: this.props.data?.address_1 || "",
     address_2: this.props.data?.address_2 || "",
@@ -96,7 +96,7 @@ class EventDetailsForm extends React.Component {
     if (this.post) {
       // uploadFileSingle(file)
       axios
-        .post(`${process.env.REACT_APP_STRAPI_API_URL}/api/upload`, file) // TODO - replace with service.
+        .post(`${process.env.GATSBY_APP_STRAPI_API_URL}/api/upload`, file) // TODO - replace with service.
         .then((response) => {
           const image = response.data[0].id
 

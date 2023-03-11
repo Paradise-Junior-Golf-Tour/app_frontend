@@ -40,10 +40,7 @@ module.exports = {
     {
       resolve: "gatsby-source-strapi",
       options: {
-        apiURL:
-          process.env.NODE_ENV === "production"
-            ? "https://paradise-junior-golf-tour.herokuapp.com"
-            : `${process.env.REACT_APP_STRAPI_API_URL}`,
+        apiURL: process.env.GATSBY_APP_STRAPI_API_URL,
         accessToken: process.env.STRAPI_TOKEN,
         collectionTypes: [
           {

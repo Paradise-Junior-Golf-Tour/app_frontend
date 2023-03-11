@@ -28,7 +28,9 @@ const EventGallery = ({ pageContext, location }) => {
     return (
       <Layout
         heading={pageContext.name}
-        images={[process.env.REACT_APP_STRAPI_API_URL + pageContext.imageUrl]}
+        images={[
+          process.env.GATSBY_REACT_APP_STRAPI_API_URL + pageContext.imageUrl,
+        ]}
       >
         <Typography variant="h2" compomnent="h2">
           No images are available yet.
@@ -49,8 +51,8 @@ const EventGallery = ({ pageContext, location }) => {
   const getFormats = (images) => {
     const _images = images.map((x) => {
       return {
-        src: process.env.REACT_APP_STRAPI_API_URL + x.url,
-        original: process.env.REACT_APP_STRAPI_API_URL + x.url,
+        src: process.env.GATSBY_REACT_APP_STRAPI_API_URL + x.url,
+        original: process.env.GATSBY_REACT_APP_STRAPI_API_URL + x.url,
         height: x.formats.medium.height,
         width: x.formats.medium.width,
       }
@@ -61,7 +63,9 @@ const EventGallery = ({ pageContext, location }) => {
   return (
     <Layout
       heading={pageContext.name}
-      images={[process.env.REACT_APP_STRAPI_API_URL + pageContext.imageUrl]}
+      images={[
+        process.env.GATSBY_REACT_APP_STRAPI_API_URL + pageContext.imageUrl,
+      ]}
     >
       <Box component="section">
         <Gallery
@@ -71,17 +75,23 @@ const EventGallery = ({ pageContext, location }) => {
         />
         {!!currentImage && (
           <Lightbox
-            mainSrc={process.env.REACT_APP_STRAPI_API_URL + currentImage.url}
+            mainSrc={
+              process.env.GATSBY_REACT_APP_STRAPI_API_URL + currentImage.url
+            }
             mainSrcThumbnail={
-              process.env.REACT_APP_STRAPI_API_URL + currentImage.src
+              process.env.GATSBY_REACT_APP_STRAPI_API_URL + currentImage.src
             }
-            nextSrc={process.env.REACT_APP_STRAPI_API_URL + nextImage.original}
+            nextSrc={
+              process.env.GATSBY_REACT_APP_STRAPI_API_URL + nextImage.original
+            }
             nextSrcThumbnail={
-              process.env.REACT_APP_STRAPI_API_URL + nextImage.src
+              process.env.GATSBY_REACT_APP_STRAPI_API_URL + nextImage.src
             }
-            prevSrc={process.env.REACT_APP_STRAPI_API_URL + prevImage.original}
+            prevSrc={
+              process.env.GATSBY_REACT_APP_STRAPI_API_URL + prevImage.original
+            }
             prevSrcThumbnail={
-              process.env.REACT_APP_STRAPI_API_URL + prevImage.src
+              process.env.GATSBY_REACT_APP_STRAPI_API_URL + prevImage.src
             }
             onCloseRequest={handleClose}
             onMovePrevRequest={handleMovePrev}

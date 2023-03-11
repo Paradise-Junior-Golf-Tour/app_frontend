@@ -11,7 +11,7 @@ export default function Header({ heading, subHeading, images }) {
   const theme = useTheme()
 
   console.log("env", {
-    root: process.env.GATSBY_REACT_APP_PORTAL_ROOT,
+    root: process.env.GATSBY_APP_ROOT,
     api: process.env.GATSBY_APP_STRAPI_API_URL,
   })
 

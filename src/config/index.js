@@ -1,6 +1,6 @@
 import { isLoggedIn } from "../services/authentication"
 
-export const portalRoot = process.env.REACT_APP_PORTAL_ROOT
+export const portalRoot = process.env.GATSBY_APP_ROOT
 console.log("*** app root", portalRoot)
 
 export const routes = {

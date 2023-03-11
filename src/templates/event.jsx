@@ -31,7 +31,8 @@ const Event = ({ pageContext, location }) => {
       heading={pageContext.name}
       images={[
         process.env.NODE_ENV !== "production"
-          ? process.env.REACT_APP_STRAPI_API_URL + pageContext.image.large
+          ? process.env.GATSBY_REACT_APP_STRAPI_API_URL +
+            pageContext.image.large
           : pageContext.image.large,
       ]}
     >

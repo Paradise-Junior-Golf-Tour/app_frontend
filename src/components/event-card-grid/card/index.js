@@ -25,7 +25,7 @@ export default function EventCard({ event }) {
           image={
             process.env.NODE_ENV === "production" // make this a util function?
               ? event?.image?.formats?.medium?.url
-              : process.env.REACT_APP_STRAPI_API_URL +
+              : process.env.GATSBY_APP_STRAPI_API_URL +
                 event?.image?.formats?.medium?.url
           }
           alt=""
@@ -83,7 +83,10 @@ export default function EventCard({ event }) {
               event,
             })
             e.preventDefault()
-            console.log('check nav', {event: event?.name, auth: authenticated, })
+            console.log("check nav", {
+              event: event?.name,
+              auth: authenticated,
+            })
             navigate(
               `${authenticated ? `/${portalRoot}` : ""}/events/${
                 user?.data?.admin ? event?.strapi_id : "register"

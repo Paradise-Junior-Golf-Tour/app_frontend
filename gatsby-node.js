@@ -3,7 +3,7 @@ const axios = require("axios")
 console.log(`[gatsby-node.js] Starting ${process.env.NODE_ENV} denvironment.`)
 
 console.log("env", {
-  root: process.env.GATSBY_REACT_APP_PORTAL_ROOT,
+  root: process.env.GATSBY_APP_ROOT,
   api: process.env.GATSBY_APP_STRAPI_API_URL,
 })
 

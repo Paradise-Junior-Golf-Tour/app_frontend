@@ -113,7 +113,7 @@ const Resources = () => {
         </li>
         <li>
           <Link
-            href={process.env.REACT_APP_STRAPI_API_URL + "/admin"}
+            href={process.env.GATSBY_APP_STRAPI_API_URL + "/admin"}
             target="_blank"
             rel="noreferrer"
           >

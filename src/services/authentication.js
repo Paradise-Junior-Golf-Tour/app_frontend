@@ -21,7 +21,7 @@ export const setUser = (user) => {
 
 export const handleLogin = async ({ username, password }) => {
   const user = await axios
-    .post(`${process.env.REACT_APP_STRAPI_API_URL}/api/auth/local`, {
+    .post(`${process.env.GATSBY_APP_STRAPI_API_URL}/api/auth/local`, {
       identifier: username,
       password: password,
     })

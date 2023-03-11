@@ -2,7 +2,7 @@ import axios from "axios"
 
 export const uploadFileSingle = async (file) => {
   return axios
-    .post(`${process.env.REACT_APP_STRAPI_API_URL}/api/upload`, file)
+    .post(`${process.env.GATSBY_REACT_APP_STRAPI_API_URL}/api/upload`, file)
     .then((res) => {
       console.log("Upload API", upload)
       return res
