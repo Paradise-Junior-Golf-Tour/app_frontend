@@ -156,8 +156,8 @@ export default function Header({ heading, subHeading, images, button }) {
               size="large"
               sx={{ mr: 2 }}
             >
-              {window.location.pathname === "/events/register/" ||
-              window.location.pathname === "/app/events/register/"
+              {isBrowser() && window.location.pathname === "/events/register/" ||
+              isBrowser() && window.location.pathname === "/app/events/register/"
                 ? `Events`
                 : "Register"}
             </Button>
