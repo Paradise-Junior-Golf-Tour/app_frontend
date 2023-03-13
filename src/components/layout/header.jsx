@@ -149,7 +149,7 @@ export default function Header({ heading, subHeading, images, button }) {
                 (window.location.pathname === "/events/register/" ||
                   window.location.pathname === "/app/events/register/")
                   ? `/events`
-                  : `/${auth ? portalRoot : ""}/events/register`
+                  : `${auth ? "/" + portalRoot : ""}/events/register`
               }
               color="secondary"
               variant="outlined"
