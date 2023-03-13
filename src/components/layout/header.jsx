@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from "react"
 import { Typography, Container, Box, Avatar } from "@mui/material"
-import { isLoggedIn, getUser } from "../../services/authentication"
+import { Button } from "gatsby-theme-material-ui"
+import { isLoggedIn } from "../../services/authentication"
 import { isBrowser } from "../../util"
 import { useTheme } from "@mui/material/styles"
 import useInterval from "react-useinterval"
+import { portalRoot } from "../../config"
 
 // TODO - make this a temp dev tool and then into a real header with styling and breadcrumbs.
-export default function Header({ heading, subHeading, images }) {
+export default function Header({ heading, subHeading, images, button }) {
   const [imageActive, setImageActive] = useState(0)
   const theme = useTheme()
+  const [auth, setAuth] = useState(false)
+
+  useEffect(() => {
+    setAuth(isLoggedIn())
+  })
 
   // Replace with a default from CMS.
   const _images = images || [
@@ -108,18 +115,54 @@ export default function Header({ heading, subHeading, images }) {
           {heading}
         </Typography>
 
-        <Typography
-          component="div"
-          variant="h3"
-          sx={{
-            display: "block",
-            // maxWidth: 600,
-            // fontWeight: 500,
-            // textShadow: `1px 1px 1px ${theme.palette.primary.background}`,
-          }}
-        >
-          {subHeading}
-        </Typography>
+        {subHeading ? (
+          <>
+            <Typography
+              component="div"
+              variant="h3"
+              sx={{
+                display: "block",
+                mb: 2,
+              }}
+            >
+              {subHeading}
+            </Typography>
+          </>
+        ) : null}
+
+        {button ? (
+          button
+        ) : (
+          <Box>
+            <Button
+              to={auth ? `/${portalRoot}` : `/${portalRoot}/login`}
+              color="secondary"
+              variant="contained"
+              size="large"
+              sx={{ mr: 2 }}
+            >
+              {auth ? "My Profile" : "Login"}
+            </Button>
+            <Button
+              to={
+                isBrowser() &&
+                (window.location.pathname === "/events/register/" ||
+                  window.location.pathname === "/app/events/register/")
+                  ? `/events`
+                  : `/${auth ? portalRoot : ""}/events/register`
+              }
+              color="secondary"
+              variant="outlined"
+              size="large"
+              sx={{ mr: 2 }}
+            >
+              {window.location.pathname === "/events/register/" ||
+              window.location.pathname === "/app/events/register/"
+                ? `Events`
+                : "Register"}
+            </Button>
+          </Box>
+        )}
 
         {isBrowser() &&
         isLoggedIn() &&

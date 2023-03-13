@@ -103,13 +103,14 @@ export const eventDetails = async ({ id }) => {
   await axios
     .get(`${process.env.GATSBY_APP_STRAPI_API_URL}/api/events/details?id=${id}`)
     .then((res) => {
-      console.log(`[Events Service] Found One: ${res}`)
+      console.log(`[Events Service] Found One Id: ${res.id}`, res)
       if (res.status === 200) {
         console.log("[services - event]", res.data)
         event = res.data
       }
     })
     .catch((err) => {
+      event = err
       console.log(`[Events Service] Create New Error`, (event = err.message))
     })
 

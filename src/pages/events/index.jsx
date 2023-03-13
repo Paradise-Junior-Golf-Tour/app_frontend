@@ -4,11 +4,11 @@ import { useStaticQuery, graphql } from "gatsby"
 import { Box } from "@mui/system"
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
-import EventCardGrid from "../../components/event-card-grid"
+import EventCardGrid from "../../components/events/card-grid"
 
 // TODO - replace static query with page query.
 
-const EventsPage = (props) => {
+const EventsPage = () => {
   const data = useStaticQuery(graphql`
     query allEvents {
       events: allStrapiEvent {

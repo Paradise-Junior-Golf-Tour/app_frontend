@@ -41,13 +41,20 @@ const EventGallery = ({ pageContext }) => {
             >
               Back to Event
             </Button>
-            <EventButton event={pageContext} sx={{ mr: 2 }} />
+            <Button
+              to={`/events/${pageContext.slug}/gallery`}
+              color="secondary"
+              variant="outlined"
+              size="large"
+            >
+              Gallery
+            </Button>
           </Box>
         }
       >
         <Box component="section">
           <Typography variant="h2" compomnent="h2">
-            No images are available yet.
+            No result are available yet.
           </Typography>
           <Typography variant="h5" compomnent="p">
             Check back during and after the event to see all the action!

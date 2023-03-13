@@ -6,7 +6,7 @@ import RegisterEventsIndividual from './individual'
 export default function UserEventRegistration(props) {
   const user = getUser()
 
-  if (user?.user?.family_account) return "Family Account"
+  if (user?.user?.family_account) return "Family Account Registration"
 
   return <RegisterEventsIndividual {...props} />
 }

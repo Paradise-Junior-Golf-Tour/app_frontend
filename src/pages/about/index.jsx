@@ -7,9 +7,18 @@ import { Typography, Box } from "@mui/material"
 import Grid from "@mui/material/Unstable_Grid2"
 import GolfCourseIcon from "@mui/icons-material/GolfCourse"
 import SchoolIcon from "@mui/icons-material/School"
-import iconStyles from "./styles"
 
-const AboutPage = (props) => {
+const styleIcon = {
+  fontSize: "6rem",
+  mt: 3,
+  mb: 2,
+  bgcolor: "secondary.main",
+  color: "white",
+  p: 2,
+  borderRadius: 100,
+}
+
+const AboutPage = () => {
   return (
     <Layout
       heading="About Us"
@@ -30,7 +39,7 @@ const AboutPage = (props) => {
         <Grid container>
           <Grid xs={12} md={4}>
             <Box sx={{ textAlign: "center" }}>
-              <GolfCourseIcon sx={iconStyles} />
+              <GolfCourseIcon sx={styleIcon} />
             </Box>
             <Typography
               variant="h4"
@@ -54,7 +63,7 @@ const AboutPage = (props) => {
           </Grid>
           <Grid xs={12} md={4}>
             <Box sx={{ textAlign: "center" }}>
-              <EmojiEventsIcon sx={iconStyles} />
+              <EmojiEventsIcon sx={styleIcon} />
             </Box>
             <Typography
               variant="h4"
@@ -80,7 +89,7 @@ const AboutPage = (props) => {
           </Grid>
           <Grid xs={12} md={4}>
             <Box sx={{ textAlign: "center" }}>
-              <SchoolIcon sx={iconStyles} />
+              <SchoolIcon sx={styleIcon} />
             </Box>
             <Typography
               variant="h4"
@@ -109,8 +118,6 @@ const AboutPage = (props) => {
         <Typography variant="h2" component="h2">
           Who I Am
         </Typography>
-        {/* <br /> */}
-        {/* <br /> */}
         <Typography variant="h5" component="h3" color="primary">
           Tony Pasquine, founder of The Future Champions Golf Tour.
         </Typography>

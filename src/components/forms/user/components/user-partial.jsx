@@ -15,8 +15,6 @@ import Grid from "@mui/material/Unstable_Grid2"
 const SignupUserPartial = ({
   formData,
   handleUpdate,
-  handleSubmit,
-  children,
 }) => {
   return (
     <>

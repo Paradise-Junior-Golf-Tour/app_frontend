@@ -24,3 +24,15 @@ export const sort = (array, property) =>
   array.sort(function (a, b) {
     return new Date(b[property]) - new Date(a[property])
   })
+
+export const isRegistrationOpen = ({ start, end }) => {
+  const today = new Date()
+
+  if (!start || !end) return true
+
+  if (today >= new Date(start) && today <= new Date(end)) {
+    return true
+  }
+
+  // return ((today >= new Date(start))) ? true : false
+}

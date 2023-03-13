@@ -6,7 +6,11 @@ import FormControlLabel from "@mui/material/FormControlLabel"
 import Box from "@mui/material/Box"
 import FormLabel from "@mui/material/FormLabel"
 import FormHelperText from "@mui/material/FormHelperText"
-import { reduceObjects } from "../../../../../util"
+import {
+  reduceObjects,
+  isRegistrationOpen,
+  dateFormat,
+} from "../../../../../util"
 import { register, eventsAll } from "../../../../../services/event"
 import { navigate } from "gatsby"
 import Layout from "../../../../layout"
@@ -51,6 +55,10 @@ export default function RegisterEventsIndividual(props) {
     eventsAvailable.forEach((x) => {
       const location = props?.location?.state?.event?.name
       const event = x.name
+      x.registration = isRegistrationOpen({
+        start: x.registration_start_date,
+        end: x.registration_end_date,
+      })
 
       // if user event array has entries disable that entry
       if (userEvents.some((userEvent) => x.name === userEvent.name)) {
@@ -77,52 +85,101 @@ export default function RegisterEventsIndividual(props) {
 
   const checkEventReferrarRegistered = (events, event) => {
     if (!events) {
-      return
+      return false
     }
 
-    if (events.filter((x) => x.registered).some((e) => e.id === event)) {
+    if (
+      events.filter((x) => x.registered).some((e) => e.id == eventReferrerId)
+    ) {
       return true
     }
   }
 
   if (!events) return "Loading"
 
+  console.log(
+    "*** ee",
+    events !== undefined
+      ? events.find((e) => e.name === props?.location?.state?.event?.name)
+      : null
+  )
   return (
     <Layout
       heading="Event Registration"
-      subHeading={`Register for ${
+      subHeading={`Signup for ${
         props?.location?.state?.event?.name
           ? props?.location?.state?.event?.name
-          : "event"
+          : "your preferred events"
       }`}
     >
       <Box component="section">
         <Typography variant="h2" component="h2">
-          Events
+          Select Your Events
         </Typography>
         <Typography variant="h5" component="h2">
-          {checkEventReferrarRegistered(events, eventReferrerId) ? `You have previously registered for ${props?.location?.state?.event?.name}, but you can still select events from the available options below.` : `You have selected ${props?.location?.state?.event?.name}.  Additional events can also be selected.` || "Choose the events for which you would like to register."}
+          {checkEventReferrarRegistered(events, eventReferrerId)
+            ? `You have already registered for ${
+                events.find((x) => x.id === eventReferrerId).name
+              }, but can still register for other events.`
+            : eventReferrerId
+            ? `You have selected ${props?.location?.state?.event?.name}.  Choose any additional events below.`
+            : `Choose from the events below.`}
         </Typography>
         <br />
         <Box>
           <FormControl sx={{}} component="fieldset" variant="standard">
-            <FormLabel component="legend">Select Your Events</FormLabel>
+            {/* <FormLabel component="legend">Select Your Events</FormLabel> */}
             <FormGroup>
               {events
                 ? events.map((event) => {
                     return (
-                      <Box key={event.name + event.id}>
+                      <Box
+                        sx={{
+                          // borderTop: "1px solid lightgrey",
+                          pb: 1,
+                          pt: 1,
+                          display: "flex",
+                          alignItems: "center",
+                          color:   event.registered || !event.registration ? "lightgrey" : "",
+                          // opacity:
+                          //   event.registered || !event.registration ? 0.5 : 1,
+                        }}
+                        key={event.name + event.id}
+                      >
                         <FormControlLabel
+                          // label={event.name}
                           control={
                             <Checkbox
                               checked={event.checked}
                               onChange={handleChangeNew}
                               name={event.name}
-                              disabled={event.registered}
+                              disabled={event.registered || !event.registration}
                             />
                           }
-                          label={`${event.name + " - $" + event.fee}`}
                         />
+                        <Box ssx={{ display: "flex", alignItems: "center" }}>
+                          <Typography variant="h6" component="h2">
+                            {event.name} - ${event.fee}
+                          </Typography>
+                          <Box
+                            component="span"
+                            sx={{
+                              // ml: 2,
+                              display: "flex",
+                              color: event.registered
+                                ? "green"
+                                : event.registration
+                                ? "primary.main"
+                                : "error.main",
+                            }}
+                          >
+                            {event.registered
+                              ? "Registered"
+                              : event.registration
+                              ? `Registration open until ${event.registration_end_date}.`
+                              : `Registration closed as of ${event.registration_end_date}.`}
+                          </Box>
+                        </Box>
                       </Box>
                     )
                   })

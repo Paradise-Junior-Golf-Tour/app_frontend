@@ -22,6 +22,8 @@ exports.createPages = async ({ graphql, actions }) => {
               strapi_id
               date
               fee
+              registration_start_date
+              registration_end_date
               description {
                 data {
                   description
@@ -51,12 +53,16 @@ exports.createPages = async ({ graphql, actions }) => {
     `
   )
 
+
+
   if (result.errors) {
     throw result.errors
   }
 
   // Create event (blog) articles pages.
   const events = result.data.events.edges
+  console.log('Events', events)
+
   const EventTemplate = require.resolve("./src/templates/event.jsx")
   events.forEach((event) => {
     console.log("Compiling event page:", event.name)
@@ -69,6 +75,10 @@ exports.createPages = async ({ graphql, actions }) => {
         date: event.node.date,
         id: event.node.id,
         strapiId: event.node.strapi_id,
+        strapiId: event.node.strapi_id,
+        imageUrl: event.node?.image?.url,
+        registration_start_date: event.node?.registration_start_date,
+        registration_end_date: event.node?.registration_end_date,
         fee: event.node?.fee,
         description: event.node?.description?.data?.description,
         image: {
@@ -91,9 +101,54 @@ exports.createPages = async ({ graphql, actions }) => {
       path: `/events/${event.node.slug}/gallery`,
       component: EventGalleryTemplate,
       context: {
+        slug: event.node.slug,
         name: event.node.name,
+        date: event.node.date,
         id: event.node.id,
         strapiId: event.node.strapi_id,
+        strapiId: event.node.strapi_id,
+        imageUrl: event.node?.image?.url,
+        registration_start_date: event.node?.registration_start_date,
+        registration_end_date: event.node?.registration_end_date,
+        fee: event.node?.fee,
+        description: event.node?.description?.data?.description,
+        image: {
+          thumbnail: event.node?.image.formats.thumbnail.url,
+          small: event.node?.image.formats.small.url,
+          medium: event.node?.image.formats.medium.url,
+          large: event.node?.image.formats.large.url,
+        },
+        imageUrl: event.node?.image?.url,
+      },
+    })
+  })
+
+  const EventResultsTemplate = require.resolve(
+    "./src/templates/event-results.jsx"
+  )
+  events.forEach((event, index) => {
+    console.log("Compiling event image results:", event.name)
+    createPage({
+      path: `/events/${event.node.slug}/results`,
+      component: EventResultsTemplate,
+      context: {
+        slug: event.node.slug,
+        name: event.node.name,
+        date: event.node.date,
+        id: event.node.id,
+        strapiId: event.node.strapi_id,
+        strapiId: event.node.strapi_id,
+        imageUrl: event.node?.image?.url,
+        registration_start_date: event.node?.registration_start_date,
+        registration_end_date: event.node?.registration_end_date,
+        fee: event.node?.fee,
+        description: event.node?.description?.data?.description,
+        image: {
+          thumbnail: event.node?.image.formats.thumbnail.url,
+          small: event.node?.image.formats.small.url,
+          medium: event.node?.image.formats.medium.url,
+          large: event.node?.image.formats.large.url,
+        },
         imageUrl: event.node?.image?.url,
       },
     })
