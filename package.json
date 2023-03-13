@@ -11,7 +11,7 @@
   "scripts": {
     "develop": "gatsby develop",
     "start": "gatsby develop",
-    "build": "gatsby build",
+    "build": "gatsby clean && gatsby build",
     "serve": "gatsby serve",
     "clean": "clear && gatsby clean",
     "schema": "clear && curl -X POST http://localhost:8000/__refresh",
